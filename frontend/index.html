@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Discovery - Price Comparison</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Header -->
+        <header class="header">
+            <h1>🎯 Product Discovery</h1>
+            <p>Find the best prices across all retailers</p>
+        </header>
+
+        <!-- Input Section -->
+        <section id="input-section" class="section">
+            <div class="card">
+                <h2>Start Your Search</h2>
+                
+                <!-- Tab Navigation -->
+                <div class="tabs">
+                    <button class="tab active" data-tab="keyword">
+                        <span class="tab-icon">🔍</span>
+                        Search by Keywords
+                    </button>
+                    <button class="tab" data-tab="url">
+                        <span class="tab-icon">🔗</span>
+                        Search by URL
+                    </button>
+                </div>
+
+                <!-- Tab Content: Keywords -->
+                <div class="tab-content active" data-content="keyword">
+                    <div class="input-group">
+                        <label for="keyword-input">Product Keywords</label>
+                        <input 
+                            type="text" 
+                            id="keyword-input" 
+                            placeholder="e.g., True Frog Curl Shampoo 250ml"
+                            autocomplete="off"
+                        >
+                        <small>Enter brand, product name, and optionally variant/size</small>
+                    </div>
+                    <button class="btn btn-primary" onclick="startSearch('keyword')">
+                        Search Products
+                    </button>
+                </div>
+
+                <!-- Tab Content: URL -->
+                <div class="tab-content" data-content="url">
+                    <div class="input-group">
+                        <label for="url-input">Product URL</label>
+                        <input 
+                            type="text" 
+                            id="url-input" 
+                            placeholder="e.g., https://truefrog.in/products/curl-shampoo"
+                            autocomplete="off"
+                        >
+                        <small>Paste a link to the product page</small>
+                    </div>
+                    <button class="btn btn-primary" onclick="startSearch('url')">
+                        Search Products
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section id="progress-section" class="section hidden">
+            <div class="card">
+                <h2>Processing Your Request</h2>
+                
+                <!-- Progress Stages -->
+                <div class="progress-stages" id="progress-stages">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <!-- Progress Logs -->
+                <div class="progress-logs" id="progress-logs">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Confirmation Section -->
+        <section id="confirmation-section" class="section hidden">
+            <div class="card">
+                <h2 id="confirmation-title">Confirmation Required</h2>
+                <p id="confirmation-message"></p>
+                
+                <!-- Product Confirmation -->
+                <div id="product-confirmation" class="confirmation-content hidden">
+                    <div class="confirmation-list" id="product-list">
+                        <!-- Dynamically populated -->
+                    </div>
+                    <button class="btn btn-primary" onclick="confirmSelection('product')">
+                        Confirm Selection
+                    </button>
+                </div>
+
+                <!-- Variant Confirmation -->
+                <div id="variant-confirmation" class="confirmation-content hidden">
+                    <div class="confirmation-list" id="variant-list">
+                        <!-- Dynamically populated -->
+                    </div>
+                    <button class="btn btn-primary" onclick="confirmSelection('variant')">
+                        Confirm Selection
+                    </button>
+                </div>
+
+                <!-- URL Extraction Confirmation -->
+                <div id="extraction-confirmation" class="confirmation-content hidden">
+                    <div class="extracted-details" id="extracted-details">
+                        <!-- Dynamically populated -->
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-success" onclick="confirmExtraction(true)">
+                            ✓ Correct
+                        </button>
+                        <button class="btn btn-danger" onclick="confirmExtraction(false)">
+                            ✗ Incorrect
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="section hidden">
+            <div class="card">
+                <div class="results-header">
+                    <h2>Search Results</h2>
+                    <span class="results-count" id="results-count">0 products found</span>
+                </div>
+                
+                <!-- Results Grid -->
+                <div class="results-grid" id="results-grid">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <!-- New Search Button -->
+                <div class="results-footer">
+                    <button class="btn btn-secondary" onclick="resetSearch()">
+                        Start New Search
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Section -->
+        <section id="error-section" class="section hidden">
+            <div class="card error-card">
+                <h2>⚠️ Error</h2>
+                <p id="error-message"></p>
+                <button class="btn btn-secondary" onclick="resetSearch()">
+                    Try Again
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Product Discovery System v1.0</p>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>

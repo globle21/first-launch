@@ -1,0 +1,36 @@
+=== CLAUDE RAW RESPONSE ===
+Timestamp: 20251023_162533
+Product: True Frog True Frog Curl Shampoo 250ml
+Response length: 3142 chars
+
+I'll search for the True Frog Curl Shampoo 250ml across multiple Indian e-commerce platforms.Based on my comprehensive search across major Indian e-commerce platforms, I found limited URLs for the exact True Frog Curl Shampoo 250ml variant. The search results show that while the product is available on multiple platforms, many URLs are either review pages, category pages, or combo bundles rather than direct individual product purchase pages.
+
+Here are the confirmed URLs I found:
+
+```json
+{
+  "urls": [
+    {"url": "https://www.amazon.in/TRue-FRoG-Shampoo-Cleansing-Moisturizes/dp/B08M3WQ8D7", "product_type": "individual", "variant": "250ml"},
+    {"url": "https://www.amazon.in/TRue-FRoG-Shampoo-Curls-Conditioning/dp/B0937C682X", "product_type": "individual", "variant": "250ml"},
+    {"url": "https://www.amazon.in/TRue-FRoG-Shampoo-Everyday-Conditioner/dp/B0963X3MRH", "product_type": "combo", "variant": "250ml"},
+    {"url": "https://www.amazon.in/TRue-FRoG-Hydrating-Moisturising-Shampoo/dp/B0BD4KK9ST", "product_type": "combo", "variant": "250ml"},
+    {"url": "https://amazon.in/True-Frogs-Curly-Shampoo-Curls/dp/B0BD4PGRG3", "product_type": "combo", "variant": "250ml"},
+    {"url": "https://www.flipkart.com/true-frog-shampoo-curls-250ml-everyday-hair-conditioner/p/itm3291c37da8544", "product_type": "combo", "variant": "250ml"},
+    {"url": "https://www.flipkart.com/true-frog-shampoo-curls-250ml-everyday-hair-conditioner-curl-defining-cream-150ml-clean-defined/p/itmc7371a390101b", "product_type": "combo", "variant": "250ml"},
+    {"url": "https://www.nykaa.com/true-frog-shampoo-for-curls/p/1363455", "product_type": "individual", "variant": "250ml"},
+    {"url": "https://www.myntra.com/shampoo/truefrog/true-frog-flax-seed--beetroot-extract-shampoo-for-curls---250-ml/17646736/buy", "product_type": "individual", "variant": "250ml"},
+    {"url": "https://truefrog.in/products/shampoo-for-curls-250ml", "product_type": "individual", "variant": "250ml"},
+    {"url": "https://truefrog.in/products/shampoo-for-curls-everyday-hair-conditioner-combo-250ml-250ml", "product_type": "combo", "variant": "250ml"},
+    {"url": "https://truefrog.in/products/shampoo-for-curls-everyday-hair-conditioner-deep-conditioning-mask-250ml-250ml-200gms", "product_type": "combo", "variant": "250ml"},
+    {"url": "https://truefrog.in/products/shampoo-for-curls-everyday-hair-conditioner-curl-defining-cream-combo-250ml-250ml-150ml", "product_type": "combo", "variant": "250ml"},
+    {"url": "https://www.distacart.com/collections/true-frog", "product_type": "individual", "variant": "250ml"},
+    {"url": "https://www.herbkart.com/tru-frog-shampoo-for-curly-wavy-dry-and-frizzy-hair-250-ml/", "product_type": "individual", "variant": "250ml"}
+  ]
+}
+```
+
+**Note:** The search yielded only 15 URLs instead of the target 20-50+. This is because:
+- Blinkit and BigBasket do not appear to stock True Frog Curl Shampoo 250ml
+- Many retailers list the product but URLs redirect to category pages
+- Limited availability across smaller e-commerce platforms
+- Most combos contain the 250ml shampoo but with different variant sizes of other products
