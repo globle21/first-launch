@@ -348,89 +348,137 @@ async def stream_progress(session_id: str):
         }
     )
 
+# In main.py, replace the existing debug endpoints with these:
+
 @app.get("/api/debug/recent-logs")
 async def get_recent_logs():
     """Get logs from the most recent session"""
-    # Get all sessions
-    sessions = session_manager.sessions
-    
-    if not sessions:
-        raise HTTPException(status_code=404, detail="No active sessions found")
-    
-    # Find most recent session
-    most_recent = max(sessions.values(), key=lambda s: s.last_updated)
-    
-    return JSONResponse(content={
-        "session_id": most_recent.session_id,
-        "status": most_recent.status,
-        "current_stage": most_recent.current_stage,
-        "start_time": most_recent.created_at.isoformat(),
-        "last_updated": most_recent.last_updated.isoformat(),
-        "progress_logs": most_recent.progress_logs,
-        "error": most_recent.error_message
-    })
+    try:
+        sessions = session_manager.sessions
+        
+        if not sessions:
+            return {
+                "status": "no_sessions",
+                "message": "No active sessions found",
+                "sessions_available": 0
+            }
+        
+        # Get most recent session
+        most_recent = max(sessions.values(), key=lambda s: s.last_updated)
+        
+        return {
+            "status": "success",
+            "session": {
+                "id": most_recent.session_id,
+                "status": most_recent.status,
+                "current_stage": most_recent.current_stage,
+                "start_time": most_recent.created_at.isoformat(),
+                "last_updated": most_recent.last_updated.isoformat(),
+                "progress": {
+                    "total_steps": len(most_recent.progress_logs),
+                    "current_step": most_recent.current_stage,
+                    "logs": most_recent.progress_logs
+                }
+            }
+        }
+    except Exception as e:
+        logger.error(f"Error getting recent logs: {str(e)}")
+        return {
+            "status": "error",
+            "error": str(e),
+            "message": "Failed to retrieve recent logs"
+        }
 
 @app.get("/api/debug/latest-results")
 async def get_latest_results():
     """Get the most recent results file from disk"""
-    results_dir = Path(__file__).parent.parent / "results"
-    result_files = sorted(
-        glob.glob(str(results_dir / "workflow_session_*.json")),
-        key=os.path.getmtime,
-        reverse=True
-    )
-    
-    if not result_files:
-        raise HTTPException(status_code=404, detail="No result files found")
-    
     try:
-        with open(result_files[0], 'r', encoding='utf-8') as f:
-            import json
-            results = json.load(f)
-        return JSONResponse(content=results)
-    except Exception as e:
-        raise HTTPException(
-            status_code=500, 
-            detail=f"Error reading results file: {str(e)}"
+        # Use absolute path to results directory
+        results_dir = Path(__file__).parent / "results"
+        results_dir.mkdir(exist_ok=True)  # Create directory if it doesn't exist
+        
+        result_files = sorted(
+            results_dir.glob("workflow_session_*.json"),
+            key=os.path.getmtime,
+            reverse=True
         )
+        
+        if not result_files:
+            return {
+                "status": "no_results",
+                "message": "No result files found",
+                "results_dir": str(results_dir.absolute())
+            }
+        
+        # Try to read the most recent result file
+        latest_file = result_files[0]
+        try:
+            with open(latest_file, 'r', encoding='utf-8') as f:
+                results = json.load(f)
+            
+            return {
+                "status": "success",
+                "file": str(latest_file.absolute()),
+                "last_modified": datetime.fromtimestamp(latest_file.stat().st_mtime).isoformat(),
+                "results": results
+            }
+            
+        except json.JSONDecodeError as je:
+            return {
+                "status": "error",
+                "file": str(latest_file.absolute()),
+                "error": "Invalid JSON in results file",
+                "details": str(je)
+            }
+            
+    except Exception as e:
+        logger.error(f"Error getting latest results: {str(e)}")
+        return {
+            "status": "error",
+            "error": str(e),
+            "message": "Failed to retrieve latest results"
+        }
 
 @app.get("/api/debug/server-logs")
 async def get_server_logs(lines: int = 100):
-    """
-    Get the most recent server logs
-    
-    Args:
-        lines: Number of log lines to return (default: 100)
-    """
-    log_file = Path("logs/app.log")
-    
-    if not log_file.exists():
-        raise HTTPException(
-            status_code=404,
-            detail="Log file not found. Ensure logging is properly configured."
-        )
-    
+    """Get the most recent server logs"""
     try:
-        # Read last N lines efficiently
-        with open(log_file, 'r', encoding='utf-8') as f:
-            # Read all lines first
+        # Use absolute path to logs directory
+        log_dir = Path(__file__).parent / "logs"
+        log_file = log_dir / "app.log"
+        
+        # Create logs directory if it doesn't exist
+        log_dir.mkdir(exist_ok=True)
+        
+        # If file doesn't exist, return empty logs
+        if not log_file.exists():
+            return {
+                "status": "no_logs",
+                "message": "Log file does not exist yet",
+                "log_file": str(log_file.absolute())
+            }
+        
+        # Read last N lines
+        with open(log_file, 'r', encoding='utf-8', errors='replace') as f:
             all_lines = f.readlines()
-            # Get last N lines, or all if less than N
             recent_lines = all_lines[-lines:] if len(all_lines) > lines else all_lines
         
         return {
+            "status": "success",
             "log_file": str(log_file.absolute()),
             "total_lines": len(all_lines),
-            "returned_lines": len(recent_lines),
+            "lines_returned": len(recent_lines),
             "logs": [line.strip() for line in recent_lines]
         }
-    except Exception as e:
-        logger.error(f"Error reading log file: {str(e)}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error reading log file: {str(e)}"
-        )
         
+    except Exception as e:
+        logger.error(f"Error reading server logs: {str(e)}")
+        return {
+            "status": "error",
+            "error": str(e),
+            "message": "Failed to read server logs"
+        }
+
 @app.on_event("startup")
 async def startup_event():
     """Startup tasks"""
