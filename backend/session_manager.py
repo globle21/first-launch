@@ -222,6 +222,10 @@ class SessionManager:
         with self.lock:
             return len(self.sessions)
 
+    def get_all_sessions(self) -> Dict[str, 'WorkflowSession']:
+        """Get a copy of all active sessions"""
+        with self.lock:
+            return self.sessions.copy()
 
 # Global session manager instance
 session_manager = SessionManager()

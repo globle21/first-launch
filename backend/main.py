@@ -16,6 +16,10 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import json
+import logging
+from logging.handlers import RotatingFileHandler
+import glob 
+from fastapi.responses import JSONResponse
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -26,6 +30,31 @@ load_dotenv(Path(__file__).parent.parent / ".env")
 from session_manager import session_manager
 from workflow_async import run_workflow_async
 
+# Configure logging
+def setup_logging():
+    log_dir = Path("logs")
+    log_dir.mkdir(exist_ok=True)
+    
+    log_file = log_dir / "app.log"
+    
+    # Configure root logger
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        handlers=[
+            RotatingFileHandler(
+                log_file,
+                maxBytes=5*1024*1024,  # 5MB
+                backupCount=3,
+                encoding='utf-8'
+            ),
+            logging.StreamHandler()
+        ]
+    )
+    
+    return logging.getLogger(__name__)
+
+logger = setup_logging()
 
 # FastAPI app
 app = FastAPI(
@@ -319,7 +348,89 @@ async def stream_progress(session_id: str):
         }
     )
 
+@app.get("/api/debug/recent-logs")
+async def get_recent_logs():
+    """Get logs from the most recent session"""
+    # Get all sessions
+    sessions = session_manager.sessions
+    
+    if not sessions:
+        raise HTTPException(status_code=404, detail="No active sessions found")
+    
+    # Find most recent session
+    most_recent = max(sessions.values(), key=lambda s: s.last_updated)
+    
+    return JSONResponse(content={
+        "session_id": most_recent.session_id,
+        "status": most_recent.status,
+        "current_stage": most_recent.current_stage,
+        "start_time": most_recent.created_at.isoformat(),
+        "last_updated": most_recent.last_updated.isoformat(),
+        "progress_logs": most_recent.progress_logs,
+        "error": most_recent.error_message
+    })
 
+@app.get("/api/debug/latest-results")
+async def get_latest_results():
+    """Get the most recent results file from disk"""
+    results_dir = Path(__file__).parent.parent / "results"
+    result_files = sorted(
+        glob.glob(str(results_dir / "workflow_session_*.json")),
+        key=os.path.getmtime,
+        reverse=True
+    )
+    
+    if not result_files:
+        raise HTTPException(status_code=404, detail="No result files found")
+    
+    try:
+        with open(result_files[0], 'r', encoding='utf-8') as f:
+            import json
+            results = json.load(f)
+        return JSONResponse(content=results)
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Error reading results file: {str(e)}"
+        )
+
+@app.get("/api/debug/server-logs")
+async def get_server_logs(lines: int = 100):
+    """
+    Get the most recent server logs
+    
+    Args:
+        lines: Number of log lines to return (default: 100)
+    """
+    log_file = Path("logs/app.log")
+    
+    if not log_file.exists():
+        raise HTTPException(
+            status_code=404,
+            detail="Log file not found. Ensure logging is properly configured."
+        )
+    
+    try:
+        # Read last N lines efficiently
+        with open(log_file, 'r', encoding='utf-8') as f:
+            # Read all lines first
+            all_lines = f.readlines()
+            # Get last N lines, or all if less than N
+            recent_lines = all_lines[-lines:] if len(all_lines) > lines else all_lines
+        
+        return {
+            "log_file": str(log_file.absolute()),
+            "total_lines": len(all_lines),
+            "returned_lines": len(recent_lines),
+            "logs": [line.strip() for line in recent_lines]
+        }
+    except Exception as e:
+        logger.error(f"Error reading log file: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error reading log file: {str(e)}"
+        )
+        
 @app.on_event("startup")
 async def startup_event():
     """Startup tasks"""
