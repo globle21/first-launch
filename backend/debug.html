@@ -345,7 +345,7 @@
 
         function startAutoRefresh() {
             if (refreshInterval) clearInterval(refreshInterval);
-            refreshInterval = setInterval(loadDebugData, 5000);
+            refreshInterval = setInterval(loadDebugData, 30000);  // Poll every 30 seconds
         }
 
         function stopAutoRefresh() {
@@ -375,6 +375,9 @@
             document.getElementById('lastUpdated').textContent = `Last Updated: ${timeStr}`;
         }
 
+        // Track last seen session to detect new searches
+        let lastSessionId = null;
+
         async function loadDebugData() {
             try {
                 const response = await fetch('/api/debug/recent-logs');
@@ -393,17 +396,30 @@
                     return;
                 }
 
+                // Detect new session - restart auto-refresh if it was stopped
+                if (lastSessionId !== data.session.id) {
+                    lastSessionId = data.session.id;
+
+                    // If a new session started, make sure auto-refresh is on
+                    if (!autoRefresh && data.session.status === 'running') {
+                        autoRefresh = true;
+                        const toggle = document.getElementById('autoRefreshToggle');
+                        const status = document.getElementById('refreshStatus');
+                        toggle.classList.add('on');
+                        status.textContent = 'ON';
+                        startAutoRefresh();
+                    }
+                }
+
                 renderDebugData(data.session);
 
-                // Stop auto-refresh if session is completed or failed
+                // Stop auto-refresh IMMEDIATELY when session completes/fails
+                // Don't refresh again until a new search is performed
                 if (autoRefresh && (data.session.status === 'completed' || data.session.status === 'failed')) {
-                    // Keep refreshing for 30 more seconds, then stop
-                    setTimeout(() => {
-                        if (data.session.status === 'completed' || data.session.status === 'failed') {
-                            stopAutoRefresh();
-                            document.getElementById('refreshStatus').textContent = 'OFF (Session Complete)';
-                        }
-                    }, 30000);
+                    stopAutoRefresh();
+                    autoRefresh = false;
+                    document.getElementById('autoRefreshToggle').classList.remove('on');
+                    document.getElementById('refreshStatus').textContent = 'OFF (Waiting for new search)';
                 }
 
             } catch (error) {

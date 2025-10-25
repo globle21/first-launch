@@ -18,33 +18,37 @@ class WorkflowSession:
     user_input: str
     created_at: datetime
     last_updated: datetime
-    
+
     # Workflow state
     current_stage: str = "initializing"
     status: str = "running"  # running, waiting_confirmation, completed, failed
-    
+
     # State data (mirrors WorkflowState)
     state_data: Dict[str, Any] = field(default_factory=dict)
-    
+
     # Real-time updates
     progress_logs: List[Dict[str, Any]] = field(default_factory=list)
-    
+
     # User confirmation tracking
     needs_product_confirmation: bool = False
     product_candidates: List[Dict] = field(default_factory=list)
     confirmed_product_index: Optional[int] = None
-    
+
     needs_variant_confirmation: bool = False
     variant_candidates: List[Dict] = field(default_factory=list)
     confirmed_variant_index: Optional[int] = None
-    
+
     needs_url_extraction_confirmation: bool = False
     extracted_details: Optional[Dict] = None
     url_extraction_confirmed: bool = False
-    
+
     # Results
     final_results: Optional[List[Dict]] = None
     error_message: Optional[str] = None
+
+    # Cleanup management
+    marked_for_cleanup: bool = False
+    cleanup_after: Optional[datetime] = None
 
 
 class SessionManager:
@@ -205,17 +209,57 @@ class SessionManager:
                 session.status = "failed"
                 session.error_message = error_message
                 session.last_updated = datetime.now()
-    
+
+    def mark_for_cleanup(self, session_id: str, cleanup_delay_minutes: int = 10):
+        """
+        Mark session for cleanup after specified delay
+
+        Args:
+            session_id: Session ID to mark
+            cleanup_delay_minutes: Minutes to wait before cleanup (default: 10)
+        """
+        with self.lock:
+            session = self.sessions.get(session_id)
+            if session:
+                session.marked_for_cleanup = True
+                session.cleanup_after = datetime.now() + timedelta(minutes=cleanup_delay_minutes)
+                print(f"🧹 Session {session_id[:8]}... marked for cleanup at {session.cleanup_after.strftime('%H:%M:%S')}")
+
     def cleanup_old_sessions(self):
-        """Remove sessions older than timeout"""
+        """
+        Remove old sessions from memory based on cleanup rules:
+
+        1. Sessions marked_for_cleanup: Remove after cleanup_after time (typically 10 minutes)
+        2. Running sessions: Remove if inactive for session_timeout (30 minutes)
+        3. Waiting sessions: Remove if inactive for session_timeout (30 minutes)
+        """
         with self.lock:
             now = datetime.now()
-            expired_sessions = [
-                sid for sid, session in self.sessions.items()
-                if now - session.last_updated > self.session_timeout
-            ]
-            for sid in expired_sessions:
+            sessions_to_remove = []
+
+            for sid, session in self.sessions.items():
+                # Rule 1: Marked for cleanup - remove after cleanup_after time
+                if session.marked_for_cleanup and session.cleanup_after:
+                    if now >= session.cleanup_after:
+                        sessions_to_remove.append((sid, "marked_cleanup"))
+                        continue
+
+                # Rule 2: Running/waiting sessions - remove if inactive for timeout
+                if session.status in ["running", "waiting_confirmation"]:
+                    if now - session.last_updated > self.session_timeout:
+                        sessions_to_remove.append((sid, "timeout"))
+                        continue
+
+            # Remove identified sessions
+            for sid, reason in sessions_to_remove:
                 del self.sessions[sid]
+                if reason == "marked_cleanup":
+                    print(f"🧹 Cleaned up session {sid[:8]}... (scheduled cleanup)")
+                elif reason == "timeout":
+                    print(f"🧹 Cleaned up session {sid[:8]}... (timeout - inactive for {self.session_timeout.total_seconds()/60:.0f} minutes)")
+
+            if sessions_to_remove:
+                print(f"📊 Active sessions: {len(self.sessions)}")
     
     def get_session_count(self) -> int:
         """Get total number of active sessions"""

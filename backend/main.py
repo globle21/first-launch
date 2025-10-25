@@ -519,6 +519,29 @@ async def debug_dashboard():
     return FileResponse(debug_html_path, media_type="text/html")
 
 
+# ============================================================================
+# BACKGROUND TASKS
+# ============================================================================
+
+async def cleanup_sessions_task():
+    """
+    Background task to clean up old sessions periodically
+
+    Runs every 5 minutes to:
+    - Remove completed/failed sessions after 10 minutes
+    - Remove inactive running sessions after 30 minutes
+
+    This prevents memory buildup on Render's free tier (512 MB limit)
+    """
+    while True:
+        try:
+            await asyncio.sleep(300)  # Wait 5 minutes (300 seconds)
+            session_manager.cleanup_old_sessions()
+        except Exception as e:
+            logger.error(f"Error in cleanup task: {e}")
+            # Continue running even if cleanup fails
+
+
 @app.on_event("startup")
 async def startup_event():
     """Startup tasks"""
@@ -528,6 +551,10 @@ async def startup_event():
     print(f"✅ Environment variables loaded")
     print(f"✅ Session manager initialized")
     print(f"✅ Debug dashboard available at /debug")
+
+    # Start background cleanup task
+    asyncio.create_task(cleanup_sessions_task())
+    print(f"✅ Background cleanup task started (runs every 5 minutes)")
     print("="*80)
 
 

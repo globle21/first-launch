@@ -22,9 +22,13 @@ from src.agents.url_extraction_agent import URLExtractionAgent
 from session_manager import session_manager
 
 
-def save_results_to_disk(session_id: str):
+def save_results_to_disk(session_id: str, remove_from_memory: bool = False):
     """
     Save workflow results to disk for debugging and analysis
+
+    Args:
+        session_id: Session ID to save
+        remove_from_memory: If True, remove session from memory after saving (for memory optimization)
     """
     try:
         # Create results directory if it doesn't exist
@@ -64,6 +68,11 @@ def save_results_to_disk(session_id: str):
 
         print(f"📁 Results saved to: {filepath}")
 
+        # Mark session for cleanup (will be removed after 10 minutes)
+        if remove_from_memory:
+            session_manager.mark_for_cleanup(session_id)
+            print(f"🧹 Session marked for cleanup (will be removed after 10 minutes)")
+
     except Exception as e:
         print(f"⚠️ Failed to save results to disk: {e}")
 
@@ -90,8 +99,8 @@ def run_workflow_async(session_id: str, input_type: str, user_input: str):
             "message": f"Critical error: {str(e)}",
             "status": "error"
         })
-        # Save partial results to disk even on failure for debugging
-        save_results_to_disk(session_id)
+        # Save partial results to disk even on failure for debugging, mark for cleanup
+        save_results_to_disk(session_id, remove_from_memory=True)
 
 
 def _run_keyword_workflow(session_id: str, user_query: str):
@@ -595,8 +604,8 @@ def _continue_workflow(
         "status": "success"
     })
 
-    # Save results to disk for debugging
-    save_results_to_disk(session_id)
+    # Save results to disk for debugging and mark for cleanup after 10 minutes
+    save_results_to_disk(session_id, remove_from_memory=True)
 
 
 def _wait_for_product_confirmation(session_id: str, timeout_seconds: int = 300):
