@@ -1,0 +1,34 @@
+=== CLAUDE RAW RESPONSE ===
+Timestamp: 20251025_011423
+Product: Nike Black Basketball Shoes black
+Response length: 3527 chars
+
+I'll search for Nike black basketball shoes on Indian e-commerce platforms.I need to search for specific product pages with direct purchase URLs. Let me search for individual Nike basketball shoe products on these platforms.Based on my search results, I found several Nike black basketball shoe product pages on Indian e-commerce platforms. Let me compile the URLs I've identified:
+
+```json
+{
+  "urls": [
+    {"url": "https://www.nike.com/in/w/black-basketball-shoes-3glsmz90poyzy7ok", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.nike.com/in/w/mens-black-basketball-shoes-3glsmz90poyznik1zy7ok", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/Jordan-Retro-Basketball-Black-White-Black/dp/B003V2RS90", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/Nike-Basketball-Shoes-Black-White/dp/B07SKKSVQM", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/Nike-Precision-Basketball-Shoes-Black/dp/B07PSJLGLS", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/Nike-CI1172-002-Mens-Basketball-Shoe/dp/B0973S56JZ", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/Nike-Jordan-Zer0-2-Basketball-Shoes/dp/B083P1N6QX", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/Nike-Mens-Kyrie-Basketball-Shoe/dp/B09RNVQYYB", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/NIKE-Basketball-Shoes-Black-White/dp/B079JC4N32", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.flipkart.com/nike-fly-by-mid-3-basketball-shoes-men/p/itmd55cdf8dde67f", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.flipkart.com/nike-zoom-freak-3-basketball-shoes-men/p/itm08f09968f06f0", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.flipkart.com/nike-precision-6-basketball-shoes-men/p/itm01804ced3ae43", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.flipkart.com/nike-nk-precision-6-basketball-shoes-men/p/itmd28af730096ae", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.flipkart.com/nike-precision-vii-basketball-shoes-men/p/itma0bdc4e1f7c26", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/sports-shoes/nike/nike-men-black--red-air-versatile-basketball-shoes/1800912/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/sports-shoes/nike/nike-unisex-black-lebron-xviii-basketball-shoes/12738520/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/sports-shoes/nike/nike-men-black-jordan-formula-23-basketball-shoes/1752696/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/sports-shoes/nike/nike-men-black-zoom-freak-1-basketball-shoes/9795875/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/sports-shoes/nike/nike-men-black-hyperdunk-x-mid-top-basketball-shoes/6676876/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/sports-shoes/nike/nike-men-black-zoom-rev-mid-top-basketball-shoes/1902102/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.nbastore.in/footwear/basketball-shoes", "product_type": "individual", "variant": "black"}
+  ]
+}
+```

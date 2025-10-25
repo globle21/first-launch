@@ -3,8 +3,8 @@ LangGraph Workflow for Product Discovery
 Multi-agent orchestration with optimized single-step architecture
 
 ARCHITECTURE:
-1. Gemini 2.5 Flash: Parse user input only (cheap)
-2. OpenAI GPT-4o: Web search + structuring (superior quality, no hallucination)
+1. Gemini 2.5 Flash: Parse user input (cheap, fast)
+2. Gemini 2.5 Flash: Product/variant confirmation with Google Search grounding (accurate, cost-effective)
 3. Claude 4.5 Haiku: URL discovery (fast, cost-effective, Sonnet-4 performance)
 4. Apify: Price scraping (concurrent batch processing, ~$0.025 per URL)
 
@@ -13,11 +13,11 @@ WORKFLOW:
       ↓
   [Gemini] Parse → brand, product, variant
       ↓
-  [OpenAI] Web search + structure → products list (NO PRICES)
+  [Gemini + Google Search] Web search + structure → products list (NO PRICES)
       ↓
   User confirms product
       ↓
-  [OpenAI] Web search + structure → variants list (NO PRICES!)
+  [Gemini + Google Search] Web search + structure → variants list (NO PRICES!)
       ↓
   User selects variant
       ↓
@@ -28,11 +28,11 @@ WORKFLOW:
   [Ranking] Sort by price → individual (low→high) → combo (low→high) → null price
 
 KEY IMPROVEMENTS:
-- Removed Gemini processing layer (was causing hallucinations)
-- OpenAI now returns structured JSON directly
+- Using Gemini 2.5 Flash with Google Search grounding for product/variant confirmation
+- Gemini returns structured JSON directly with real-time web data
 - No fake products/variants - only what actually exists
 - Faster workflow (one less processing step)
-- More accurate (GPT doesn't hallucinate like Gemini did)
+- Cost-effective: ~$0.001 per request (97% cheaper than GPT-4o-mini)
 - Concurrent price scraping (20 URLs/batch, multiple batches in parallel)
 """
 
@@ -123,7 +123,7 @@ def node_parse_input(state: WorkflowState) -> Dict:
 def node_search_brand_page(state: WorkflowState) -> Dict:
     """
     Node 2: Search brand page and find product
-    Architecture: OpenAI searches and structures directly
+    Architecture: Gemini 2.5 Flash with Google Search grounding
     """
     stage_name = "brand_page_search"
     start_time = datetime.now()
@@ -139,10 +139,10 @@ def node_search_brand_page(state: WorkflowState) -> Dict:
         # Initialize Orchestrator (Gemini processor)
         orchestrator = OrchestratorAgent()
 
-        # Initialize ProductConfirmationAgent (OpenAI direct structuring)
+        # Initialize ProductConfirmationAgent (Gemini with Google Search)
         agent = ProductConfirmationAgent(orchestrator_agent=orchestrator)
 
-        # Search brand page (OpenAI search + structuring directly)
+        # Search brand page (Gemini + Google Search, returns structured JSON)
         search_result = agent.search_and_confirm_product(
             brand=state["extracted_brand"],
             product_name=state["extracted_product_name"],
@@ -236,7 +236,7 @@ def node_search_brand_page(state: WorkflowState) -> Dict:
 def node_extract_variants(state: WorkflowState) -> Dict:
     """
     Node 3: Extract variants from confirmed product page
-    Architecture: OpenAI searches and structures directly (no prices)
+    Architecture: Gemini 2.5 Flash with Google Search grounding (no prices)
     """
     stage_name = "variant_extraction"
     start_time = datetime.now()
@@ -270,14 +270,14 @@ def node_extract_variants(state: WorkflowState) -> Dict:
         # Initialize Orchestrator (only for input parsing)
         orchestrator = OrchestratorAgent()
 
-        # Initialize ProductConfirmationAgent (OpenAI direct structuring)
+        # Initialize ProductConfirmationAgent (Gemini with Google Search)
         agent = ProductConfirmationAgent(orchestrator_agent=orchestrator)
 
         confirmed_product = state["confirmed_product"]
         product_name = confirmed_product.get("name", "")
         product_url = confirmed_product.get("url", "")
 
-        # Extract variants (OpenAI search + structuring directly, no prices)
+        # Extract variants (Gemini + Google Search, returns structured JSON, no prices)
         variant_result = agent.extract_product_variants(
             product_name=product_name,
             product_url=product_url,
@@ -398,6 +398,16 @@ def node_discover_urls(state: WorkflowState) -> Dict:
         product_name = confirmed_product.get("name", state["extracted_product_name"])  # Use confirmed product name, fallback to extracted
         product_url = confirmed_product.get("url")
 
+        # Clean product name to remove duplicate brand prefix
+        # Sometimes the confirmed product name includes the brand (e.g., "Nike Blazer Low")
+        # We want to avoid "Nike Nike Blazer Low" in the search
+        brand = state["extracted_brand"]
+        if product_name.startswith(brand + " "):
+            # Remove brand prefix
+            product_name_cleaned = product_name[len(brand):].strip()
+        else:
+            product_name_cleaned = product_name
+
         # Determine variant to search for
         variant = None
         if state.get("selected_variant"):
@@ -410,8 +420,8 @@ def node_discover_urls(state: WorkflowState) -> Dict:
 
         # Discover URLs using CONFIRMED product name (not original extracted name)
         discovery_result = agent.discover_urls(
-            brand=state["extracted_brand"],
-            product_name=product_name,  # Use confirmed product name
+            brand=brand,
+            product_name=product_name_cleaned,  # Use cleaned product name without duplicate brand
             variant=variant,
             brand_product_url=product_url
         )

@@ -1,20 +1,22 @@
 """
-OpenAI Web Search Tool - Uses GPT-4o for superior web search quality
-Returns STRUCTURED results directly (no Gemini processing needed)
+Brand Page Search Tool - Uses Gemini 2.5 Flash with Google Search grounding
+Returns STRUCTURED results directly (no post-processing needed)
 """
 
 import os
 import json
+import re
 from typing import Dict, Optional
-from openai import OpenAI
+from google import genai
+from google.genai import types
 
 
 class OpenAIWebSearchTool:
     """
-    Web search specialist using GPT-4o
+    Web search specialist using Gemini 2.5 Flash with Google Search grounding
 
     Role: Performs web searches AND structures results directly
-    Returns structured JSON - NO Gemini processing needed
+    Returns structured JSON - NO post-processing needed
 
     Used for:
     - Finding brand pages and products (Stage 2)
@@ -23,17 +25,17 @@ class OpenAIWebSearchTool:
 
     def __init__(self, api_key: Optional[str] = None):
         """
-        Initialize OpenAI web search tool
+        Initialize brand page search tool
 
         Args:
-            api_key: OpenAI API key (if None, reads from environment)
+            api_key: Google API key (if None, reads from environment)
         """
-        self.api_key = api_key or os.getenv("OPENAI_API_KEY")
+        self.api_key = api_key or os.getenv("GOOGLE_API_KEY")
         if not self.api_key:
-            raise ValueError("OPENAI_API_KEY not found in environment variables")
+            raise ValueError("GOOGLE_API_KEY not found in environment variables")
 
-        self.client = OpenAI(api_key=self.api_key)
-        self.model = "gpt-4.1-mini"  # GPT-4o has superior web search
+        self.client = genai.Client(api_key=self.api_key)
+        self.model = "gemini-2.5-flash"  # Gemini 2.5 Flash with Google Search grounding
         self.request_count = 0
 
     def search_brand_and_product(
@@ -43,9 +45,9 @@ class OpenAIWebSearchTool:
         variant_hint: Optional[str] = None
     ) -> Dict:
         """
-        Search for brand page and product using GPT-4o web search
+        Search for brand page and product using Gemini 2.5 Flash with Google Search
 
-        Returns STRUCTURED results directly - no Gemini processing needed
+        Returns STRUCTURED results directly - no post-processing needed
 
         Args:
             brand: Brand name (e.g., "True Frog")
@@ -56,49 +58,62 @@ class OpenAIWebSearchTool:
             Dictionary with structured product candidates
         """
 
-        # Build search instruction for GPT-4o
-        variant_context = ""
+        # Build search instruction for Gemini with variant prioritization
+        variant_priority = ""
         if variant_hint:
-            variant_context = f"\nUser mentioned variant: {variant_hint}"
+            variant_priority = f"""
+VARIANT MATCHING PRIORITY (CRITICAL):
+⭐ User specifically mentioned variant: "{variant_hint}"
+⭐ PRIORITIZE products that match this variant
+⭐ Search specifically for: "{brand} {variant_hint} {product_name}"
+⭐ First find products with "{variant_hint}" in the name or description
+⭐ If few matches found (<3), then include other related products as backup
+⭐ Rank products: exact variant matches first, then others
+"""
 
         search_instruction = f"""
-Search the web COMPREHENSIVELY to find:
+Search the web COMPREHENSIVELY using Google Search to find:
 
 1. Official brand website for "{brand}"
    - Look for {brand}.in or {brand}.com domains
-   - Prioritize official brand sites (not retailer sites)
+   - Prioritize official brand sites (not retailer sites like Amazon, Flipkart)
+   - Verify it's the actual brand website
 
-2. Find ALL products matching "{product_name}" on the brand's website
-   - Search the entire product catalog/shop section
-   - Find EVERY variation and type of "{product_name}"
-   - Look for different formulations (e.g., "for Dry Hair", "for Normal Hair", "for Oily Hair")
-   - Check product listings, collections, and category pages
-   - Get complete product names EXACTLY as shown on website
-   - Get all WORKING product page URLs{variant_context}
+2. Find products matching "{product_name}" on the brand's website{variant_priority}
+
+SEARCH STRATEGY:
+✓ Search for: "{brand} {product_name}" on brand's official website
+✓ Search product catalog/shop section thoroughly
+✓ Find EVERY variation and type available
+✓ Look for different formulations (e.g., "for Dry Hair", "for Normal Hair", "for Oily Hair")
+✓ Check product listings, collections, and category pages
+✓ Get complete product names EXACTLY as shown on website
+✓ Get all WORKING product page URLs
 
 CRITICAL INSTRUCTIONS:
-✓ Be EXHAUSTIVE - find ALL products related to "{product_name}", not just 1-2
+✓ Be EXHAUSTIVE - find ALL relevant products, not just 1-2
 ✓ ONLY include products that ACTUALLY EXIST on the website
 ✓ DO NOT hallucinate or create fake product variations
 ✓ Verify URLs are working and lead to actual product pages
 ✓ Get exact product names from the website - don't modify them
 ✓ If there's only ONE version of the product, return only that ONE product
 ✓ DO NOT include prices
+✓ Use Google Search to verify information accuracy
 
 OUTPUT FORMAT (JSON only):
-{{
+{{{{
   "brand_page_found": true/false,
-  "brand_page_url": "https://truefrog.in",
+  "brand_page_url": "https://brand-website.in",
   "products_found": [
-    {{
+    {{{{
       "name": "Exact Product Name from Website",
-      "url": "https://truefrog.in/products/exact-product-url",
+      "url": "https://brand-website.in/products/exact-product-url",
       "description": "Brief description from website"
-    }}
+    }}}}
   ],
   "match_confidence": "high/medium/low",
-  "notes": "Any relevant notes"
-}}
+  "notes": "Any relevant notes about the search"
+}}}}
 
 IMPORTANT:
 - Return ONLY products that actually exist on the brand's website
@@ -106,61 +121,56 @@ IMPORTANT:
 - Verify all URLs are valid and working
 - If only one product exists, return only one product
 - DO NOT create fake variations
+- PRIORITIZE variant matching if variant hint provided
 
 Return ONLY valid JSON.
 """
 
         try:
-            print(f"\n🔍 [OpenAI] Searching for {brand} {product_name}...")
-            print(f"🤖 Using GPT-4.1-mini with web search (superior quality)")
+            print(f"\n🔍 [Gemini] Searching for {brand} {product_name}...")
+            if variant_hint:
+                print(f"🎯 Prioritizing variant: {variant_hint}")
+            print(f"🤖 Using Gemini 2.5 Flash with Google Search grounding")
 
-            # GPT-4o automatically uses web search when appropriate
-            response = self.client.chat.completions.create(
+            # Call Gemini with Google Search grounding
+            response = self.client.models.generate_content(
                 model=self.model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are a web search assistant. Search the web and return ONLY factual information found on websites. Return structured JSON. DO NOT hallucinate or create fake data."
-                    },
-                    {
-                        "role": "user",
-                        "content": search_instruction
-                    }
-                ],
-                temperature=0.1,  # Very low temperature for factual accuracy
-                response_format={"type": "json_object"}  # Force JSON output
+                contents=search_instruction,
+                config=types.GenerateContentConfig(
+                    temperature=0.3,  # Slightly more creative for better search results
+                    tools=[types.Tool(google_search=types.GoogleSearch())]  # Enable Google Search
+                )
             )
 
             self.request_count += 1
 
             # Extract response
-            response_text = response.choices[0].message.content
+            response_text = response.text
 
-            print(f"✅ [OpenAI] Search complete")
+            print(f"✅ [Gemini] Search complete")
 
-            # Parse JSON
-            try:
-                result = json.loads(response_text)
+            # Parse JSON (handle markdown blocks)
+            result = self._parse_json_response(response_text)
+
+            if result:
                 products = result.get("products_found", [])
                 print(f"📋 Found {len(products)} product(s)")
                 for i, product in enumerate(products, 1):
                     print(f"   {i}. {product.get('name', 'Unknown')}")
-
                 return result
-
-            except json.JSONDecodeError as e:
-                print(f"⚠️ JSON parsing failed: {e}")
+            else:
+                print(f"⚠️ JSON parsing failed")
                 print(f"Raw response: {response_text[:500]}")
                 return {
                     "brand_page_found": False,
                     "brand_page_url": None,
                     "products_found": [],
                     "match_confidence": "none",
-                    "notes": f"JSON parsing error: {str(e)}"
+                    "notes": "Failed to parse Gemini response"
                 }
 
         except Exception as e:
-            print(f"❌ [OpenAI] Search failed: {e}")
+            print(f"❌ [Gemini] Search failed: {e}")
             return {
                 "brand_page_found": False,
                 "brand_page_url": None,
@@ -176,9 +186,9 @@ Return ONLY valid JSON.
         variant_hint: Optional[str] = None
     ) -> Dict:
         """
-        Search product page for available variants using GPT-4o web search
+        Search product page for available variants using Gemini 2.5 Flash with Google Search
 
-        Returns STRUCTURED variant data directly - no Gemini processing needed
+        Returns STRUCTURED variant data directly - no post-processing needed
 
         Args:
             product_name: Confirmed product name
@@ -189,15 +199,21 @@ Return ONLY valid JSON.
             Dictionary with structured variants (NO PRICES)
         """
 
-        variant_context = ""
+        variant_priority = ""
         if variant_hint:
-            variant_context = f"\nUser is interested in: {variant_hint}"
+            variant_priority = f"""
+VARIANT MATCHING PRIORITY (CRITICAL):
+⭐ User specifically mentioned variant: "{variant_hint}"
+⭐ PRIORITIZE finding this specific variant
+⭐ If variant exists, ensure it's included in results
+⭐ If few variants found (<3), include other available options as backup
+"""
 
         search_instruction = f"""
-Visit this product page and find ALL available variants COMPREHENSIVELY:
+Visit this product page using Google Search and find ALL available variants COMPREHENSIVELY:
 
 Product: {product_name}
-URL: {product_url}{variant_context}
+URL: {product_url}{variant_priority}
 
 CRITICAL: Search THOROUGHLY for ALL variants:
 - Size/Volume options (50ml, 100ml, 200ml, 250ml, 500ml, 1L, etc.)
@@ -208,6 +224,7 @@ CRITICAL: Search THOROUGHLY for ALL variants:
 - Any other variant types available
 
 SEARCH INSTRUCTIONS:
+✓ Use Google Search to access and analyze the product page
 ✓ Check dropdown menus, variant selectors, size options
 ✓ Look for "Select Size", "Choose Variant", "Available in" sections
 ✓ Check product details, specifications, and variant tables
@@ -219,25 +236,25 @@ SEARCH INSTRUCTIONS:
 ✓ DO NOT include prices
 
 OUTPUT FORMAT (JSON only):
-{{
+{{{{
   "product_name": "{product_name}",
   "product_url": "{product_url}",
   "variants_found": true/false,
   "variants": [
-    {{
+    {{{{
       "type": "volume",
       "value": "100ml",
       "url": "https://..." (optional)
-    }},
-    {{
+    }}}},
+    {{{{
       "type": "volume",
       "value": "250ml",
       "url": "https://..." (optional)
-    }}
+    }}}}
   ],
   "total_variants": 2,
   "notes": "Any relevant notes"
-}}
+}}}}
 
 IMPORTANT:
 - Return ONLY variants that actually exist on the product page
@@ -245,49 +262,45 @@ IMPORTANT:
 - DO NOT include prices or monetary information
 - Variant types: volume, weight, color, pack_size, formulation
 - If only one variant exists, return only that one
+- PRIORITIZE variant matching if variant hint provided
 
 Return ONLY valid JSON.
 """
 
         try:
-            print(f"\n🔍 [OpenAI] Searching for variants of {product_name}...")
+            print(f"\n🔍 [Gemini] Searching for variants of {product_name}...")
+            if variant_hint:
+                print(f"🎯 Prioritizing variant: {variant_hint}")
             print(f"🌐 URL: {product_url[:60]}...")
 
-            response = self.client.chat.completions.create(
+            # Call Gemini with Google Search grounding
+            response = self.client.models.generate_content(
                 model=self.model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are a web search assistant. Visit product pages and return ONLY factual variant information found. Return structured JSON. DO NOT hallucinate or create fake variants. DO NOT include prices."
-                    },
-                    {
-                        "role": "user",
-                        "content": search_instruction
-                    }
-                ],
-                temperature=0.1,  # Very low temperature for factual accuracy
-                response_format={"type": "json_object"}  # Force JSON output
+                contents=search_instruction,
+                config=types.GenerateContentConfig(
+                    temperature=0.3,  # Slightly more creative for better search results
+                    tools=[types.Tool(google_search=types.GoogleSearch())]  # Enable Google Search
+                )
             )
 
             self.request_count += 1
 
             # Extract response
-            response_text = response.choices[0].message.content
+            response_text = response.text
 
-            print(f"✅ [OpenAI] Variant search complete")
+            print(f"✅ [Gemini] Variant search complete")
 
-            # Parse JSON
-            try:
-                result = json.loads(response_text)
+            # Parse JSON (handle markdown blocks)
+            result = self._parse_json_response(response_text)
+
+            if result:
                 variants = result.get("variants", [])
                 print(f"📋 Found {len(variants)} variant(s) (NO PRICES)")
                 for i, variant in enumerate(variants, 1):
                     print(f"   {i}. {variant.get('value', 'Unknown')} ({variant.get('type', 'unknown')})")
-
                 return result
-
-            except json.JSONDecodeError as e:
-                print(f"⚠️ JSON parsing failed: {e}")
+            else:
+                print(f"⚠️ JSON parsing failed")
                 print(f"Raw response: {response_text[:500]}")
                 return {
                     "product_name": product_name,
@@ -295,11 +308,11 @@ Return ONLY valid JSON.
                     "variants_found": False,
                     "variants": [],
                     "total_variants": 0,
-                    "notes": f"JSON parsing error: {str(e)}"
+                    "notes": "Failed to parse Gemini response"
                 }
 
         except Exception as e:
-            print(f"❌ [OpenAI] Variant search failed: {e}")
+            print(f"❌ [Gemini] Variant search failed: {e}")
             return {
                 "product_name": product_name,
                 "product_url": product_url,
@@ -309,10 +322,67 @@ Return ONLY valid JSON.
                 "notes": f"Search error: {str(e)}"
             }
 
+    def _parse_json_response(self, response_text: str) -> Optional[Dict]:
+        """
+        Parse JSON from Gemini response (handles markdown blocks)
+
+        Args:
+            response_text: Raw response from Gemini
+
+        Returns:
+            Parsed dictionary or None
+        """
+        # Strategy 1: Direct JSON parse
+        try:
+            return json.loads(response_text)
+        except json.JSONDecodeError:
+            pass
+
+        # Strategy 2: Extract JSON from markdown (```json)
+        try:
+            if "```json" in response_text:
+                start = response_text.find("```json") + 7
+                end = response_text.find("```", start)
+                json_str = response_text[start:end].strip()
+                return json.loads(json_str)
+        except:
+            pass
+
+        # Strategy 3: Extract JSON from markdown (``` without language)
+        try:
+            if response_text.strip().startswith("```"):
+                temp = response_text.strip()[3:]
+                start = temp.find("{")
+                if start != -1:
+                    # Count braces to find matching closing brace
+                    brace_count = 0
+                    for i in range(start, len(temp)):
+                        if temp[i] == '{':
+                            brace_count += 1
+                        elif temp[i] == '}':
+                            brace_count -= 1
+                            if brace_count == 0:
+                                json_str = temp[start:i+1]
+                                return json.loads(json_str)
+        except:
+            pass
+
+        # Strategy 4: Extract JSON object
+        try:
+            start = response_text.find("{")
+            end = response_text.rfind("}") + 1
+            if start != -1 and end > start:
+                json_str = response_text[start:end]
+                return json.loads(json_str)
+        except:
+            pass
+
+        return None
+
     def get_usage_stats(self) -> Dict:
         """Get API usage statistics"""
         return {
-            "tool": "OpenAI GPT-4o Web Search",
+            "tool": "Gemini 2.5 Flash with Google Search",
             "requests": self.request_count,
-            "estimated_cost_usd": round(self.request_count * 0.03, 4)  # ~$0.03 per request
+            "estimated_cost_usd": round(self.request_count * 0.001, 6)  # ~$0.001 per request
         }

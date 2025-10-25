@@ -18,12 +18,12 @@ class OrchestratorAgent:
     1. Parse user input (extract brand, product, variant) - NO WEB SEARCH
 
     Deprecated Methods (no longer used):
-    2. process_product_search_results() - DEPRECATED: OpenAI now returns structured data
-    3. process_variant_search_results() - DEPRECATED: OpenAI now returns structured data
+    2. process_product_search_results() - DEPRECATED: Gemini 2.5 Flash now returns structured data
+    3. process_variant_search_results() - DEPRECATED: Gemini 2.5 Flash now returns structured data
 
-    IMPORTANT: This agent NEVER does web searches
-    - OpenAI does web searches AND structuring (superior quality, no hallucination)
-    - Gemini only parses user input (cheap and fast)
+    IMPORTANT: This agent NEVER does web searches for product/variant discovery
+    - Gemini 2.5 Flash (in ProductConfirmationAgent) does web searches AND structuring with Google Search grounding
+    - OrchestratorAgent only parses user input (cheap and fast)
     """
 
     def __init__(self, api_key: Optional[str] = None):
@@ -120,13 +120,13 @@ class OrchestratorAgent:
     def process_product_search_results(self, raw_search_results: str, brand: str, product_name: str) -> Dict:
         """
         DEPRECATED: This method is no longer used.
-        OpenAI now returns structured JSON directly - no Gemini processing needed.
+        Gemini 2.5 Flash (in ProductConfirmationAgent) now returns structured JSON directly.
 
         This method was causing hallucinations (creating fake products/variants).
         Kept for backward compatibility but should not be called.
 
         Args:
-            raw_search_results: Raw text from OpenAI web search
+            raw_search_results: Raw text from web search
             brand: Brand name
             product_name: Product name
 
@@ -138,7 +138,7 @@ class OrchestratorAgent:
         processing_prompt = f"""
 You are processing web search results to identify product candidates.
 
-SEARCH RESULTS (from OpenAI web search):
+SEARCH RESULTS (from web search):
 {raw_search_results}
 
 USER IS LOOKING FOR:
@@ -187,7 +187,7 @@ Return ONLY valid JSON with ALL products found.
 """
 
         try:
-            print(f"\n🤖 [{self.name}] Processing OpenAI search results...")
+            print(f"\n🤖 [{self.name}] Processing web search results...")
 
             response = self.client.models.generate_content(
                 model=self.model,
@@ -230,13 +230,13 @@ Return ONLY valid JSON with ALL products found.
     def process_variant_search_results(self, raw_variant_data: str, product_name: str) -> Dict:
         """
         DEPRECATED: This method is no longer used.
-        OpenAI now returns structured JSON directly - no Gemini processing needed.
+        Gemini 2.5 Flash (in ProductConfirmationAgent) now returns structured JSON directly.
 
         This method was causing hallucinations (creating fake variants).
         Kept for backward compatibility but should not be called.
 
         Args:
-            raw_variant_data: Raw text from OpenAI variant search
+            raw_variant_data: Raw text from web search
             product_name: Product name
 
         Returns:
@@ -247,7 +247,7 @@ Return ONLY valid JSON with ALL products found.
         processing_prompt = f"""
 You are processing web search results to extract product variants.
 
-VARIANT DATA (from OpenAI web search):
+VARIANT DATA (from web search):
 {raw_variant_data}
 
 PRODUCT:
@@ -297,7 +297,7 @@ Return ONLY valid JSON.
 """
 
         try:
-            print(f"\n🤖 [{self.name}] Processing OpenAI variant data...")
+            print(f"\n🤖 [{self.name}] Processing web search variant data...")
             print(f"🚫 Filtering out ALL price information...")
 
             response = self.client.models.generate_content(

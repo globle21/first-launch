@@ -147,6 +147,13 @@ class ProductURLSearchTool:
             if result and "urls" in result:
                 urls = result.get("urls", [])
                 print(f"✅ JSON parsing successful!")
+
+                # If no URLs found, extract reason from Claude's explanation
+                if len(urls) == 0:
+                    failure_reason = self._extract_failure_reason(response_text)
+                    print(f"⚠️ No URLs found: {failure_reason}")
+                    return self._empty_result(brand, product_name, variant, failure_reason, response_text)
+
                 print(f"✅ Successfully discovered {len(urls)} URLs")
                 print(f"💰 Web search cost: ${self.search_count * 0.01:.4f}")
                 print(f"📊 Search method: {tool_uses} web searches (batch mode - multiple URLs per search)")
@@ -186,7 +193,10 @@ class ProductURLSearchTool:
                 print("❌ JSON parsing failed!")
                 print(f"⚠️ Could not parse JSON response or no URLs found")
                 print(f"📁 Check debug file for full response: {debug_file}")
-                return self._empty_result(brand, product_name, variant, "Failed to parse response", response_text)
+
+                # Extract failure reason from Claude's response for user feedback
+                failure_reason = self._extract_failure_reason(response_text)
+                return self._empty_result(brand, product_name, variant, failure_reason, response_text)
 
         except Exception as e:
             print(f"❌ URL discovery failed: {e}")
@@ -300,6 +310,55 @@ class ProductURLSearchTool:
             }
 
         return None
+
+    def _extract_failure_reason(self, response_text: str) -> str:
+        """
+        Extract Claude's explanation for why no URLs were found
+
+        Args:
+            response_text: Full response from Claude
+
+        Returns:
+            Extracted reason or generic message
+        """
+        if not response_text:
+            return "No URLs found - empty response"
+
+        # Keywords to identify relevant explanation sentences
+        reason_keywords = [
+            "out of stock", "out-of-stock", "sold out",
+            "not available", "no longer available", "discontinued",
+            "could not find", "no results", "limited availability",
+            "no confirmed", "challenge is", "appears to",
+            "search results show", "limited to", "only found"
+        ]
+
+        # Extract sentences containing these keywords
+        sentences = response_text.replace('\n', ' ').split('.')
+        relevant_sentences = []
+
+        for sentence in sentences[:15]:  # Only check first 15 sentences
+            sentence_lower = sentence.lower().strip()
+            if any(keyword in sentence_lower for keyword in reason_keywords):
+                # Clean up the sentence
+                clean_sentence = sentence.strip()
+                if len(clean_sentence) > 20 and len(clean_sentence) < 200:
+                    relevant_sentences.append(clean_sentence)
+
+        if relevant_sentences:
+            # Return first 2 most relevant sentences
+            reason = '. '.join(relevant_sentences[:2])
+            if not reason.endswith('.'):
+                reason += '.'
+            return reason
+
+        # Fallback: Try to extract the first substantive paragraph
+        paragraphs = [p.strip() for p in response_text.split('\n\n') if p.strip()]
+        for para in paragraphs[:3]:
+            if len(para) > 50 and len(para) < 500:
+                return para[:300] + ('...' if len(para) > 300 else '')
+
+        return "No URLs found - Claude could not locate products matching the exact variant"
 
     def _empty_result(
         self,

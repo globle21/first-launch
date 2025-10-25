@@ -1,6 +1,6 @@
 """
 ProductConfirmationAgent - Product confirmation specialist
-Architecture: OpenAI searches AND structures (no Gemini processing needed)
+Architecture: Gemini 2.5 Flash with Google Search grounding
 """
 
 from typing import Dict, Optional
@@ -9,10 +9,10 @@ from ..tools.brand_page_search import OpenAIWebSearchTool
 
 class ProductConfirmationAgent:
     """
-    Agent responsible for product confirmation using OpenAI GPT-4o:
+    Agent responsible for product confirmation using Gemini 2.5 Flash with Google Search:
 
-    Single-step process: OpenAI GPT-4o searches AND structures results directly
-    No Gemini processing needed - GPT returns ready-to-use JSON
+    Single-step process: Gemini searches AND structures results directly
+    Uses Google Search grounding for accurate, real-time data
 
     Tasks:
     1. Find brand's official page
@@ -20,19 +20,20 @@ class ProductConfirmationAgent:
     3. Extract available variants (NO PRICES)
 
     Architecture:
-    - OpenAI tool: Searches web AND returns structured JSON directly
+    - Gemini 2.5 Flash: Searches web (Google Search) AND returns structured JSON directly
     - No hallucination - only returns products/variants that actually exist
+    - Cost-effective: ~$0.001 per request (97% cheaper than GPT-4o-mini)
     """
 
     def __init__(self, orchestrator_agent=None, openai_api_key: Optional[str] = None):
         """
-        Initialize agent with OpenAI tool
+        Initialize agent with Gemini tool (note: parameter name kept for backward compatibility)
 
         Args:
             orchestrator_agent: OrchestratorAgent instance (kept for compatibility, not used)
-            openai_api_key: OpenAI API key (optional)
+            openai_api_key: Google API key (parameter name kept for backward compatibility)
         """
-        # OpenAI tool for web search AND structuring
+        # Gemini tool for web search AND structuring (class name kept for backward compatibility)
         self.openai_tool = OpenAIWebSearchTool(api_key=openai_api_key)
 
         # Keep orchestrator reference for compatibility (but don't use it)
@@ -49,7 +50,7 @@ class ProductConfirmationAgent:
         """
         Search brand page and find matching products
 
-        Single-step process: OpenAI searches AND structures results directly
+        Single-step process: Gemini searches AND structures results directly
 
         Args:
             brand: Brand name
@@ -60,11 +61,11 @@ class ProductConfirmationAgent:
             Dictionary with brand page and structured product candidates
         """
         print("\n" + "="*70)
-        print(f"🤖 {self.name}: Product confirmation (OpenAI direct)")
+        print(f"🤖 {self.name}: Product confirmation (Gemini 2.5 Flash)")
         print("="*70)
 
-        # OpenAI web search AND structuring (single step)
-        print("\n📍 OpenAI web search + structuring...")
+        # Gemini web search AND structuring (single step)
+        print("\n📍 Gemini web search + structuring...")
         structured_result = self.openai_tool.search_brand_and_product(
             brand=brand,
             product_name=product_name,
@@ -83,7 +84,7 @@ class ProductConfirmationAgent:
         """
         Extract variants for confirmed product
 
-        Single-step process: OpenAI searches AND structures results directly
+        Single-step process: Gemini searches AND structures results directly
 
         Args:
             product_name: Confirmed product name
@@ -94,31 +95,30 @@ class ProductConfirmationAgent:
             Dictionary with variant information (NO PRICES)
         """
         print("\n" + "="*70)
-        print(f"🤖 {self.name}: Variant extraction (OpenAI direct)")
+        print(f"🤖 {self.name}: Variant extraction (Gemini 2.5 Flash)")
         print("="*70)
 
-        # OpenAI web search AND structuring (single step)
-        print("\n📍 OpenAI web search + structuring...")
+        # Gemini web search AND structuring (single step)
+        print("\n📍 Gemini web search + structuring...")
         structured_result = self.openai_tool.search_product_variants(
             product_name=product_name,
             product_url=product_url,
             variant_hint=variant_hint
         )
 
-        # Result is already structured - no Gemini processing needed
+        # Result is already structured
         return structured_result
 
     def get_usage_stats(self) -> Dict:
         """Get API usage statistics"""
-        openai_stats = self.openai_tool.get_usage_stats()
+        gemini_stats = self.openai_tool.get_usage_stats()
 
         return {
             "agent": self.name,
-            "openai_requests": openai_stats["requests"],
-            "gemini_requests": 0,  # No longer using Gemini for product/variant processing
-            "estimated_cost_usd": openai_stats["estimated_cost_usd"],
+            "gemini_requests": gemini_stats["requests"],
+            "estimated_cost_usd": gemini_stats["estimated_cost_usd"],
             "breakdown": {
-                "openai": openai_stats
+                "gemini_2.5_flash": gemini_stats
             },
-            "notes": "Gemini processing removed - OpenAI returns structured results directly"
+            "notes": "Using Gemini 2.5 Flash with Google Search grounding"
         }

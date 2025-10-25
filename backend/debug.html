@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Discovery - Debug Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #2a2a2a;
+            border: 2px solid #444;
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #666;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #4CAF50;
+            letter-spacing: 2px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #333;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .auto-refresh {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #555;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .toggle-switch.on {
+            background: #4CAF50;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: 0.3s;
+        }
+
+        .toggle-switch.on::after {
+            left: 29px;
+        }
+
+        .last-updated {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .section {
+            margin: 30px 0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            color: #64B5F6;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .divider {
+            border-top: 1px dashed #444;
+            margin: 20px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        .info-label {
+            color: #888;
+            font-weight: bold;
+        }
+
+        .info-value {
+            color: #e0e0e0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .status-completed { background: #4CAF50; color: white; }
+        .status-running { background: #FFC107; color: black; }
+        .status-failed { background: #F44336; color: white; }
+        .status-waiting { background: #2196F3; color: white; }
+
+        .stage-log {
+            margin: 15px 0;
+            padding: 15px;
+            background: #333;
+            border-left: 4px solid #666;
+            border-radius: 4px;
+        }
+
+        .stage-log.success { border-left-color: #4CAF50; }
+        .stage-log.error { border-left-color: #F44336; }
+        .stage-log.warning { border-left-color: #FFC107; }
+        .stage-log.info { border-left-color: #2196F3; }
+
+        .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .stage-title {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .stage-duration {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .stage-message {
+            color: #ccc;
+            margin: 5px 0;
+        }
+
+        .stage-data {
+            margin-top: 10px;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            background: #333;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: #444;
+            border: 1px solid #666;
+            color: #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #555;
+        }
+
+        .btn-primary {
+            background: #2196F3;
+            border-color: #2196F3;
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+
+        .error-message {
+            background: #4a1a1a;
+            border: 1px solid #F44336;
+            padding: 15px;
+            border-radius: 5px;
+            color: #ff6b6b;
+            margin: 10px 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #4CAF50;
+        }
+
+        .spinner {
+            border: 3px solid #333;
+            border-top: 3px solid #4CAF50;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .json-view {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .json-view pre {
+            color: #4CAF50;
+            font-size: 11px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>╔══════════════════════════════════════════════════════════╗</h1>
+            <h1>║      PRODUCT DISCOVERY DEBUG DASHBOARD      ║</h1>
+            <h1>╚══════════════════════════════════════════════════════════╝</h1>
+        </div>
+
+        <div class="controls">
+            <div class="auto-refresh">
+                <span>🔄 Auto-Refresh:</span>
+                <div class="toggle-switch on" id="autoRefreshToggle" onclick="toggleAutoRefresh()"></div>
+                <span id="refreshStatus">ON</span>
+            </div>
+            <div class="last-updated" id="lastUpdated">Loading...</div>
+        </div>
+
+        <div id="content">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading debug information...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let autoRefresh = true;
+        let refreshInterval = null;
+        let lastUpdateTime = null;
+
+        function toggleAutoRefresh() {
+            autoRefresh = !autoRefresh;
+            const toggle = document.getElementById('autoRefreshToggle');
+            const status = document.getElementById('refreshStatus');
+
+            if (autoRefresh) {
+                toggle.classList.add('on');
+                status.textContent = 'ON';
+                startAutoRefresh();
+            } else {
+                toggle.classList.remove('on');
+                status.textContent = 'OFF';
+                stopAutoRefresh();
+            }
+        }
+
+        function startAutoRefresh() {
+            if (refreshInterval) clearInterval(refreshInterval);
+            refreshInterval = setInterval(loadDebugData, 5000);
+        }
+
+        function stopAutoRefresh() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+                refreshInterval = null;
+            }
+        }
+
+        function updateLastUpdatedTime() {
+            if (!lastUpdateTime) return;
+
+            const now = new Date();
+            const diff = Math.floor((now - lastUpdateTime) / 1000);
+
+            let timeStr;
+            if (diff < 60) {
+                timeStr = `${diff} second${diff !== 1 ? 's' : ''} ago`;
+            } else if (diff < 3600) {
+                const mins = Math.floor(diff / 60);
+                timeStr = `${mins} minute${mins !== 1 ? 's' : ''} ago`;
+            } else {
+                const hours = Math.floor(diff / 3600);
+                timeStr = `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+            }
+
+            document.getElementById('lastUpdated').textContent = `Last Updated: ${timeStr}`;
+        }
+
+        async function loadDebugData() {
+            try {
+                const response = await fetch('/api/debug/recent-logs');
+                const data = await response.json();
+
+                lastUpdateTime = new Date();
+                updateLastUpdatedTime();
+
+                if (data.status === 'no_sessions') {
+                    showNoData();
+                    return;
+                }
+
+                if (data.status === 'error') {
+                    showError(data.message || 'Failed to load debug data');
+                    return;
+                }
+
+                renderDebugData(data.session);
+
+                // Stop auto-refresh if session is completed or failed
+                if (autoRefresh && (data.session.status === 'completed' || data.session.status === 'failed')) {
+                    // Keep refreshing for 30 more seconds, then stop
+                    setTimeout(() => {
+                        if (data.session.status === 'completed' || data.session.status === 'failed') {
+                            stopAutoRefresh();
+                            document.getElementById('refreshStatus').textContent = 'OFF (Session Complete)';
+                        }
+                    }, 30000);
+                }
+
+            } catch (error) {
+                console.error('Error loading debug data:', error);
+                showError('Failed to fetch debug data. Is the server running?');
+            }
+        }
+
+        function showNoData() {
+            document.getElementById('content').innerHTML = `
+                <div class="no-data">
+                    <h2>📭 No Sessions Found</h2>
+                    <p>No workflow sessions have been run yet.</p>
+                    <p>Start a search on the main page to see debug information here.</p>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            document.getElementById('content').innerHTML = `
+                <div class="error-message">
+                    <h3>❌ Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        function renderDebugData(session) {
+            const statusClass = session.status === 'completed' ? 'status-completed' :
+                               session.status === 'failed' ? 'status-failed' :
+                               session.status === 'waiting_confirmation' ? 'status-waiting' :
+                               'status-running';
+
+            const statusIcon = session.status === 'completed' ? '✅' :
+                              session.status === 'failed' ? '❌' :
+                              session.status === 'waiting_confirmation' ? '👤' :
+                              '⏳';
+
+            const startTime = new Date(session.start_time);
+            const lastUpdate = new Date(session.last_updated);
+            const duration = Math.floor((lastUpdate - startTime) / 1000);
+            const durationStr = formatDuration(duration);
+
+            let html = `
+                <div class="section">
+                    <div class="section-title">📊 SESSION OVERVIEW</div>
+                    <div class="info-grid">
+                        <div class="info-label">Session ID:</div>
+                        <div class="info-value">${session.id}</div>
+
+                        <div class="info-label">Status:</div>
+                        <div class="info-value">
+                            ${statusIcon} <span class="status-badge ${statusClass}">${session.status.toUpperCase()}</span>
+                        </div>
+
+                        <div class="info-label">Started:</div>
+                        <div class="info-value">${formatTime(startTime)}</div>
+
+                        <div class="info-label">Duration:</div>
+                        <div class="info-value">${durationStr}</div>
+
+                        <div class="info-label">Current Stage:</div>
+                        <div class="info-value">${session.current_stage}</div>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="section">
+                    <div class="section-title">📋 STAGE-BY-STAGE PROGRESS</div>
+            `;
+
+            // Render stage logs
+            if (session.progress && session.progress.logs && session.progress.logs.length > 0) {
+                const logs = session.progress.logs;
+
+                for (const log of logs) {
+                    const logClass = log.status === 'success' ? 'success' :
+                                   log.status === 'error' || log.status === 'failed' ? 'error' :
+                                   log.status === 'waiting' ? 'info' :
+                                   'warning';
+
+                    const icon = getStageIcon(log.stage, log.status);
+                    const stageName = getReadableStageName(log.stage);
+
+                    html += `
+                        <div class="stage-log ${logClass}">
+                            <div class="stage-header">
+                                <div class="stage-title">${icon} ${stageName}</div>
+                                ${log.timestamp ? `<div class="stage-duration">⏱️ ${formatTime(new Date(log.timestamp))}</div>` : ''}
+                            </div>
+                            <div class="stage-message">
+                                ${getStatusIcon(log.status)} ${log.message}
+                            </div>
+                    `;
+
+                    // Show INPUT data if available
+                    if (log.input && Object.keys(log.input).length > 0) {
+                        html += `
+                            <div class="stage-data">
+                                <div style="color: #64B5F6; font-weight: bold; margin-bottom: 8px;">📥 INPUT:</div>
+                                ${formatData(log.input, 1)}
+                            </div>
+                        `;
+                    }
+
+                    // Show OUTPUT data if available
+                    if (log.output && Object.keys(log.output).length > 0) {
+                        html += `
+                            <div class="stage-data" style="margin-top: 10px;">
+                                <div style="color: #4CAF50; font-weight: bold; margin-bottom: 8px;">📤 OUTPUT:</div>
+                                ${formatData(log.output, 1)}
+                            </div>
+                        `;
+                    }
+
+                    // Show additional data if available (for backward compatibility)
+                    if (log.data && Object.keys(log.data).length > 0) {
+                        html += `
+                            <div class="stage-data" style="margin-top: 10px;">
+                                <div style="color: #FFC107; font-weight: bold; margin-bottom: 8px;">📊 DATA:</div>
+                                ${formatData(log.data, 1)}
+                            </div>
+                        `;
+                    }
+
+                    html += `</div>`;
+                }
+            } else {
+                html += `<div class="no-data">No progress logs available yet.</div>`;
+            }
+
+            html += `</div>`;
+
+            // Results Summary (if available)
+            const lastLog = session.progress?.logs?.[session.progress.logs.length - 1];
+            if (lastLog && lastLog.data) {
+                html += `
+                    <div class="divider"></div>
+                    <div class="section">
+                        <div class="section-title">📈 RESULTS SUMMARY</div>
+                        <div class="stat-grid">
+                `;
+
+                if (lastLog.data.total_urls !== undefined) {
+                    html += `
+                        <div class="stat-card">
+                            <div class="stat-value">${lastLog.data.total_urls || 0}</div>
+                            <div class="stat-label">URLs Discovered</div>
+                        </div>
+                    `;
+                }
+
+                if (lastLog.data.scraped_successfully !== undefined) {
+                    const successRate = lastLog.data.total_urls ?
+                        Math.round((lastLog.data.scraped_successfully / lastLog.data.total_urls) * 100) : 0;
+                    html += `
+                        <div class="stat-card">
+                            <div class="stat-value">${lastLog.data.scraped_successfully || 0}</div>
+                            <div class="stat-label">Prices Scraped (${successRate}%)</div>
+                        </div>
+                    `;
+                }
+
+                if (lastLog.data.in_stock !== undefined) {
+                    html += `
+                        <div class="stat-card">
+                            <div class="stat-value">${lastLog.data.in_stock || 0}</div>
+                            <div class="stat-label">In Stock</div>
+                        </div>
+                    `;
+                }
+
+                if (lastLog.data.failed !== undefined) {
+                    html += `
+                        <div class="stat-card">
+                            <div class="stat-value">${lastLog.data.failed || 0}</div>
+                            <div class="stat-label">Failed Scrapes</div>
+                        </div>
+                    `;
+                }
+
+                html += `</div></div>`;
+            }
+
+            // Action buttons
+            html += `
+                <div class="divider"></div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="downloadJSON()">💾 Download Session JSON</button>
+                    <button class="btn" onclick="viewServerLogs()">📋 View Server Logs</button>
+                    <button class="btn" onclick="window.location.href='/'">🏠 Back to Main Page</button>
+                </div>
+            `;
+
+            document.getElementById('content').innerHTML = html;
+        }
+
+        function getStageIcon(stage, status) {
+            const icons = {
+                'parsing': '🤖',
+                'product_search': '🔍',
+                'product_confirmation': '✅',
+                'variant_extraction': '🔧',
+                'variant_confirmation': '👤',
+                'url_extraction': '🔗',
+                'url_extraction_confirmation': '👤',
+                'url_discovery': '🌐',
+                'price_scraping': '💰',
+                'per_unit_pricing': '📊',
+                'ranking': '🏆',
+                'complete': '🎉',
+                'error': '❌'
+            };
+            return icons[stage] || '📌';
+        }
+
+        function getReadableStageName(stage) {
+            const names = {
+                'parsing': 'OrchestratorAgent: Parsing Input',
+                'product_search': 'ProductConfirmationAgent: Product Search',
+                'product_confirmation': 'User Confirmation: Select Product',
+                'variant_extraction': 'ProductConfirmationAgent: Variant Extraction',
+                'variant_confirmation': 'User Confirmation: Select Variant',
+                'url_extraction': 'URLExtractionAgent: Extract from URL',
+                'url_extraction_confirmation': 'User Confirmation: Verify Extraction',
+                'url_discovery': 'URLDiscoveryAgent: URL Discovery',
+                'price_scraping': 'PriceScrapingAgent: Price Scraping',
+                'per_unit_pricing': 'ComboPricingAgent: Per-Unit Pricing',
+                'ranking': 'Product Ranking',
+                'complete': 'Workflow Complete',
+                'error': 'Error Occurred'
+            };
+            return names[stage] || stage.replace('_', ' ').toUpperCase();
+        }
+
+        function getStatusIcon(status) {
+            const icons = {
+                'success': '✅',
+                'error': '❌',
+                'failed': '❌',
+                'started': '▶️',
+                'waiting': '⏸️',
+                'skipped': '⏭️'
+            };
+            return icons[status] || '•';
+        }
+
+        function formatKey(key) {
+            return key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        }
+
+        function formatTime(date) {
+            const now = new Date();
+            const diff = Math.floor((now - date) / 1000);
+
+            if (diff < 60) return `${diff}s ago`;
+            if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+            if (diff < 86400) return date.toLocaleTimeString();
+            return date.toLocaleString();
+        }
+
+        function formatDuration(seconds) {
+            if (seconds < 60) return `${seconds}s`;
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            if (mins < 60) return `${mins}m ${secs}s`;
+            const hours = Math.floor(mins / 60);
+            const remainMins = mins % 60;
+            return `${hours}h ${remainMins}m`;
+        }
+
+        function formatData(data, indent = 0) {
+            if (data === null || data === undefined) {
+                return '<span style="color: #888;">null</span>';
+            }
+
+            if (typeof data === 'string') {
+                return `<span style="color: #9CCC65;">"${escapeHtml(data)}"</span>`;
+            }
+
+            if (typeof data === 'number') {
+                return `<span style="color: #FFB74D;">${data}</span>`;
+            }
+
+            if (typeof data === 'boolean') {
+                return `<span style="color: #64B5F6;">${data}</span>`;
+            }
+
+            if (Array.isArray(data)) {
+                if (data.length === 0) {
+                    return '<span style="color: #888;">[]</span>';
+                }
+
+                // For arrays with many items, show count and expandable list
+                if (data.length > 3) {
+                    let html = `<span style="color: #888;">[${data.length} items]</span>`;
+                    html += '<div style="margin-left: 15px; margin-top: 5px;">';
+                    for (let i = 0; i < Math.min(data.length, 10); i++) {
+                        html += `<div style="margin: 5px 0;">`;
+                        html += `<span style="color: #888;">[${i}]</span> `;
+                        html += formatData(data[i], indent + 1);
+                        html += `</div>`;
+                    }
+                    if (data.length > 10) {
+                        html += `<div style="color: #888; font-style: italic;">... and ${data.length - 10} more</div>`;
+                    }
+                    html += '</div>';
+                    return html;
+                }
+
+                // For small arrays, format inline
+                let html = '<span style="color: #888;">[</span>';
+                html += data.map(item => formatData(item, indent + 1)).join(', ');
+                html += '<span style="color: #888;">]</span>';
+                return html;
+            }
+
+            if (typeof data === 'object') {
+                const keys = Object.keys(data);
+                if (keys.length === 0) {
+                    return '<span style="color: #888;">{}</span>';
+                }
+
+                let html = '<div style="margin-left: 15px;">';
+                for (const key of keys) {
+                    html += `<div style="margin: 5px 0;">`;
+                    html += `<span style="color: #81D4FA;">${escapeHtml(key)}</span>: `;
+                    html += formatData(data[key], indent + 1);
+                    html += `</div>`;
+                }
+                html += '</div>';
+                return html;
+            }
+
+            return escapeHtml(String(data));
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function downloadJSON() {
+            try {
+                const response = await fetch('/api/debug/recent-logs');
+                const data = await response.json();
+
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `debug_session_${data.session.id}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                alert('Failed to download JSON: ' + error.message);
+            }
+        }
+
+        function viewServerLogs() {
+            window.open('/api/debug/server-logs?lines=100', '_blank');
+        }
+
+        // Initialize
+        loadDebugData();
+        if (autoRefresh) {
+            startAutoRefresh();
+            setInterval(updateLastUpdatedTime, 1000);
+        }
+    </script>
+</body>
+</html>

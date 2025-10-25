@@ -1,0 +1,38 @@
+=== CLAUDE RAW RESPONSE ===
+Timestamp: 20251025_012453
+Product: Nike Air Jordan 1 Low Men's Shoes black
+Response length: 4050 chars
+
+I'll search for Nike Air Jordan 1 Low Men's Shoes in black on Indian e-commerce platforms.Let me search for more specific product listings with direct purchase URLs.Based on my search results, I found several Indian e-commerce platforms selling Nike Air Jordan 1 Low Men's Shoes in black variants. Here are the verified purchase URLs:
+
+```json
+{
+  "urls": [
+    {"url": "https://www.amazon.in/Nike-Jordan-Shoes-White-Black/dp/B0BSRP2HXF", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/Nike-Basketball-553558-040-Particle-Grey-White/dp/B097WQJW3R", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/NIKE-Jordan-University-Black-553558-600/dp/B075KL45CY", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/Jordan-Nike-Black-White-Basketball/dp/B01DRFP9IW", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/Nike-Mens-Jordan-Leather-Sneaker/dp/B095J98VYR", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.amazon.in/Nike-Mens-Jordan-Running-Shoes/dp/B0DNJBR4YZ", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.flipkart.com/nike-men-yellow-black-air-jordan-1-low-leather-basketball-shoes/p/itm08eca097f64a8", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/casual-shoes/nike/nike-men-air-jordan-1-low-sneakers/25052756/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/casual-shoes/nike/nike-air-jordan-1-low-men-shoes/34951364/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/casual-shoes/nike/nike-air-jordan-1-low-mens-shoes/29973845/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/sports-shoes/nike/nike-men-black-air-jordan-1-low-suede-colourblocked-basketball-shoes/11980122/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/casual-shoes/nike/nike-air-jordan-1-low-men-shoes/34951327/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/casual-shoes/nike/nike-men-air-jordan-1-low-sneakers/30439726/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/casual-shoes/nike/-nike-air-jordan-1-low-mens-shoes-/29922402/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/casual-shoes/nike/nike-solid-air-jordan-1-low-mens-shoes/30738937/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/casual-shoes/nike/nike-men-air-jordan-1-low-casual-sneakers/31059819/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/casual-shoes/nike/-nike-air-jordan-1-low-mens-shoes/30068832/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.myntra.com/casual-shoes/nike/nike-air-jordan-1-low-mens-shoes/30738931/buy", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.ajio.com/nike-air-jordan-1-low-top-lace-up-basketball-shoes/p/460624516_black", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.ajio.com/nike-air-jordan-1-low-top-lace-up-sports-shoes/p/460624615006", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.superkicks.in/products/air-jordan-1-low-white-black-white-shoes-for-men", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.nike.com/in/t/air-jordan-1-low-shoes-6Q1tFM", "product_type": "individual", "variant": "black"},
+    {"url": "https://www.nike.com/in/t/air-jordan-1-low-se-shoes-R22PUQMA", "product_type": "individual", "variant": "black"},
+    {"url": "https://limitededt.in/products/jordan-1-low-white-black", "product_type": "individual", "variant": "black"},
+    {"url": "https://hypefly.co.in/collections/air-jordan-1-low", "product_type": "individual", "variant": "black"}
+  ]
+}
+```

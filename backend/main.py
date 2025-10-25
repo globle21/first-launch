@@ -440,16 +440,16 @@ async def get_latest_results():
         }
 
 @app.get("/api/debug/server-logs")
-async def get_server_logs(lines: int = 100):
-    """Get the most recent server logs"""
+async def get_server_logs(lines: int = 100, filter_technical: bool = True):
+    """Get the most recent server logs (filtered for user-relevant events by default)"""
     try:
         # Use absolute path to logs directory
         log_dir = Path(__file__).parent / "logs"
         log_file = log_dir / "app.log"
-        
+
         # Create logs directory if it doesn't exist
         log_dir.mkdir(exist_ok=True)
-        
+
         # If file doesn't exist, return empty logs
         if not log_file.exists():
             return {
@@ -457,20 +457,50 @@ async def get_server_logs(lines: int = 100):
                 "message": "Log file does not exist yet",
                 "log_file": str(log_file.absolute())
             }
-        
+
         # Read last N lines
         with open(log_file, 'r', encoding='utf-8', errors='replace') as f:
             all_lines = f.readlines()
             recent_lines = all_lines[-lines:] if len(all_lines) > lines else all_lines
-        
-        return {
-            "status": "success",
-            "log_file": str(log_file.absolute()),
-            "total_lines": len(all_lines),
-            "lines_returned": len(recent_lines),
-            "logs": [line.strip() for line in recent_lines]
-        }
-        
+
+        # Filter out technical logs if requested
+        if filter_technical:
+            # Keywords to EXCLUDE (technical library logs)
+            exclude_keywords = [
+                'AFC is enabled',
+                'AFC remote call',
+                'HTTP Request: POST',
+                'HTTP Request: GET',
+                'google_genai.models',
+                'httpx - INFO',
+                'INFO - HTTP'
+            ]
+
+            # Filter lines
+            filtered_lines = []
+            for line in recent_lines:
+                # Skip if line contains any exclude keyword
+                if not any(keyword in line for keyword in exclude_keywords):
+                    filtered_lines.append(line.strip())
+
+            return {
+                "status": "success",
+                "log_file": str(log_file.absolute()),
+                "total_lines": len(all_lines),
+                "lines_returned": len(filtered_lines),
+                "filtered": True,
+                "logs": filtered_lines
+            }
+        else:
+            return {
+                "status": "success",
+                "log_file": str(log_file.absolute()),
+                "total_lines": len(all_lines),
+                "lines_returned": len(recent_lines),
+                "filtered": False,
+                "logs": [line.strip() for line in recent_lines]
+            }
+
     except Exception as e:
         logger.error(f"Error reading server logs: {str(e)}")
         return {
@@ -478,6 +508,16 @@ async def get_server_logs(lines: int = 100):
             "error": str(e),
             "message": "Failed to read server logs"
         }
+
+@app.get("/debug")
+async def debug_dashboard():
+    """Serve the debug dashboard HTML page"""
+    from fastapi.responses import FileResponse
+    debug_html_path = Path(__file__).parent / "debug.html"
+    if not debug_html_path.exists():
+        raise HTTPException(status_code=404, detail="Debug dashboard not found")
+    return FileResponse(debug_html_path, media_type="text/html")
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -487,6 +527,7 @@ async def startup_event():
     print("="*80)
     print(f"✅ Environment variables loaded")
     print(f"✅ Session manager initialized")
+    print(f"✅ Debug dashboard available at /debug")
     print("="*80)
 
 

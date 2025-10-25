@@ -8,6 +8,7 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, Any, Optional
 import time
+import json
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -19,6 +20,52 @@ from src.agents.url_discovery_agent import URLDiscoveryAgent
 from src.agents.url_extraction_agent import URLExtractionAgent
 
 from session_manager import session_manager
+
+
+def save_results_to_disk(session_id: str):
+    """
+    Save workflow results to disk for debugging and analysis
+    """
+    try:
+        # Create results directory if it doesn't exist
+        results_dir = Path(__file__).parent / "results"
+        results_dir.mkdir(exist_ok=True)
+
+        # Get session data
+        session = session_manager.get_session(session_id)
+        if not session:
+            return
+
+        # Prepare results data
+        results_data = {
+            "session_id": session.session_id,
+            "status": session.status,
+            "input_type": session.input_type,
+            "user_input": session.user_input,
+            "created_at": session.created_at.isoformat(),
+            "last_updated": session.last_updated.isoformat(),
+            "current_stage": session.current_stage,
+            "progress_logs": session.progress_logs,
+            "final_results": session.final_results,
+            "error_message": session.error_message if session.status == "failed" else None,
+            "statistics": {
+                "total_results": len(session.final_results) if session.final_results else 0,
+                "total_stages": len(session.progress_logs),
+                "duration_seconds": (session.last_updated - session.created_at).total_seconds()
+            }
+        }
+
+        # Save to JSON file
+        filename = f"workflow_session_{session_id}.json"
+        filepath = results_dir / filename
+
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(results_data, f, indent=2, ensure_ascii=False)
+
+        print(f"📁 Results saved to: {filepath}")
+
+    except Exception as e:
+        print(f"⚠️ Failed to save results to disk: {e}")
 
 
 def run_workflow_async(session_id: str, input_type: str, user_input: str):
@@ -43,6 +90,8 @@ def run_workflow_async(session_id: str, input_type: str, user_input: str):
             "message": f"Critical error: {str(e)}",
             "status": "error"
         })
+        # Save partial results to disk even on failure for debugging
+        save_results_to_disk(session_id)
 
 
 def _run_keyword_workflow(session_id: str, user_query: str):
@@ -52,25 +101,26 @@ def _run_keyword_workflow(session_id: str, user_query: str):
     session_manager.add_progress_log(session_id, {
         "stage": "parsing",
         "message": f"Parsing query: {user_query}",
-        "status": "started"
+        "status": "started",
+        "input": {"user_query": user_query}
     })
     session_manager.update_session(session_id, current_stage="parsing")
-    
+
     try:
         orchestrator = OrchestratorAgent()
         parse_result = orchestrator.parse_user_input(user_query)
         parsed_data = parse_result.get("parsed_data", {})
-        
+
         extracted_brand = parsed_data.get("brand")
         extracted_product = parsed_data.get("product_name")
         extracted_variant = parsed_data.get("variant")
         has_variant = parsed_data.get("has_variant", False)
-        
+
         session_manager.add_progress_log(session_id, {
             "stage": "parsing",
             "message": f"Extracted: {extracted_brand} - {extracted_product}",
             "status": "success",
-            "data": parsed_data
+            "output": parsed_data
         })
         
     except Exception as e:
@@ -81,10 +131,15 @@ def _run_keyword_workflow(session_id: str, user_query: str):
     session_manager.add_progress_log(session_id, {
         "stage": "product_search",
         "message": f"Searching for {extracted_brand} {extracted_product}",
-        "status": "started"
+        "status": "started",
+        "input": {
+            "brand": extracted_brand,
+            "product_name": extracted_product,
+            "variant_hint": extracted_variant
+        }
     })
     session_manager.update_session(session_id, current_stage="product_search")
-    
+
     try:
         agent = ProductConfirmationAgent(orchestrator_agent=orchestrator)
         search_result = agent.search_and_confirm_product(
@@ -92,13 +147,17 @@ def _run_keyword_workflow(session_id: str, user_query: str):
             product_name=extracted_product,
             variant_hint=extracted_variant
         )
-        
+
         products_found = search_result.get("products_found", [])
-        
+
         session_manager.add_progress_log(session_id, {
             "stage": "product_search",
             "message": f"Found {len(products_found)} products",
-            "status": "success"
+            "status": "success",
+            "output": {
+                "products_found": products_found,
+                "total_count": len(products_found)
+            }
         })
         
         # Handle product selection
@@ -112,31 +171,35 @@ def _run_keyword_workflow(session_id: str, user_query: str):
             session_manager.add_progress_log(session_id, {
                 "stage": "product_confirmation",
                 "message": f"Auto-selected: {confirmed_product.get('name')}",
-                "status": "success"
+                "status": "success",
+                "input": {"products_found": products_found},
+                "output": {"confirmed_product": confirmed_product}
             })
-        
+
         else:
             # Need user confirmation - WAIT FOR USER
             session_manager.set_product_confirmation_needed(session_id, products_found)
             session_manager.add_progress_log(session_id, {
                 "stage": "product_confirmation",
                 "message": f"Please select from {len(products_found)} products",
-                "status": "waiting"
+                "status": "waiting",
+                "input": {"products_found": products_found}
             })
-            
+
             # WAIT for user confirmation
             _wait_for_product_confirmation(session_id)
-            
+
             # Check if user confirmed or cancelled
             session = session_manager.get_session(session_id)
             if not session or session.status == "failed":
                 return
-            
+
             confirmed_product = products_found[session.confirmed_product_index]
             session_manager.add_progress_log(session_id, {
                 "stage": "product_confirmation",
                 "message": f"User selected: {confirmed_product.get('name')}",
-                "status": "success"
+                "status": "success",
+                "output": {"confirmed_product": confirmed_product}
             })
     
     except Exception as e:
@@ -148,65 +211,81 @@ def _run_keyword_workflow(session_id: str, user_query: str):
         session_manager.add_progress_log(session_id, {
             "stage": "variant_extraction",
             "message": "Variant already specified, skipping extraction",
-            "status": "skipped"
+            "status": "skipped",
+            "output": {"selected_variant": {"type": "user_specified", "value": extracted_variant}}
         })
         selected_variant = {"type": "user_specified", "value": extracted_variant}
-    
+
     else:
         session_manager.add_progress_log(session_id, {
             "stage": "variant_extraction",
             "message": "Extracting product variants",
-            "status": "started"
+            "status": "started",
+            "input": {
+                "product_name": confirmed_product.get("name"),
+                "product_url": confirmed_product.get("url"),
+                "variant_hint": extracted_variant
+            }
         })
         session_manager.update_session(session_id, current_stage="variant_extraction")
-        
+
         try:
             variant_result = agent.extract_product_variants(
                 product_name=confirmed_product.get("name"),
                 product_url=confirmed_product.get("url"),
                 variant_hint=extracted_variant
             )
-            
+
             variants = variant_result.get("variants", [])
-            
+
             if len(variants) == 0:
                 selected_variant = {"type": "standard", "value": "standard"}
                 session_manager.add_progress_log(session_id, {
                     "stage": "variant_extraction",
                     "message": "No variants found, using standard",
-                    "status": "success"
+                    "status": "success",
+                    "output": {
+                        "variants_found": [],
+                        "selected_variant": selected_variant
+                    }
                 })
-            
+
             elif len(variants) == 1:
                 selected_variant = variants[0]
                 session_manager.add_progress_log(session_id, {
                     "stage": "variant_extraction",
                     "message": f"Auto-selected: {selected_variant.get('value')}",
-                    "status": "success"
+                    "status": "success",
+                    "output": {
+                        "variants_found": variants,
+                        "selected_variant": selected_variant
+                    }
                 })
-            
+
             else:
                 # Need user confirmation - WAIT FOR USER
                 session_manager.set_variant_confirmation_needed(session_id, variants)
                 session_manager.add_progress_log(session_id, {
                     "stage": "variant_confirmation",
                     "message": f"Please select from {len(variants)} variants",
-                    "status": "waiting"
+                    "status": "waiting",
+                    "input": {"variants": variants}
                 })
-                
+
                 # WAIT for user confirmation
                 _wait_for_variant_confirmation(session_id)
-                
+
                 # Check if user confirmed or cancelled
                 session = session_manager.get_session(session_id)
                 if not session or session.status == "failed":
                     return
-                
+
                 selected_variant = variants[session.confirmed_variant_index]
                 session_manager.add_progress_log(session_id, {
                     "stage": "variant_confirmation",
                     "message": f"User selected: {selected_variant.get('value')}",
-                    "status": "success"
+                    "status": "success",
+                    "output": {"selected_variant": selected_variant}
                 })
         
         except Exception as e:
@@ -225,27 +304,28 @@ def _run_keyword_workflow(session_id: str, user_query: str):
 
 def _run_url_workflow(session_id: str, product_url: str):
     """URL-based workflow"""
-    
+
     # Stage 1: Extract from URL
     session_manager.add_progress_log(session_id, {
         "stage": "url_extraction",
         "message": f"Extracting details from URL",
-        "status": "started"
+        "status": "started",
+        "input": {"product_url": product_url}
     })
     session_manager.update_session(session_id, current_stage="url_extraction")
-    
+
     try:
         url_agent = URLExtractionAgent()
         extraction_result = url_agent.extract_from_url(product_url)
-        
+
         if not extraction_result.get("success"):
             session_manager.set_failed(session_id, extraction_result.get("error", "Extraction failed"))
             return
-        
+
         extracted_brand = extraction_result.get("brand")
         extracted_product = extraction_result.get("product_name")
         extracted_variant = extraction_result.get("variant")
-        
+
         # Need user confirmation - WAIT FOR USER
         session_manager.set_url_extraction_confirmation_needed(session_id, {
             "brand": extracted_brand,
@@ -255,22 +335,32 @@ def _run_url_workflow(session_id: str, product_url: str):
         session_manager.add_progress_log(session_id, {
             "stage": "url_extraction_confirmation",
             "message": "Please confirm extracted details",
-            "status": "waiting"
+            "status": "waiting",
+            "output": {
+                "brand": extracted_brand,
+                "product_name": extracted_product,
+                "variant": extracted_variant
+            }
         })
-        
+
         # WAIT for user confirmation
         _wait_for_url_extraction_confirmation(session_id)
-        
+
         # Check if user confirmed or cancelled
         session = session_manager.get_session(session_id)
         if not session or session.status == "failed" or not session.url_extraction_confirmed:
             session_manager.set_failed(session_id, "User rejected extraction")
             return
-        
+
         session_manager.add_progress_log(session_id, {
             "stage": "url_extraction_confirmation",
             "message": "User confirmed extraction",
-            "status": "success"
+            "status": "success",
+            "output": {
+                "brand": extracted_brand,
+                "product_name": extracted_product,
+                "variant": extracted_variant
+            }
         })
     
     except Exception as e:
@@ -300,10 +390,16 @@ def _continue_workflow(
     session_manager.add_progress_log(session_id, {
         "stage": "url_discovery",
         "message": f"Discovering URLs for {brand} {product_name} {variant}",
-        "status": "started"
+        "status": "started",
+        "input": {
+            "brand": brand,
+            "product_name": product_name,
+            "variant": variant,
+            "brand_product_url": product_url
+        }
     })
     session_manager.update_session(session_id, current_stage="url_discovery")
-    
+
     try:
         url_agent = URLDiscoveryAgent()
         discovery_result = url_agent.discover_urls(
@@ -312,17 +408,23 @@ def _continue_workflow(
             variant=variant,
             brand_product_url=product_url
         )
-        
+
         urls = discovery_result.get("urls", [])
-        
+
         session_manager.add_progress_log(session_id, {
             "stage": "url_discovery",
             "message": f"Found {len(urls)} URLs",
-            "status": "success"
+            "status": "success",
+            "output": {
+                "urls": urls,
+                "total_count": len(urls)
+            }
         })
-        
+
         if len(urls) == 0:
-            session_manager.set_failed(session_id, "No URLs found")
+            # Use detailed error explanation from Claude instead of generic message
+            error_message = discovery_result.get("error", "No URLs found")
+            session_manager.set_failed(session_id, error_message)
             return
     
     except Exception as e:
@@ -333,23 +435,30 @@ def _continue_workflow(
     session_manager.add_progress_log(session_id, {
         "stage": "price_scraping",
         "message": f"Scraping prices for {len(urls)} URLs",
-        "status": "started"
+        "status": "started",
+        "input": {
+            "urls": urls,
+            "total_urls": len(urls)
+        }
     })
     session_manager.update_session(session_id, current_stage="price_scraping")
-    
+
     try:
         from src.agents.price_scraping_agent import PriceScrapingAgent
         price_agent = PriceScrapingAgent()
-        
+
         result = price_agent.enrich_urls(discovered_urls=urls, max_workers=5)
         enriched_urls = result.get("enriched_urls", [])
         stats = result.get("stats", {})
-        
+
         session_manager.add_progress_log(session_id, {
             "stage": "price_scraping",
             "message": f"Enriched {stats.get('scraped_successfully', 0)}/{len(urls)} URLs",
             "status": "success",
-            "data": stats
+            "output": {
+                "enriched_urls": enriched_urls,
+                "stats": stats
+            }
         })
     
     except Exception as e:
@@ -360,7 +469,11 @@ def _continue_workflow(
     session_manager.add_progress_log(session_id, {
         "stage": "per_unit_pricing",
         "message": "Calculating per-unit prices",
-        "status": "started"
+        "status": "started",
+        "input": {
+            "enriched_urls": enriched_urls,
+            "total_count": len(enriched_urls)
+        }
     })
     session_manager.update_session(session_id, current_stage="per_unit_pricing")
     
@@ -413,14 +526,22 @@ def _continue_workflow(
         session_manager.add_progress_log(session_id, {
             "stage": "per_unit_pricing",
             "message": "Per-unit pricing complete",
-            "status": "success"
+            "status": "success",
+            "output": {
+                "updated_urls": updated_urls,
+                "total_count": len(updated_urls)
+            }
         })
-    
+
     except Exception as e:
         session_manager.add_progress_log(session_id, {
             "stage": "per_unit_pricing",
             "message": f"Warning: {str(e)}",
-            "status": "warning"
+            "status": "warning",
+            "output": {
+                "updated_urls": enriched_urls,
+                "total_count": len(enriched_urls)
+            }
         })
         updated_urls = enriched_urls
     
@@ -428,29 +549,41 @@ def _continue_workflow(
     session_manager.add_progress_log(session_id, {
         "stage": "ranking",
         "message": "Ranking products by price",
-        "status": "started"
+        "status": "started",
+        "input": {
+            "updated_urls": updated_urls,
+            "total_count": len(updated_urls)
+        }
     })
     session_manager.update_session(session_id, current_stage="ranking")
-    
+
     try:
         with_per_unit = [u for u in updated_urls if u.get("per_unit_price") not in [None, "null"]]
         without_per_unit = [u for u in updated_urls if u.get("per_unit_price") in [None, "null"]]
-        
+
         with_per_unit.sort(key=lambda x: float(x.get("per_unit_price", 0)))
-        
+
         ranked_urls = with_per_unit + without_per_unit
-        
+
         session_manager.add_progress_log(session_id, {
             "stage": "ranking",
             "message": f"Ranked {len(ranked_urls)} products",
-            "status": "success"
+            "status": "success",
+            "output": {
+                "ranked_urls": ranked_urls,
+                "total_count": len(ranked_urls)
+            }
         })
-    
+
     except Exception as e:
         session_manager.add_progress_log(session_id, {
             "stage": "ranking",
             "message": f"Warning: {str(e)}",
-            "status": "warning"
+            "status": "warning",
+            "output": {
+                "ranked_urls": updated_urls,
+                "total_count": len(updated_urls)
+            }
         })
         ranked_urls = updated_urls
     
@@ -461,6 +594,9 @@ def _continue_workflow(
         "message": f"Workflow completed successfully with {len(ranked_urls)} results",
         "status": "success"
     })
+
+    # Save results to disk for debugging
+    save_results_to_disk(session_id)
 
 
 def _wait_for_product_confirmation(session_id: str, timeout_seconds: int = 300):
