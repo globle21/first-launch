@@ -1,4 +1,4 @@
-name: Build and Deploy to EC2
+name: Deploy to EC2
 
 on:
   push:
@@ -6,79 +6,66 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: 1. Checkout Repository
+    - name: ✅ 1. Checkout Code
       uses: actions/checkout@v4
 
-    # --- STEP 2: Deploy Frontend (NO BUILD NEEDED) ---
-    - name: 2. Deploy Frontend Files to EC2
+    # === DEPLOY FRONTEND STATIC FILES ===
+    - name: ✅ 2. Upload Frontend to EC2 (Static Files)
       uses: appleboy/scp-action@v1.0.0
       with:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        # This is the corrected path. It copies the contents of your 'frontend' folder.
-        source: "frontend/*"
-        target: "/var/www/first-launch/frontend"
-        # We strip 1 component ('frontend') from the path
+        source: "frontend/."
+        target: "/var/www/html"
         strip_components: 1
 
-    # --- STEP 3: Deploy Backend Code ---
-    - name: 3. Deploy Backend to EC2
+    # === DEPLOY BACKEND ===
+    - name: ✅ 3. Upload Backend Files to EC2
       uses: appleboy/scp-action@v1.0.0
       with:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: "backend/*"
+        source: "backend/."
         target: "/var/www/first-launch/backend"
+        strip_components: 1
 
-    # --- STEP 4: Deploy 'src' Directory ---
-    - name: 4. Deploy 'src' Directory to EC2
-      uses: appleboy/scp-action@v1.0.0
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        source: "src/*"
-        target: "/var/www/first-launch/src"
-
-    # --- STEP 5: Setup Backend and Restart Service ---
-    - name: 5. Setup Backend and Restart Service
+    # === RESTART BACKEND AND NGINX ===
+    - name: ✅ 4. Backend Setup and Service Restart
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          echo "Server-side setup starting..."
-          
-          # 1. Create the .env file
-          echo "${{ secrets.DOT_ENV_BACKEND }}" > /var/www/first-launch/backend/.env
-          echo ".env file created."
-          
-          # 2. Navigate to backend
+          echo "✅ Deployment Started on Server"
+
           cd /var/www/first-launch/backend
-          
-          # 3. Create venv if it doesn't exist
+
+          # Write backend .env file from GitHub Secret
+          echo "${{ secrets.DOT_ENV_BACKEND }}" > .env
+
+          # Create virtual environment if missing
           if [ ! -d "venv" ]; then
             echo "Creating virtual environment..."
             python3 -m venv venv
           fi
-          
-          # 4. Install dependencies
-          echo "Installing/updating dependencies..."
+
+          # Install requirements
           source venv/bin/activate
           pip install -r requirements.txt
           deactivate
-          echo "Dependencies installed."
-          
-          # 5. Reload and restart the services
+
+          # Restart FastAPI backend service
           sudo systemctl daemon-reload
           sudo systemctl restart first-launch
+
+          # Restart Nginx for frontend static update
           sudo systemctl restart nginx
-          
-          echo "Deployment successful!"
+
+          echo "✅ Deployment Successful!"
