@@ -1,0 +1,135 @@
+# This is the name of your workflow. It will show up in the "Actions" tab of your GitHub repo.
+name: Build and Deploy to EC2
+
+# This section defines *when* the workflow should run.
+on:
+  # We are telling it to run *only* when code is pushed to the "main" branch.
+  push:
+    branches:
+      - main
+
+# This section defines the "jobs" to run. A job is a set of steps.
+jobs:
+  build-and-deploy:
+    # This job will run on a fresh, temporary virtual machine provided by GitHub (an "Ubuntu runner").
+    runs-on: ubuntu-latest
+    
+    # These are the individual steps the runner will execute in order.
+    steps:
+    # --- Step 1: Check out your code ---
+    # This downloads your repository's code (from the 'main' branch) onto the runner.
+    - name: 1. Checkout Repository
+      uses: actions/checkout@v4
+
+    # --- Step 2: Set up Node.js ---
+    # This installs Node.js on the runner, which is necessary to build your React frontend.
+    - name: 2. Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18' # Use a standard LTS version
+
+    # --- Step 3: Build the Frontend ---
+    # This step replicates what you would do locally to build the React app.
+    - name: 3. Build Frontend
+      run: |
+        echo "Building frontend..."
+        # This securely creates the .env file for the *build process* using your GitHub secret.
+        # This bakes your /api URL into the frontend code.
+        echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" > ./frontend/.env
+        
+        # Navigate into the frontend folder
+        cd frontend
+        
+        # Install all npm packages (like React, Vite, etc.)
+        npm install
+        
+        # Run the 'build' command (defined in your package.json) to create the optimized static files.
+        npm run build
+        echo "Frontend build complete."
+
+    # --- Step 4: Deploy Frontend Build to EC2 ---
+    # This step securely copies *only* the built files to your server.
+    - name: 4. Deploy Frontend Build to EC2
+      uses: appleboy/scp-action@v1.0.1
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        # 'frontend/build/*' copies the *contents* of the build folder.
+        source: "frontend/build/*"
+        # This is the destination folder you created in Part 1.
+        target: "/var/www/first-launch/frontend"
+        # This clever command removes the "frontend/build" part from the path
+        # so the files land directly in /var/www/first-launch/frontend
+        strip_components: 2 
+
+    # --- Step 5: Deploy Backend Code to EC2 ---
+    # This step copies your Python code to the server.
+    - name: 5. Deploy Backend to EC2
+      uses: appleboy/scp-action@v1.0.1
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        # Copy the entire 'backend' folder and its contents.
+        source: "backend/*"
+        target: "/var/www/first-launch/backend"
+
+    # --- Step 6: Deploy 'src' Directory to EC2 ---
+    # This step copies your AI/ML architecture code to the server.
+    - name: 6. Deploy 'src' Directory to EC2
+      uses: appleboy/scp-action@v1.0.1
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "src/*"
+        target: "/var/www/first-launch/src"
+
+    # --- Step 7: Setup Backend and Restart Service on EC2 ---
+    # This is the final and most important step. It logs into your server and runs all
+    # the commands needed to install dependencies and restart your application.
+    - name: 7. Setup Backend and Restart Service
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        
+        # This is the script that will run on your EC2 server
+        script: |
+          echo "Server-side setup starting..."
+          
+          # 1. Securely create the production .env file from your GitHub secret.
+          # This is for your *live application*.
+          echo "${{ secrets.DOT_ENV_BACKEND }}" > /var/www/first-launch/backend/.env
+          echo ".env file created."
+          
+          # 2. Navigate to the backend directory.
+          cd /var/www/first-launch/backend
+          
+          # 3. Create a Python virtual environment (venv) if it doesn't already exist.
+          if [ ! -d "venv" ]; then
+            echo "Creating virtual environment..."
+            python3 -m venv venv
+          fi
+          
+          # 4. Activate the virtual environment and install dependencies.
+          echo "Installing/updating dependencies..."
+          source venv/bin/activate
+          pip install -r requirements.txt
+          deactivate
+          echo "Dependencies installed."
+          
+          # 5. Reload the systemd service to make sure it sees any changes
+          # to the .service file (though we didn't change it, this is good practice).
+          sudo systemctl daemon-reload
+          
+          # 6. Restart your application. systemd will stop the old process
+          # and start the new one with all the new code.
+          sudo systemctl restart first-launch
+          
+          # 7. Restart Nginx just to be safe.
+          sudo systemctl restart nginx
+          
+          echo "Deployment successful! Application is live."
