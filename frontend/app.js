@@ -4,9 +4,9 @@
  */
 
 // Configuration
-const API_BASE_URL = window.location.hostname === 'localhost' 
+const API_BASE_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:8000'
-    : 'https://product-discovery-backend.onrender.com'; // Replace with your Render backend URL
+    : window.location.origin + '/api';
 
 // Global state
 let currentSessionId = null;
