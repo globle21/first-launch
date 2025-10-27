@@ -3,6 +3,9 @@ set -e
 
 echo "Starting application deployment..."
 
+# Ensure proper ownership
+sudo chown -R ubuntu:ubuntu /home/ubuntu/first-launch
+
 # Stop any existing processes
 pkill -f "uvicorn main:app" || true
 
@@ -34,10 +37,11 @@ sudo cp -r /home/ubuntu/first-launch/frontend/* /var/www/html/
 
 # Copy src folder if it exists and is needed by frontend
 if [ -d /home/ubuntu/first-launch/src ]; then
+    echo "Copying src folder to web root..."
     sudo cp -r /home/ubuntu/first-launch/src /var/www/html/
 fi
 
-# Set proper permissions
+# Set proper permissions for web files
 sudo chown -R www-data:www-data /var/www/html
 sudo chmod -R 755 /var/www/html
 

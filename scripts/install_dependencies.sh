@@ -3,6 +3,9 @@ set -e
 
 echo "Starting dependency installation..."
 
+# Ensure proper ownership of the application directory
+sudo chown -R ubuntu:ubuntu /home/ubuntu/first-launch
+
 # Navigate to backend directory
 cd /home/ubuntu/first-launch/backend
 
@@ -24,6 +27,9 @@ deactivate
 echo "Ensuring Nginx is installed..."
 sudo apt install -y nginx
 sudo systemctl enable nginx
+
+# Ensure proper permissions for all files
+sudo chown -R ubuntu:ubuntu /home/ubuntu/first-launch
 
 echo "Dependencies installed successfully"
 exit 0
