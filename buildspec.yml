@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - echo "Installing dependencies..."
+      - cd backend
+      - pip install -r requirements.txt -t .
+      - cd ..
+  
+  build:
+    commands:
+      - echo "Build phase - No build needed for vanilla JavaScript frontend"
+      - echo "Build completed on $(date)"
+  
+  post_build:
+    commands:
+      - echo "Post build phase completed"
+
+artifacts:
+  files:
+    - '**/*'
+  name: first-launch-artifacts
