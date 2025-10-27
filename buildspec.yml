@@ -6,9 +6,9 @@ phases:
       python: 3.11
     commands:
       - echo "Installing dependencies..."
-      - cd backend
-      - pip install -r requirements.txt -t .
-      - cd ..
+      # Don't install dependencies here - they'll be installed on EC2 by install_dependencies.sh
+      # Just verify requirements.txt exists
+      - test -f backend/requirements.txt && echo "requirements.txt found" || echo "WARNING: requirements.txt not found"
   
   build:
     commands:
