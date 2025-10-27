@@ -6,15 +6,11 @@ phases:
       python: 3.11
     commands:
       - echo "Installing dependencies..."
-      # Don't install dependencies here - they'll be installed on EC2 by install_dependencies.sh
-      # Just verify requirements.txt exists
-      - test -f backend/requirements.txt && echo "requirements.txt found" || echo "WARNING: requirements.txt not found"
-  
+      - test -f backend/requirements.txt && echo "requirements.txt found" || echo "WARNING requirements.txt not found"
   build:
     commands:
       - echo "Build phase - No build needed for vanilla JavaScript frontend"
       - echo "Build completed on $(date)"
-  
   post_build:
     commands:
       - echo "Post build phase completed"
