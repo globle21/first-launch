@@ -6,7 +6,7 @@
 // Configuration
 const API_BASE_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:8000'
-    : window.location.origin + '/api';
+    : window.location.origin;
 
 // Global state
 let currentSessionId = null;
