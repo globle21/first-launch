@@ -6,7 +6,7 @@
 // Configuration
 const API_BASE_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:8000'
-    : window.location.origin;
+    : window.location.origin + '/api';
 
 // Global state
 let currentSessionId = null;
@@ -91,7 +91,7 @@ async function startSearch(inputType) {
     
     try {
         // Call API to start workflow
-        const response = await fetch(`${API_BASE_URL}/api/workflow/start`, {
+        const response = await fetch(`${API_BASE_URL}/workflow/start`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ function startProgressStream() {
         eventSource.close();
     }
     
-    eventSource = new EventSource(`${API_BASE_URL}/api/workflow/progress/${currentSessionId}`);
+    eventSource = new EventSource(`${API_BASE_URL}/workflow/progress/${currentSessionId}`);
     
     eventSource.onmessage = (event) => {
         const data = JSON.parse(event.data);
@@ -200,7 +200,7 @@ async function handleStatusUpdate(statusData) {
  */
 async function showProductConfirmation() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/workflow/status/${currentSessionId}`);
+        const response = await fetch(`${API_BASE_URL}/workflow/status/${currentSessionId}`);
         const data = await response.json();
         
         if (!data.needs_product_confirmation) return;
@@ -255,7 +255,7 @@ async function showProductConfirmation() {
  */
 async function showVariantConfirmation() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/workflow/status/${currentSessionId}`);
+        const response = await fetch(`${API_BASE_URL}/workflow/status/${currentSessionId}`);
         const data = await response.json();
         
         if (!data.needs_variant_confirmation) return;
@@ -309,7 +309,7 @@ async function showVariantConfirmation() {
  */
 async function showExtractionConfirmation() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/workflow/status/${currentSessionId}`);
+        const response = await fetch(`${API_BASE_URL}/workflow/status/${currentSessionId}`);
         const data = await response.json();
         
         if (!data.needs_url_extraction_confirmation) return;
@@ -385,8 +385,8 @@ async function confirmSelection(type) {
     
     try {
         const endpoint = type === 'product' 
-            ? `/api/workflow/confirm-product/${currentSessionId}`
-            : `/api/workflow/confirm-variant/${currentSessionId}`;
+            ? `/workflow/confirm-product/${currentSessionId}`
+            : `/workflow/confirm-variant/${currentSessionId}`;
         
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
             method: 'POST',
@@ -429,7 +429,7 @@ async function confirmExtraction(confirmed) {
     
     try {
         const response = await fetch(
-            `${API_BASE_URL}/api/workflow/confirm-extraction/${currentSessionId}`,
+            `${API_BASE_URL}/workflow/confirm-extraction/${currentSessionId}`,
             {
                 method: 'POST',
                 headers: {
