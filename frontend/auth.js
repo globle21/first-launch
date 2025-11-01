@@ -481,14 +481,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Guest helpers
 function getGuestId() {
-    try { return sessionStorage.getItem(GUEST_UUID_KEY); } catch (e) { return null; }
+    try { return localStorage.getItem(GUEST_UUID_KEY); } catch (e) { return null; }
 }
 
 function getOrCreateGuestId() {
     let id = getGuestId();
     if (!id && window.crypto && window.crypto.randomUUID) {
         id = window.crypto.randomUUID();
-        try { sessionStorage.setItem(GUEST_UUID_KEY, id); } catch (e) {}
+        try { localStorage.setItem(GUEST_UUID_KEY, id); } catch (e) {}
     }
     return id;
 }
