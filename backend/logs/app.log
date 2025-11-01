@@ -1,47 +1,84 @@
-2025-10-24 18:17:17,037 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-24 18:17:22,990 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-24 18:17:23,017 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-24 18:18:03,320 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-24 18:18:37,295 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
-2025-10-25 01:05:15,005 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 01:05:21,026 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 01:05:21,033 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 01:06:16,860 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 01:06:26,874 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 01:06:42,444 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 01:07:09,190 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
-2025-10-25 01:13:05,521 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 01:13:30,741 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 01:13:30,764 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 01:13:46,294 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 01:14:22,618 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
-2025-10-25 01:23:48,846 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 01:23:54,691 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 01:23:54,693 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 01:24:10,875 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 01:24:52,999 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
-2025-10-25 10:44:49,503 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:44:54,022 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:44:54,032 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:45:30,127 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:45:40,140 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:45:49,928 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:46:11,846 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
-2025-10-25 10:47:26,293 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:47:39,304 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:47:39,331 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:47:55,067 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:47:55,087 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:48:13,144 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:48:13,157 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:48:24,314 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:48:24,331 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:48:43,342 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:48:43,358 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:48:58,904 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:48:58,934 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:49:17,471 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:49:17,491 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:49:38,716 - google_genai.models - INFO - AFC remote call 1 is done.
-2025-10-25 10:49:38,733 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
-2025-10-25 10:49:53,330 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 00:04:36,794 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 00:04:36,803 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 00:25:56,455 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 00:25:56,479 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 00:34:55,479 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 00:34:55,489 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 00:43:43,521 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 00:43:43,533 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 00:52:09,662 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 00:52:09,676 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 00:52:56,334 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 00:52:56,348 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 00:54:08,083 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 00:54:08,096 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 01:02:37,260 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 01:02:41,891 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 01:02:41,901 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 01:03:01,934 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 01:03:06,448 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 01:03:06,453 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 01:03:11,779 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 01:03:39,401 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 01:03:39,404 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 01:03:49,718 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 01:04:13,151 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-10-31 11:39:59,212 - __main__ - WARNING - ⚠️  Authentication module not available: (psycopg2.OperationalError) could not translate host name "ep-odd-dream-adzc7cfq-pooler.c-2.us-east-1.aws.neon.tech" to address: No such host is known. 
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 11:42:56,797 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:42:56,881 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:43:22,765 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:43:22,783 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:44:16,162 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:44:20,206 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 11:44:20,215 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:44:36,197 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 11:44:52,074 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 11:44:52,093 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 11:46:56,496 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 11:46:56,505 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 11:47:36,633 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:47:41,882 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 11:47:41,889 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:48:33,558 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 11:48:45,576 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:49:01,444 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 11:49:36,877 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-10-31 11:58:12,193 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:58:15,323 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 11:58:15,329 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:59:00,336 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 11:59:14,351 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 11:59:41,161 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:00:03,950 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-10-31 12:11:11,470 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 12:11:11,490 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 12:11:35,792 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:11:41,456 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:11:41,460 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:11:48,518 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:15:52,930 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-10-31 12:15:52,932 - __main__ - INFO - ✅ Authentication routes registered
+2025-10-31 12:16:01,951 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:16:08,348 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:16:08,348 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:16:44,439 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:17:12,326 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:17:17,958 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:17:17,965 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:17:46,638 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:18:10,664 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:18:21,415 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:18:40,561 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-10-31 12:19:42,787 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:19:47,663 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:19:47,670 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:20:04,142 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:21:41,198 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:21:41,788 - anthropic._base_client - INFO - Retrying request to /v1/messages in 0.476082 seconds
+2025-10-31 12:21:42,271 - anthropic._base_client - INFO - Retrying request to /v1/messages in 0.841857 seconds
+2025-10-31 12:21:59,896 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:22:05,029 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-10-31 12:22:05,053 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-10-31 12:22:14,856 - google_genai.models - INFO - AFC remote call 1 is done.

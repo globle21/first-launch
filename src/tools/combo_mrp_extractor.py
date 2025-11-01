@@ -1,11 +1,16 @@
 """
 Combo Product MRP Extractor - Extracts individual product MRPs from brand pages
-Uses Google Gemini 2.5 Flash with Google Search grounding
+Uses Google Gemini 2.5 Flash with Google Search grounding (REAL-TIME DATA)
 
 SIMPLIFIED APPROACH:
 - Combo sale price comes from Apify scraping (no LLM extraction needed)
 - LLM only extracts individual product MRPs from brand website
 - Python calculates: per_unit_price = (original_mrp / sum_mrps) × combo_sale_price
+
+IMPLEMENTATION:
+- Uses newer Gemini SDK with Google Search grounding for real-time accuracy
+- Format: genai.Client(api_key) → client.models.generate_content()
+- Ensures MRP data is current and not cached/outdated
 """
 
 import os

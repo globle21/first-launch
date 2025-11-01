@@ -1,6 +1,11 @@
 """
 ProductConfirmationAgent - Product confirmation specialist
-Architecture: Gemini 2.5 Flash with Google Search grounding
+Architecture: Gemini 2.5 Flash with Google Search grounding (REAL-TIME DATA)
+
+IMPLEMENTATION:
+- Uses newer Gemini SDK (genai.Client → client.models.generate_content)
+- Wrapper around brand_page_search tool which uses Google Search grounding
+- Ensures product/variant data is current and not cached/outdated
 """
 
 from typing import Dict, Optional

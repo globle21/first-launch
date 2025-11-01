@@ -1,0 +1,131 @@
+{
+  "session_id": "15b73736-c048-420b-9b64-1037ac80ddb8",
+  "status": "failed",
+  "input_type": "keyword",
+  "user_input": "wel vdsbf",
+  "created_at": "2025-10-31T12:16:01.946730",
+  "last_updated": "2025-10-31T12:21:44.616380",
+  "current_stage": "product_confirmation",
+  "progress_logs": [
+    {
+      "stage": "parsing",
+      "message": "Parsing query: wel vdsbf",
+      "status": "started",
+      "input": {
+        "user_query": "wel vdsbf"
+      },
+      "timestamp": "2025-10-31T12:16:01.947783"
+    },
+    {
+      "stage": "parsing",
+      "message": "Extracted: None - None",
+      "status": "success",
+      "output": {
+        "brand": null,
+        "product_name": null,
+        "variant": null,
+        "has_variant": false
+      },
+      "timestamp": "2025-10-31T12:16:08.348301"
+    },
+    {
+      "stage": "product_search",
+      "message": "Searching for None None",
+      "status": "started",
+      "input": {
+        "brand": null,
+        "product_name": null,
+        "variant_hint": null
+      },
+      "timestamp": "2025-10-31T12:16:08.348301"
+    },
+    {
+      "stage": "product_search",
+      "message": "Found 6 products",
+      "status": "success",
+      "output": {
+        "products_found": [
+          {
+            "name": "Travis Scott Blue Print Acid Wash Oversized T-Shirt",
+            "url": "https://noneclothing.com/products/travis-scott-blue-print-acid-wash-oversized-t-shirt",
+            "description": "This oversized T-shirt can be paired with baggie pants or shorts. Features: French Terry Cotton; Round neck; Half sleeves; Drop shoulder."
+          },
+          {
+            "name": "Off White Oversized Unisex Sweatshirt",
+            "url": "https://noneclothing.com/products/off-white-oversized-unisex-sweatshirt",
+            "description": "Get Pinteresty Look. Features: 100% Pure cotton; 350 GSM Cotton Fleece; Half Zipper; Oversized Fitting; High Neck."
+          },
+          {
+            "name": "Kendrick Lamar Full Size Printed T-shirt",
+            "url": "https://noneclothing.com/products/kendrick-lamar-full-size-printed-t-shirt",
+            "description": "This oversized T-shirt can be paired with baggie pants or shorts. Features: 100% Pure cotton. Round neck. Half sleeves. Drop shoulder."
+          },
+          {
+            "name": "The Weeknd XO Regular T-Shirt",
+            "url": "https://noneclothing.com/products/the-weeknd-xo-regular-t-shirt",
+            "description": "This oversized T-shirt can be paired with baggie pants or shorts. Features: 100% Pure cotton. Round neck. Half sleeves. Drop shoulder."
+          },
+          {
+            "name": "None Clothing Blue White Vertical Striped Oversized Shirt",
+            "url": "https://noneclothing.com/products/none-clothing-blue-white-vertical-striped-oversized-shirt",
+            "description": "Material : Cotton; Full Sleeves; Premium Fabric; Drop Shoulder."
+          },
+          {
+            "name": "Kendrick Lamar Front & Back Print Oversized T-shirt",
+            "url": "https://noneclothing.com/products/kendrick-lamar-front-back-print-oversized-t-shirt",
+            "description": "This oversized T-shirt can be paired with baggie pants or shorts. Features: 100% Pure cotton; Round neck; Half sleeves; Drop shoulder."
+          }
+        ],
+        "total_count": 6
+      },
+      "timestamp": "2025-10-31T12:16:44.440866"
+    },
+    {
+      "stage": "product_confirmation",
+      "message": "Please select from 6 products",
+      "status": "waiting",
+      "input": {
+        "products_found": [
+          {
+            "name": "Travis Scott Blue Print Acid Wash Oversized T-Shirt",
+            "url": "https://noneclothing.com/products/travis-scott-blue-print-acid-wash-oversized-t-shirt",
+            "description": "This oversized T-shirt can be paired with baggie pants or shorts. Features: French Terry Cotton; Round neck; Half sleeves; Drop shoulder."
+          },
+          {
+            "name": "Off White Oversized Unisex Sweatshirt",
+            "url": "https://noneclothing.com/products/off-white-oversized-unisex-sweatshirt",
+            "description": "Get Pinteresty Look. Features: 100% Pure cotton; 350 GSM Cotton Fleece; Half Zipper; Oversized Fitting; High Neck."
+          },
+          {
+            "name": "Kendrick Lamar Full Size Printed T-shirt",
+            "url": "https://noneclothing.com/products/kendrick-lamar-full-size-printed-t-shirt",
+            "description": "This oversized T-shirt can be paired with baggie pants or shorts. Features: 100% Pure cotton. Round neck. Half sleeves. Drop shoulder."
+          },
+          {
+            "name": "The Weeknd XO Regular T-Shirt",
+            "url": "https://noneclothing.com/products/the-weeknd-xo-regular-t-shirt",
+            "description": "This oversized T-shirt can be paired with baggie pants or shorts. Features: 100% Pure cotton. Round neck. Half sleeves. Drop shoulder."
+          },
+          {
+            "name": "None Clothing Blue White Vertical Striped Oversized Shirt",
+            "url": "https://noneclothing.com/products/none-clothing-blue-white-vertical-striped-oversized-shirt",
+            "description": "Material : Cotton; Full Sleeves; Premium Fabric; Drop Shoulder."
+          },
+          {
+            "name": "Kendrick Lamar Front & Back Print Oversized T-shirt",
+            "url": "https://noneclothing.com/products/kendrick-lamar-front-back-print-oversized-t-shirt",
+            "description": "This oversized T-shirt can be paired with baggie pants or shorts. Features: 100% Pure cotton; Round neck; Half sleeves; Drop shoulder."
+          }
+        ]
+      },
+      "timestamp": "2025-10-31T12:16:44.440866"
+    }
+  ],
+  "final_results": null,
+  "error_message": "Product confirmation timeout",
+  "statistics": {
+    "total_results": 0,
+    "total_stages": 5,
+    "duration_seconds": 342.66965
+  }
+}

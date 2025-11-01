@@ -10,16 +10,17 @@ from typing import Optional
 from datetime import datetime
 import threading
 import asyncio
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, JSONResponse
+from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import json
 import logging
 from logging.handlers import RotatingFileHandler
-import glob 
-from fastapi.responses import JSONResponse
+import glob
+from typing import Any, Dict
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -29,6 +30,8 @@ load_dotenv(Path(__file__).parent.parent / ".env")
 
 from session_manager import session_manager
 from workflow_async import run_workflow_async
+from utils.input_sanitizer import validate_search_input, sanitize_keyword, sanitize_url
+from utils.env_validator import validate_env_vars, print_env_summary
 
 # Configure logging
 def setup_logging():
@@ -56,6 +59,32 @@ def setup_logging():
 
 logger = setup_logging()
 
+# Validate environment variables on startup
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development").lower()
+is_valid, env_errors = validate_env_vars(ENVIRONMENT)
+if not is_valid:
+    logger.error("Environment validation failed. Application may not function correctly.")
+    if ENVIRONMENT == "production":
+        # In production, fail fast if validation fails
+        raise ValueError(
+            "Environment validation failed. Please fix the following errors:\n" +
+            "\n".join(f"  - {error}" for error in env_errors)
+        )
+else:
+    print_env_summary()
+
+# NEW: Import auth routes and database
+try:
+    from auth.routes import router as auth_router
+    from database.connection import Base, engine
+    AUTH_ENABLED = True
+    # Create database tables
+    Base.metadata.create_all(bind=engine)
+    logger.info("✅ Authentication module loaded successfully")
+except Exception as e:
+    AUTH_ENABLED = False
+    logger.warning(f"⚠️  Authentication module not available: {e}")
+
 # FastAPI app
 app = FastAPI(
     title="Product Discovery API",
@@ -63,14 +92,95 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS middleware (allow frontend from any origin in development)
+# CORS configuration - environment-aware
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development").lower()
+ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "")
+
+if ENVIRONMENT == "production":
+    # Production: require explicit origins
+    if not ALLOWED_ORIGINS:
+        raise ValueError(
+            "CRITICAL: CORS_ALLOWED_ORIGINS must be set in production environment. "
+            "Example: CORS_ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com"
+        )
+    # Parse comma-separated origins
+    allowed_origins = [origin.strip() for origin in ALLOWED_ORIGINS.split(",") if origin.strip()]
+    logger.info(f"🔒 CORS enabled for production origins: {allowed_origins}")
+else:
+    # Development: allow all origins
+    allowed_origins = ["*"]
+    logger.info("⚠️  CORS allowing all origins (development mode)")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with your domain
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Standardized error response format
+class ErrorResponse(BaseModel):
+    """Standardized error response format"""
+    error: bool = True
+    message: str
+    detail: Optional[str] = None
+    status_code: int
+
+
+# Global exception handlers for standardized error responses
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    """Handle HTTP exceptions with standardized format"""
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "error": True,
+            "message": exc.detail,
+            "detail": None,
+            "status_code": exc.status_code
+        }
+    )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """Handle validation errors with standardized format"""
+    errors = exc.errors()
+    error_details = "; ".join([
+        f"{'.'.join(str(loc) for loc in err['loc'])}: {err['msg']}"
+        for err in errors
+    ])
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={
+            "error": True,
+            "message": "Validation error",
+            "detail": error_details,
+            "status_code": status.HTTP_422_UNPROCESSABLE_ENTITY
+        }
+    )
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    """Handle unexpected exceptions with standardized format"""
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "error": True,
+            "message": "An unexpected error occurred",
+            "detail": str(exc) if os.getenv("ENVIRONMENT", "development").lower() == "development" else None,
+            "status_code": status.HTTP_500_INTERNAL_SERVER_ERROR
+        }
+    )
+
+
+# Include auth router if available
+if AUTH_ENABLED:
+    app.include_router(auth_router)
+    logger.info("✅ Authentication routes registered")
 
 
 # Request/Response models
@@ -134,26 +244,48 @@ async def start_workflow(request: StartWorkflowRequest):
     - **user_input**: Product keywords or product URL
     """
     
-    # Validate input
+    # Validate input type
     if request.input_type not in ["keyword", "url"]:
-        raise HTTPException(status_code=400, detail="input_type must be 'keyword' or 'url'")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="input_type must be 'keyword' or 'url'"
+        )
     
-    if not request.user_input.strip():
-        raise HTTPException(status_code=400, detail="user_input cannot be empty")
+    # Validate and sanitize user input
+    is_valid, error_message = validate_search_input(request.input_type, request.user_input)
+    if not is_valid:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=error_message or "Invalid input"
+        )
     
-    # Create session
+    # Sanitize input based on type
+    if request.input_type == "keyword":
+        sanitized_input = sanitize_keyword(request.user_input)
+    else:  # url
+        sanitized_url = sanitize_url(request.user_input)
+        if not sanitized_url:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Invalid URL format"
+            )
+        sanitized_input = sanitized_url
+    
+    # Create session with sanitized input
     session_id = session_manager.create_session(
         input_type=request.input_type,
-        user_input=request.user_input
+        user_input=sanitized_input
     )
     
-    # Start workflow in background thread
+    # Start workflow in background thread with sanitized input
     thread = threading.Thread(
         target=run_workflow_async,
-        args=(session_id, request.input_type, request.user_input),
+        args=(session_id, request.input_type, sanitized_input),
         daemon=True
     )
     thread.start()
+    
+    logger.info(f"Workflow started: session_id={session_id}, input_type={request.input_type}")
     
     return StartWorkflowResponse(
         session_id=session_id,
@@ -551,6 +683,13 @@ async def startup_event():
     print(f"✅ Environment variables loaded")
     print(f"✅ Session manager initialized")
     print(f"✅ Debug dashboard available at /debug")
+    
+    if AUTH_ENABLED:
+        print(f"✅ Authentication enabled (Mock OTP mode)")
+        print(f"   - Guest sessions: 2 free searches")
+        print(f"   - Auth endpoints: /api/auth/*")
+    else:
+        print(f"⚠️  Authentication disabled")
 
     # Start background cleanup task
     asyncio.create_task(cleanup_sessions_task())

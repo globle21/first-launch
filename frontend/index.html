@@ -12,8 +12,29 @@
 
         <!-- Header -->
         <header class="header">
-            <h1>🎯 Globle Club's Product Discovery</h1>
-            <p>Find the best prices across all retailers</p>
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>🎯 Globle Club's Product Discovery</h1>
+                    <p>Find the best prices across all retailers</p>
+                </div>
+                
+                <!-- Auth Controls -->
+                <div class="auth-controls">
+                    <!-- Show when not logged in -->
+                    <button id="auth-button" class="btn btn-secondary" onclick="showLoginModal()">
+                        🔒 Sign In
+                    </button>
+                    
+                    <!-- Show when logged in -->
+                    <div id="user-info" class="user-info hidden">
+                        <span class="user-phone">📱 <span id="user-phone-display"></span></span>
+                        <button class="btn btn-link" onclick="logout()">Logout</button>
+                    </div>
+                    
+                    <!-- Session info for guests -->
+                    <div id="session-info" class="session-info hidden"></div>
+                </div>
+            </div>
         </header>
 
         <!-- Input Section -->
@@ -173,7 +194,60 @@
         <div class="spinner"></div>
     </div>
 
+    <!-- Authentication Modal -->
+    <div id="auth-modal" class="auth-modal hidden">
+        <div class="auth-modal-overlay" onclick="hideLoginModal()"></div>
+        <div class="auth-modal-content">
+            <!-- Close button -->
+            <button class="auth-modal-close" onclick="hideLoginModal()">×</button>
+            
+            <!-- Message (shown when login required) -->
+            <div id="auth-modal-message" class="auth-modal-alert hidden"></div>
+            
+            <!-- Phone Input Screen (Phone-only login) -->
+            <div id="phone-input-screen" class="auth-screen">
+                <div class="auth-header">
+                    <h2>Sign in to save your history</h2>
+                    <p>Enter your phone number (E.164). We'll remember it for future visits.</p>
+                </div>
+                
+                <div class="auth-form">
+                    <div class="input-group">
+                        <label for="phone-number-input">Phone Number</label>
+                        <div class="phone-input-wrapper">
+                            <span class="country-code">+91</span>
+                            <input 
+                                type="tel" 
+                                id="phone-number-input" 
+                                placeholder="9876543210"
+                                maxlength="10"
+                                autocomplete="tel"
+                            >
+                        </div>
+                        <small>Enter 10-digit mobile number (we store it for future searches)</small>
+                        <div id="phone-error" class="error-message hidden"></div>
+                    </div>
+                    
+                    <button 
+                        class="btn btn-primary auth-btn" 
+                        onclick="handlePhoneSubmit()"
+                        id="login-phone-btn"
+                    >
+                        <span id="phone-loading-spinner" class="spinner-small hidden"></span>
+                        Continue
+                    </button>
+
+                    <div class="resend-otp" style="border-top:none;">
+                        <span id="guest-note">Or continue without signing in</span>
+                        <button class="btn-link" onclick="continueAsGuest()">Continue as Guest</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
+    <script src="auth.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

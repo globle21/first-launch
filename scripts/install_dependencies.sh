@@ -21,6 +21,18 @@ echo "Installing Python dependencies..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
+# Run DB migrations (baseline)
+echo "Running database migrations..."
+if [ -f /home/ubuntu/first-launch/.env ]; then
+    set -a
+    source /home/ubuntu/first-launch/.env
+    set +a
+fi
+alembic upgrade 0001 || {
+    echo "Alembic upgrade failed. Attempting to stamp base then upgrade..."
+    alembic stamp base && alembic upgrade 0001
+}
+
 deactivate
 
 # Ensure Nginx is installed and enabled

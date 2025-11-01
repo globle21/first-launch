@@ -1,6 +1,12 @@
 """
-Brand Page Search Tool - Uses Gemini 2.5 Flash with Google Search grounding
+Brand Page Search Tool - Uses Gemini 2.5 Flash with Google Search grounding (REAL-TIME DATA)
 Returns STRUCTURED results directly (no post-processing needed)
+
+IMPLEMENTATION:
+- Uses newer Gemini SDK with Google Search grounding for real-time accuracy
+- Format: genai.Client(api_key) → client.models.generate_content()
+- Ensures product/variant data is current and not cached/outdated
+- Google Search provides live web data for accurate product availability
 """
 
 import os
@@ -137,7 +143,7 @@ Return ONLY valid JSON.
                 model=self.model,
                 contents=search_instruction,
                 config=types.GenerateContentConfig(
-                    temperature=0.3,  # Slightly more creative for better search results
+                    temperature=0.1,  # Slightly more creative for better search results
                     tools=[types.Tool(google_search=types.GoogleSearch())]  # Enable Google Search
                 )
             )
@@ -278,7 +284,7 @@ Return ONLY valid JSON.
                 model=self.model,
                 contents=search_instruction,
                 config=types.GenerateContentConfig(
-                    temperature=0.3,  # Slightly more creative for better search results
+                    temperature=0.1,  # Low temperature for factual accuracy
                     tools=[types.Tool(google_search=types.GoogleSearch())]  # Enable Google Search
                 )
             )

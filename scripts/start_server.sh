@@ -74,7 +74,7 @@ python -c "import main" || {
     exit 1
 }
 
-# Start FastAPI application in background
+# Start FastAPI application in background (Gunicorn+Uvicorn optional upgrade later)
 echo "Starting FastAPI backend on port 8000..."
 nohup uvicorn main:app --host 0.0.0.0 --port 8000 > /home/ubuntu/first-launch/backend/server.log 2>&1 &
 
@@ -102,52 +102,7 @@ curl -f http://localhost:8000/ || {
     tail -20 /home/ubuntu/first-launch/backend/server.log
 }
 
-# Deploy frontend files
-echo "Deploying frontend files to Nginx..."
-
-# Ensure Nginx web root exists
-sudo mkdir -p /var/www/html
-
-# Remove old files
-sudo rm -rf /var/www/html/*
-
-# Copy frontend files
-echo "Copying frontend files..."
-if [ -d "/home/ubuntu/first-launch/frontend" ]; then
-    sudo cp -r /home/ubuntu/first-launch/frontend/* /var/www/html/
-    echo "Frontend files copied"
-else
-    echo "ERROR: Frontend directory not found!"
-    exit 1
-fi
-
-# Copy src folder if it exists
-if [ -d /home/ubuntu/first-launch/src ]; then
-    echo "Copying src folder to web root..."
-    sudo cp -r /home/ubuntu/first-launch/src /var/www/html/
-fi
-
-# Set proper permissions for web files
-echo "Setting permissions for web files..."
-sudo chown -R www-data:www-data /var/www/html
-sudo chmod -R 755 /var/www/html
-
-# Verify files were copied
-echo "Verifying frontend files..."
-ls -la /var/www/html/
-
-# Restart Nginx
-echo "Restarting Nginx..."
-sudo systemctl restart nginx
-
-# Check Nginx status
-if sudo systemctl is-active --quiet nginx; then
-    echo "✅ Nginx is running"
-else
-    echo "❌ ERROR: Nginx failed to start"
-    sudo systemctl status nginx
-    exit 1
-fi
+echo "Skipping Nginx configuration (handled separately)."
 
 # Get EC2 public IP
 PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4 || echo "Unable to get public IP")
@@ -156,7 +111,7 @@ echo "=========================================="
 echo "✅ Application started successfully!"
 echo "=========================================="
 echo "Frontend: http://$PUBLIC_IP/"
-echo "Backend API: http://$PUBLIC_IP/api/"
+echo "Backend API (proxied): http://$PUBLIC_IP/api/"
 echo "Backend Docs: http://$PUBLIC_IP/api/docs"
 echo ""
 echo "Logs:"

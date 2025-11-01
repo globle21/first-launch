@@ -835,3 +835,317 @@ body {
 .mt-1 { margin-top: 0.5rem !important; }
 .mt-2 { margin-top: 1rem !important; }
 .mt-3 { margin-top: 1.5rem !important; }
+
+/* ==========================================================================
+   Authentication Styles
+   ========================================================================== */
+
+/* Header Layout */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.header-title {
+    flex: 1;
+}
+
+/* Auth Controls */
+.auth-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--background);
+    padding: 0.75rem 1.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-neumorph-inset);
+}
+
+.user-phone {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.session-info {
+    background: rgba(133, 223, 111, 0.15);
+    color: var(--green-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* Auth Modal */
+.auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+}
+
+.auth-modal-content {
+    position: relative;
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 3rem;
+    max-width: 450px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        var(--shadow-neumorph);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--background);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-neumorph-small);
+}
+
+.auth-modal-close:hover {
+    background: var(--danger);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.auth-modal-alert {
+    background: rgba(133, 223, 111, 0.1);
+    border-left: 4px solid var(--primary-green);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Auth Screens */
+.auth-screen {
+    animation: slideUp 0.3s ease;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.auth-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: var(--primary-green);
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    transition: var(--transition-fast);
+}
+
+.back-button:hover {
+    color: var(--green-dark);
+}
+
+/* Phone Input */
+.phone-input-wrapper {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+}
+
+.country-code {
+    background: var(--background);
+    padding: 1rem 1.25rem;
+    border-radius: 12px 0 0 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-neumorph-inset);
+    display: flex;
+    align-items: center;
+}
+
+.phone-input-wrapper input {
+    flex: 1;
+    border-radius: 0 12px 12px 0 !important;
+    margin: 0 !important;
+}
+
+/* OTP Input */
+.otp-input {
+    text-align: center;
+    font-size: 1.5rem !important;
+    font-weight: 600;
+    letter-spacing: 0.5rem;
+    font-family: 'Courier New', monospace;
+}
+
+/* Remember Me */
+.remember-me {
+    margin: 1.5rem 0;
+}
+
+.remember-me label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.remember-me input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Auth Button */
+.auth-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+/* Resend OTP */
+.resend-otp {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.resend-otp span {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--primary-green);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    transition: var(--transition-fast);
+}
+
+.btn-link:hover:not(:disabled) {
+    color: var(--green-dark);
+    text-decoration: underline;
+}
+
+.btn-link:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Error/Success Messages */
+.error-message {
+    color: var(--danger);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(255, 99, 72, 0.1);
+    border-radius: 8px;
+}
+
+.success-message {
+    color: var(--success);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(133, 223, 111, 0.1);
+    border-radius: 8px;
+}
+
+/* Spinner */
+.spinner-small {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Responsive Auth */
+@media (max-width: 768px) {
+    .auth-modal-content {
+        padding: 2rem;
+        max-width: 95%;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .auth-controls {
+        justify-content: center;
+    }
+}

@@ -9,6 +9,7 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 import time
 import json
+import logging
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -20,6 +21,14 @@ from src.agents.url_discovery_agent import URLDiscoveryAgent
 from src.agents.url_extraction_agent import URLExtractionAgent
 
 from session_manager import session_manager
+
+# Database imports for conversation storage
+from sqlalchemy.orm import Session
+from database.connection import SessionLocal
+from auth.models import SearchSession, ConversationHistory
+
+# Configure logger
+logger = logging.getLogger(__name__)
 
 
 def save_results_to_disk(session_id: str, remove_from_memory: bool = False):
@@ -66,23 +75,111 @@ def save_results_to_disk(session_id: str, remove_from_memory: bool = False):
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(results_data, f, indent=2, ensure_ascii=False)
 
-        print(f"📁 Results saved to: {filepath}")
+        logger.info(f"Results saved to: {filepath}")
+
+        # Save to database for authenticated users
+        save_conversation_to_database(session_id, results_data)
 
         # Mark session for cleanup (will be removed after 10 minutes)
         if remove_from_memory:
             session_manager.mark_for_cleanup(session_id)
-            print(f"🧹 Session marked for cleanup (will be removed after 10 minutes)")
+            logger.info(f"Session {session_id[:8]}... marked for cleanup (will be removed after 10 minutes)")
 
     except Exception as e:
-        print(f"⚠️ Failed to save results to disk: {e}")
+        logger.error(f"Failed to save results to disk for session {session_id}: {e}", exc_info=True)
+
+
+def save_conversation_to_database(session_id: str, conversation_data: dict):
+    """
+    Save complete conversation JSON to database for authenticated users and guests
+    Creates a fallback SearchSession if one doesn't exist (for robustness)
+
+    Args:
+        session_id: Session ID
+        conversation_data: Complete workflow JSON data
+    """
+    db = SessionLocal()
+    try:
+        # Find the search session to get phone_number or guest_uuid
+        search_session = db.query(SearchSession).filter(
+            SearchSession.session_id == session_id
+        ).first()
+
+        # Fallback: Create a minimal SearchSession if track-session failed
+        if not search_session:
+            logger.warning(f"Session {session_id} not tracked - creating fallback SearchSession")
+            # Extract search info from conversation data if available
+            search_type = conversation_data.get("input_type", "keyword")  # input_type: "keyword" or "url"
+            search_input = conversation_data.get("user_input", "")
+            
+            # Create minimal SearchSession (no phone_number or guest_uuid yet)
+            # This allows us to save the conversation at least
+            search_session = SearchSession(
+                session_id=session_id,
+                search_type=search_type,
+                search_input=search_input,
+                completed=False,
+                ip_address=None,  # Not available in fallback
+                phone_number=None,
+                guest_uuid=None
+            )
+            db.add(search_session)
+            db.commit()
+            logger.info(f"Created fallback SearchSession for {session_id}")
+
+        # Authenticated user - upsert by (phone_number, session_id)
+        if getattr(search_session, 'phone_number', None):
+            existing = db.query(ConversationHistory).filter(
+                ConversationHistory.phone_number == search_session.phone_number,
+                ConversationHistory.session_id == session_id
+            ).first()
+            if existing:
+                existing.conversation_data = conversation_data
+            else:
+                db.add(ConversationHistory(
+                    phone_number=search_session.phone_number,
+                    session_id=session_id,
+                    conversation_data=conversation_data
+                ))
+            db.commit()
+            logger.info(f"Conversation saved to database for user {search_session.phone_number}, session {session_id}")
+            return
+
+        # Guest user - save to database by guest_uuid when available
+        guest_uuid = getattr(search_session, 'guest_uuid', None)
+        if guest_uuid:
+            existing = db.query(ConversationHistory).filter(
+                ConversationHistory.guest_uuid == guest_uuid,
+                ConversationHistory.session_id == session_id
+            ).first()
+            if existing:
+                existing.conversation_data = conversation_data
+            else:
+                db.add(ConversationHistory(
+                    guest_uuid=guest_uuid,
+                    session_id=session_id,
+                    conversation_data=conversation_data
+                ))
+            db.commit()
+            logger.info(f"Conversation saved to database for guest {guest_uuid}, session {session_id}")
+            return
+
+        # Fallback
+        logger.info(f"Session {session_id} has no phone_number or guest_uuid - skipping DB save")
+
+    except Exception as e:
+        db.rollback()
+        logger.error(f"Failed to save conversation to database for session {session_id}: {e}", exc_info=True)
+    finally:
+        db.close()
 
 
 def run_workflow_async(session_id: str, input_type: str, user_input: str):
     """
     Run workflow asynchronously with session-based confirmations
     This replaces CLI input() with session state checks
+    Always persists final/partial state to disk and DB (auth or guest).
     """
-    
     try:
         # Initialize workflow state based on input type
         if input_type == "keyword":
@@ -91,7 +188,6 @@ def run_workflow_async(session_id: str, input_type: str, user_input: str):
             _run_url_workflow(session_id, user_input)
         else:
             session_manager.set_failed(session_id, f"Invalid input type: {input_type}")
-    
     except Exception as e:
         session_manager.set_failed(session_id, f"Workflow error: {str(e)}")
         session_manager.add_progress_log(session_id, {
@@ -99,7 +195,8 @@ def run_workflow_async(session_id: str, input_type: str, user_input: str):
             "message": f"Critical error: {str(e)}",
             "status": "error"
         })
-        # Save partial results to disk even on failure for debugging, mark for cleanup
+    finally:
+        # Persist whatever we have (success or failure)
         save_results_to_disk(session_id, remove_from_memory=True)
 
 
@@ -604,8 +701,7 @@ def _continue_workflow(
         "status": "success"
     })
 
-    # Save results to disk for debugging and mark for cleanup after 10 minutes
-    save_results_to_disk(session_id, remove_from_memory=True)
+    # Final persistence happens in the run_workflow_async() finally block
 
 
 def _wait_for_product_confirmation(session_id: str, timeout_seconds: int = 300):

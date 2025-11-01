@@ -1,0 +1,1000 @@
+{
+  "session_id": "ae566dbd-e9f1-4795-b49d-1416cbcc31db",
+  "status": "completed",
+  "input_type": "keyword",
+  "user_input": "Logitech mouse",
+  "created_at": "2025-10-31T11:58:12.188268",
+  "last_updated": "2025-10-31T12:01:39.415968",
+  "current_stage": "complete",
+  "progress_logs": [
+    {
+      "stage": "parsing",
+      "message": "Parsing query: Logitech mouse",
+      "status": "started",
+      "input": {
+        "user_query": "Logitech mouse"
+      },
+      "timestamp": "2025-10-31T11:58:12.188268"
+    },
+    {
+      "stage": "parsing",
+      "message": "Extracted: Logitech - mouse",
+      "status": "success",
+      "output": {
+        "brand": "Logitech",
+        "product_name": "mouse",
+        "variant": null,
+        "has_variant": false
+      },
+      "timestamp": "2025-10-31T11:58:15.327584"
+    },
+    {
+      "stage": "product_search",
+      "message": "Searching for Logitech mouse",
+      "status": "started",
+      "input": {
+        "brand": "Logitech",
+        "product_name": "mouse",
+        "variant_hint": null
+      },
+      "timestamp": "2025-10-31T11:58:15.327584"
+    },
+    {
+      "stage": "product_search",
+      "message": "Found 31 products",
+      "status": "success",
+      "output": {
+        "products_found": [
+          {
+            "name": "MX Master 3S Wireless Performance Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/mx-master-3s-wireless-mouse.910-006556.html",
+            "description": "An iconic mouse, remastered. For advanced users, creative pros, and coders. Now with Quiet Clicks and an 8K DPI track-on-glass sensor."
+          },
+          {
+            "name": "MX Anywhere 3S Compact Performance Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/mx-anywhere-3s.910-006557.html",
+            "description": "A compact mouse for advanced users, creators, and coders. Now with Quiet Clicks and an 8K DPI track-on-glass sensor."
+          },
+          {
+            "name": "Lift Vertical Ergonomic Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/lift-vertical-ergonomic-mouse.910-006439.html",
+            "description": "Lift your hand into instant comfort with Lift Vertical Ergonomic Mouse — a great fit for small to medium hands."
+          },
+          {
+            "name": "M720 Triathlon Multi-Device Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m720-triathlon-multi-device-wireless-mouse.910-004790.html",
+            "description": "Built for endurance, versatility, and comfort, M720 Triathlon Mouse helps you succeed in a multi-device world."
+          },
+          {
+            "name": "M590 Multi-Device Silent Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m590-multi-device-silent-wireless-mouse.910-005196.html",
+            "description": "M590 Multi-Device Silent lets you get through your tasks with efficiency and silence. Enjoy the sound of silence with 90% reduced click noise."
+          },
+          {
+            "name": "M330 Silent Plus Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m330-silent-plus-wireless-mouse.910-004281.html",
+            "description": "Enjoy the sound of silence. M330 Silent Plus provides advanced comfort for your right hand, exceptional battery life, and broad compatibility."
+          },
+          {
+            "name": "M220 Silent Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m220-silent-wireless-mouse.910-004877.html",
+            "description": "Enjoy the sound of silence. M220 Silent offers all the functionality of a regular mouse without the click noise."
+          },
+          {
+            "name": "Pebble M350 Modern Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/pebble-m350-wireless-mouse.910-005601.html",
+            "description": "Make any space minimalist, modern, and silent with Logitech Pebble M350 — the portable mouse that fits your curated lifestyle."
+          },
+          {
+            "name": "POP Mouse Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/pop-wireless-mouse.910-006545.html",
+            "description": "Get noticed with POP Mouse, a wireless mouse with a customizable emoji button that fits your personality."
+          },
+          {
+            "name": "G502 X PLUS LIGHTSPEED Wireless Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g502-x-plus-wireless-rgb-gaming-mouse.910-006161.html",
+            "description": "The G502 X PLUS is a LIGHTSPEED wireless gaming mouse with LIGHTSYNC RGB, HERO 25K Sensor, and hybrid optical-mechanical switches."
+          },
+          {
+            "name": "G502 X LIGHTSPEED Wireless Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g502-x-lightspeed-wireless-gaming-mouse.910-006162.html",
+            "description": "The G502 X LIGHTSPEED is a LIGHTSPEED wireless gaming mouse with HERO 25K Sensor and hybrid optical-mechanical switches."
+          },
+          {
+            "name": "G502 X Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g502-x-wired-gaming-mouse.910-006137.html",
+            "description": "The G502 X is a wired gaming mouse with HERO 25K Sensor and hybrid optical-mechanical switches."
+          },
+          {
+            "name": "PRO X SUPERLIGHT 2 Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/pro-x-superlight-2-wireless-mouse.910-006707.html",
+            "description": "The next generation of our championship-winning mouse. PRO X SUPERLIGHT 2 is the ultimate gaming mouse for esports pros."
+          },
+          {
+            "name": "PRO Wireless Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/pro-wireless-mouse.910-005270.html",
+            "description": "Engineered for esports pros, the PRO Wireless Gaming Mouse features LIGHTSPEED wireless and HERO sensor for ultimate performance."
+          },
+          {
+            "name": "G203 LIGHTSYNC Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g203-lightsync-rgb-gaming-mouse.910-005790.html",
+            "description": "Light up your game with G203 LIGHTSYNC, a gaming mouse with vibrant RGB lighting and a gaming-grade sensor."
+          },
+          {
+            "name": "G305 LIGHTSPEED Wireless Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g305-lightspeed-wireless-gaming-mouse.910-005280.html",
+            "description": "G305 LIGHTSPEED is a wireless gaming mouse designed for serious performance with the latest technology innovations at an affordable price point."
+          },
+          {
+            "name": "G703 LIGHTSPEED Wireless Gaming Mouse with HERO Sensor",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g703-hero-wireless-gaming-mouse.910-005638.html",
+            "description": "G703 LIGHTSPEED Wireless Gaming Mouse with HERO Sensor delivers next-gen performance with advanced LIGHTSPEED wireless technology."
+          },
+          {
+            "name": "G903 LIGHTSPEED Wireless Gaming Mouse with HERO Sensor",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g903-hero-wireless-gaming-mouse.910-005639.html",
+            "description": "G903 LIGHTSPEED Wireless Gaming Mouse with HERO Sensor delivers next-gen performance with advanced LIGHTSPEED wireless technology."
+          },
+          {
+            "name": "Signature M650 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m650-signature-wireless-mouse.910-006250.html",
+            "description": "Upgrade to smarter scrolling, better comfort, and more productivity. The Signature M650 features SmartWheel scrolling and silent clicks."
+          },
+          {
+            "name": "M190 Full-Size Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m190-full-size-wireless-mouse.910-005920.html",
+            "description": "A comfortable and reliable full-size wireless mouse with a contoured design for medium to large hands."
+          },
+          {
+            "name": "M185 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m185-wireless-mouse.910-002225.html",
+            "description": "A simple, reliable mouse with plug-and-play wireless. Enjoy the freedom and reliability of a corded mouse with wireless convenience."
+          },
+          {
+            "name": "B100 Corded Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/b100-corded-mouse.910-001122.html",
+            "description": "A simple, reliable corded mouse that's ready in seconds. Full-size, ambidextrous design for comfortable use."
+          },
+          {
+            "name": "M90 Corded Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m90-corded-mouse.910-001799.html",
+            "description": "A simple, reliable corded mouse that's ready in seconds. Full-size, ambidextrous design for comfortable use."
+          },
+          {
+            "name": "M170 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m170-wireless-mouse.910-004641.html",
+            "description": "A simple, reliable wireless mouse with plug-and-play connectivity. Enjoy the freedom and reliability of a corded mouse with wireless convenience."
+          },
+          {
+            "name": "M310 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m310-wireless-mouse.910-001675.html",
+            "description": "A comfortable, full-size wireless mouse with a contoured design for right-hand comfort."
+          },
+          {
+            "name": "M510 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m510-wireless-mouse.910-001822.html",
+            "description": "A full-size wireless mouse with comfortable contoured design and soft rubber grips."
+          },
+          {
+            "name": "M325 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m325-wireless-mouse.910-002133.html",
+            "description": "A compact wireless mouse with a contoured design and advanced optical tracking for precise navigation."
+          },
+          {
+            "name": "M500s Corded Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m500s-corded-mouse.910-005783.html",
+            "description": "A high-performance corded mouse with hyper-fast scrolling and adjustable DPI for precision."
+          },
+          {
+            "name": "MX Vertical Ergonomic Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/mx-vertical-ergonomic-mouse.910-005447.html",
+            "description": "Advanced ergonomic mouse that combines a science-driven design with the elevated performance of Logitech’s MX series."
+          },
+          {
+            "name": "ERGO M575 Wireless Trackball Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/ergo-m575-wireless-trackball.910-005868.html",
+            "description": "A wireless trackball mouse with a sculpted ergonomic shape for comfortable thumb control."
+          },
+          {
+            "name": "Trackman Marble Trackball",
+            "url": "https://www.logitech.com/en-us/products/mice/trackman-marble-trackball.910-000806.html",
+            "description": "A comfortable, ambidextrous trackball mouse with optical tracking for smooth, precise control."
+          }
+        ],
+        "total_count": 31
+      },
+      "timestamp": "2025-10-31T11:59:00.336278"
+    },
+    {
+      "stage": "product_confirmation",
+      "message": "Please select from 31 products",
+      "status": "waiting",
+      "input": {
+        "products_found": [
+          {
+            "name": "MX Master 3S Wireless Performance Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/mx-master-3s-wireless-mouse.910-006556.html",
+            "description": "An iconic mouse, remastered. For advanced users, creative pros, and coders. Now with Quiet Clicks and an 8K DPI track-on-glass sensor."
+          },
+          {
+            "name": "MX Anywhere 3S Compact Performance Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/mx-anywhere-3s.910-006557.html",
+            "description": "A compact mouse for advanced users, creators, and coders. Now with Quiet Clicks and an 8K DPI track-on-glass sensor."
+          },
+          {
+            "name": "Lift Vertical Ergonomic Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/lift-vertical-ergonomic-mouse.910-006439.html",
+            "description": "Lift your hand into instant comfort with Lift Vertical Ergonomic Mouse — a great fit for small to medium hands."
+          },
+          {
+            "name": "M720 Triathlon Multi-Device Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m720-triathlon-multi-device-wireless-mouse.910-004790.html",
+            "description": "Built for endurance, versatility, and comfort, M720 Triathlon Mouse helps you succeed in a multi-device world."
+          },
+          {
+            "name": "M590 Multi-Device Silent Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m590-multi-device-silent-wireless-mouse.910-005196.html",
+            "description": "M590 Multi-Device Silent lets you get through your tasks with efficiency and silence. Enjoy the sound of silence with 90% reduced click noise."
+          },
+          {
+            "name": "M330 Silent Plus Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m330-silent-plus-wireless-mouse.910-004281.html",
+            "description": "Enjoy the sound of silence. M330 Silent Plus provides advanced comfort for your right hand, exceptional battery life, and broad compatibility."
+          },
+          {
+            "name": "M220 Silent Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m220-silent-wireless-mouse.910-004877.html",
+            "description": "Enjoy the sound of silence. M220 Silent offers all the functionality of a regular mouse without the click noise."
+          },
+          {
+            "name": "Pebble M350 Modern Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/pebble-m350-wireless-mouse.910-005601.html",
+            "description": "Make any space minimalist, modern, and silent with Logitech Pebble M350 — the portable mouse that fits your curated lifestyle."
+          },
+          {
+            "name": "POP Mouse Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/pop-wireless-mouse.910-006545.html",
+            "description": "Get noticed with POP Mouse, a wireless mouse with a customizable emoji button that fits your personality."
+          },
+          {
+            "name": "G502 X PLUS LIGHTSPEED Wireless Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g502-x-plus-wireless-rgb-gaming-mouse.910-006161.html",
+            "description": "The G502 X PLUS is a LIGHTSPEED wireless gaming mouse with LIGHTSYNC RGB, HERO 25K Sensor, and hybrid optical-mechanical switches."
+          },
+          {
+            "name": "G502 X LIGHTSPEED Wireless Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g502-x-lightspeed-wireless-gaming-mouse.910-006162.html",
+            "description": "The G502 X LIGHTSPEED is a LIGHTSPEED wireless gaming mouse with HERO 25K Sensor and hybrid optical-mechanical switches."
+          },
+          {
+            "name": "G502 X Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g502-x-wired-gaming-mouse.910-006137.html",
+            "description": "The G502 X is a wired gaming mouse with HERO 25K Sensor and hybrid optical-mechanical switches."
+          },
+          {
+            "name": "PRO X SUPERLIGHT 2 Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/pro-x-superlight-2-wireless-mouse.910-006707.html",
+            "description": "The next generation of our championship-winning mouse. PRO X SUPERLIGHT 2 is the ultimate gaming mouse for esports pros."
+          },
+          {
+            "name": "PRO Wireless Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/pro-wireless-mouse.910-005270.html",
+            "description": "Engineered for esports pros, the PRO Wireless Gaming Mouse features LIGHTSPEED wireless and HERO sensor for ultimate performance."
+          },
+          {
+            "name": "G203 LIGHTSYNC Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g203-lightsync-rgb-gaming-mouse.910-005790.html",
+            "description": "Light up your game with G203 LIGHTSYNC, a gaming mouse with vibrant RGB lighting and a gaming-grade sensor."
+          },
+          {
+            "name": "G305 LIGHTSPEED Wireless Gaming Mouse",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g305-lightspeed-wireless-gaming-mouse.910-005280.html",
+            "description": "G305 LIGHTSPEED is a wireless gaming mouse designed for serious performance with the latest technology innovations at an affordable price point."
+          },
+          {
+            "name": "G703 LIGHTSPEED Wireless Gaming Mouse with HERO Sensor",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g703-hero-wireless-gaming-mouse.910-005638.html",
+            "description": "G703 LIGHTSPEED Wireless Gaming Mouse with HERO Sensor delivers next-gen performance with advanced LIGHTSPEED wireless technology."
+          },
+          {
+            "name": "G903 LIGHTSPEED Wireless Gaming Mouse with HERO Sensor",
+            "url": "https://www.logitechg.com/en-us/products/gaming-mice/g903-hero-wireless-gaming-mouse.910-005639.html",
+            "description": "G903 LIGHTSPEED Wireless Gaming Mouse with HERO Sensor delivers next-gen performance with advanced LIGHTSPEED wireless technology."
+          },
+          {
+            "name": "Signature M650 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m650-signature-wireless-mouse.910-006250.html",
+            "description": "Upgrade to smarter scrolling, better comfort, and more productivity. The Signature M650 features SmartWheel scrolling and silent clicks."
+          },
+          {
+            "name": "M190 Full-Size Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m190-full-size-wireless-mouse.910-005920.html",
+            "description": "A comfortable and reliable full-size wireless mouse with a contoured design for medium to large hands."
+          },
+          {
+            "name": "M185 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m185-wireless-mouse.910-002225.html",
+            "description": "A simple, reliable mouse with plug-and-play wireless. Enjoy the freedom and reliability of a corded mouse with wireless convenience."
+          },
+          {
+            "name": "B100 Corded Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/b100-corded-mouse.910-001122.html",
+            "description": "A simple, reliable corded mouse that's ready in seconds. Full-size, ambidextrous design for comfortable use."
+          },
+          {
+            "name": "M90 Corded Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m90-corded-mouse.910-001799.html",
+            "description": "A simple, reliable corded mouse that's ready in seconds. Full-size, ambidextrous design for comfortable use."
+          },
+          {
+            "name": "M170 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m170-wireless-mouse.910-004641.html",
+            "description": "A simple, reliable wireless mouse with plug-and-play connectivity. Enjoy the freedom and reliability of a corded mouse with wireless convenience."
+          },
+          {
+            "name": "M310 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m310-wireless-mouse.910-001675.html",
+            "description": "A comfortable, full-size wireless mouse with a contoured design for right-hand comfort."
+          },
+          {
+            "name": "M510 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m510-wireless-mouse.910-001822.html",
+            "description": "A full-size wireless mouse with comfortable contoured design and soft rubber grips."
+          },
+          {
+            "name": "M325 Wireless Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m325-wireless-mouse.910-002133.html",
+            "description": "A compact wireless mouse with a contoured design and advanced optical tracking for precise navigation."
+          },
+          {
+            "name": "M500s Corded Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/m500s-corded-mouse.910-005783.html",
+            "description": "A high-performance corded mouse with hyper-fast scrolling and adjustable DPI for precision."
+          },
+          {
+            "name": "MX Vertical Ergonomic Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/mx-vertical-ergonomic-mouse.910-005447.html",
+            "description": "Advanced ergonomic mouse that combines a science-driven design with the elevated performance of Logitech’s MX series."
+          },
+          {
+            "name": "ERGO M575 Wireless Trackball Mouse",
+            "url": "https://www.logitech.com/en-us/products/mice/ergo-m575-wireless-trackball.910-005868.html",
+            "description": "A wireless trackball mouse with a sculpted ergonomic shape for comfortable thumb control."
+          },
+          {
+            "name": "Trackman Marble Trackball",
+            "url": "https://www.logitech.com/en-us/products/mice/trackman-marble-trackball.910-000806.html",
+            "description": "A comfortable, ambidextrous trackball mouse with optical tracking for smooth, precise control."
+          }
+        ]
+      },
+      "timestamp": "2025-10-31T11:59:00.336278"
+    },
+    {
+      "stage": "product_confirmation",
+      "message": "User selected: M325 Wireless Mouse",
+      "status": "success",
+      "output": {
+        "confirmed_product": {
+          "name": "M325 Wireless Mouse",
+          "url": "https://www.logitech.com/en-us/products/mice/m325-wireless-mouse.910-002133.html",
+          "description": "A compact wireless mouse with a contoured design and advanced optical tracking for precise navigation."
+        }
+      },
+      "timestamp": "2025-10-31T11:59:14.348476"
+    },
+    {
+      "stage": "variant_extraction",
+      "message": "Extracting product variants",
+      "status": "started",
+      "input": {
+        "product_name": "M325 Wireless Mouse",
+        "product_url": "https://www.logitech.com/en-us/products/mice/m325-wireless-mouse.910-002133.html",
+        "variant_hint": null
+      },
+      "timestamp": "2025-10-31T11:59:14.348476"
+    },
+    {
+      "stage": "variant_confirmation",
+      "message": "Please select from 11 variants",
+      "status": "waiting",
+      "input": {
+        "variants": [
+          {
+            "type": "color",
+            "value": "Blue"
+          },
+          {
+            "type": "color",
+            "value": "Black"
+          },
+          {
+            "type": "color",
+            "value": "Red"
+          },
+          {
+            "type": "color",
+            "value": "Graphite"
+          },
+          {
+            "type": "color",
+            "value": "Celebration Black"
+          },
+          {
+            "type": "color",
+            "value": "Pale Grey"
+          },
+          {
+            "type": "color",
+            "value": "Lilac"
+          },
+          {
+            "type": "color",
+            "value": "Vivid Violet"
+          },
+          {
+            "type": "color",
+            "value": "Light Silver"
+          },
+          {
+            "type": "color",
+            "value": "Blue Topography"
+          },
+          {
+            "type": "color",
+            "value": "Fusion Party"
+          }
+        ]
+      },
+      "timestamp": "2025-10-31T11:59:41.165721"
+    },
+    {
+      "stage": "variant_confirmation",
+      "message": "User selected: Black",
+      "status": "success",
+      "output": {
+        "selected_variant": {
+          "type": "color",
+          "value": "Black"
+        }
+      },
+      "timestamp": "2025-10-31T11:59:47.169371"
+    },
+    {
+      "stage": "url_discovery",
+      "message": "Discovering URLs for Logitech M325 Wireless Mouse Black",
+      "status": "started",
+      "input": {
+        "brand": "Logitech",
+        "product_name": "M325 Wireless Mouse",
+        "variant": "Black",
+        "brand_product_url": "https://www.logitech.com/en-us/products/mice/m325-wireless-mouse.910-002133.html"
+      },
+      "timestamp": "2025-10-31T11:59:47.169371"
+    },
+    {
+      "stage": "url_discovery",
+      "message": "Found 6 URLs",
+      "status": "success",
+      "output": {
+        "urls": [
+          {
+            "url": "https://www.flipkart.com/logitech-m325-wireless-optical-mouse/p/itmeabytzhz6fw9x",
+            "product_type": "individual",
+            "variant": "Black"
+          },
+          {
+            "url": "https://www.snapdeal.com/product/logitech-wireless-mouse-m325-dark/1243926",
+            "product_type": "individual",
+            "variant": "Black"
+          },
+          {
+            "url": "https://www.indiamart.com/proddetail/logitech-m325-wireless-mouse-20506035497.html",
+            "product_type": "individual",
+            "variant": "Black"
+          },
+          {
+            "url": "https://www.desertcart.in/products/1247453-logitech-m325-wireless-mouse-for-web-scrolling-black",
+            "product_type": "individual",
+            "variant": "Black"
+          },
+          {
+            "url": "https://www.ubuy.co.in/product/1SC56ZJ8-logitech-wireless-mouse-m325-celebration-black",
+            "product_type": "individual",
+            "variant": "Black"
+          },
+          {
+            "url": "https://www.amazon.in/Logitech-Wireless-Mouse-Celebration-Black/dp/B00E7IPN0I",
+            "product_type": "individual",
+            "variant": "Black"
+          }
+        ],
+        "total_count": 6
+      },
+      "timestamp": "2025-10-31T12:00:05.058731"
+    },
+    {
+      "stage": "price_scraping",
+      "message": "Scraping prices for 6 URLs",
+      "status": "started",
+      "input": {
+        "urls": [
+          {
+            "url": "https://www.flipkart.com/logitech-m325-wireless-optical-mouse/p/itmeabytzhz6fw9x",
+            "product_type": "individual",
+            "variant": "Black"
+          },
+          {
+            "url": "https://www.snapdeal.com/product/logitech-wireless-mouse-m325-dark/1243926",
+            "product_type": "individual",
+            "variant": "Black"
+          },
+          {
+            "url": "https://www.indiamart.com/proddetail/logitech-m325-wireless-mouse-20506035497.html",
+            "product_type": "individual",
+            "variant": "Black"
+          },
+          {
+            "url": "https://www.desertcart.in/products/1247453-logitech-m325-wireless-mouse-for-web-scrolling-black",
+            "product_type": "individual",
+            "variant": "Black"
+          },
+          {
+            "url": "https://www.ubuy.co.in/product/1SC56ZJ8-logitech-wireless-mouse-m325-celebration-black",
+            "product_type": "individual",
+            "variant": "Black"
+          },
+          {
+            "url": "https://www.amazon.in/Logitech-Wireless-Mouse-Celebration-Black/dp/B00E7IPN0I",
+            "product_type": "individual",
+            "variant": "Black"
+          }
+        ],
+        "total_urls": 6
+      },
+      "timestamp": "2025-10-31T12:00:05.058731"
+    },
+    {
+      "stage": "price_scraping",
+      "message": "Enriched 4/6 URLs",
+      "status": "success",
+      "output": {
+        "enriched_urls": [
+          {
+            "url": "https://www.flipkart.com/logitech-m325-wireless-optical-mouse/p/itmeabytzhz6fw9x",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech M325 Wireless Ambidextrous Optical Mouse",
+            "price": null,
+            "currency": null,
+            "image": "https://rukminim2.flixcart.com/image/832/832/mouse/q/w/h/logitech-m325-original-imadnhna4uqaraqu.jpeg?q=70&crop=false",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.snapdeal.com/product/logitech-wireless-mouse-m325-dark/1243926",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "N/A",
+            "price": null,
+            "currency": null,
+            "image": "N/A",
+            "availability": "unavailable"
+          },
+          {
+            "url": "https://www.indiamart.com/proddetail/logitech-m325-wireless-mouse-20506035497.html",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech Black M325 Wireless Mouse",
+            "price": null,
+            "currency": null,
+            "image": "https://5.imimg.com/data5/TP/TB/GH/SELLER-73906631/logitech-m325-wireless-mouse-1000x1000.jpg",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.desertcart.in/products/1247453-logitech-m325-wireless-mouse-for-web-scrolling-black",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech M325 Wireless Mouse for Web Scrolling - Black",
+            "price": "4239.0",
+            "currency": "INR",
+            "image": "https://m.media-amazon.com/images/I/715ezfr98UL.jpg",
+            "availability": "in_stock"
+          },
+          {
+            "url": "https://www.ubuy.co.in/product/1SC56ZJ8-logitech-wireless-mouse-m325-celebration-black",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech Wireless Mouse M325 Celebration Black",
+            "price": null,
+            "currency": null,
+            "image": "https://m.media-amazon.com/images/I/71SiGyH+NwL._AC_SL1500_.jpg",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.amazon.in/Logitech-Wireless-Mouse-Celebration-Black/dp/B00E7IPN0I",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "N/A",
+            "price": null,
+            "currency": null,
+            "image": "N/A",
+            "availability": "unavailable"
+          }
+        ],
+        "stats": {
+          "total_urls": 6,
+          "scraped_successfully": 4,
+          "failed": 2,
+          "batches_processed": 1,
+          "duration_seconds": 94.21,
+          "in_stock": 1,
+          "out_of_stock": 3,
+          "unavailable": 2
+        }
+      },
+      "timestamp": "2025-10-31T12:01:39.414987"
+    },
+    {
+      "stage": "per_unit_pricing",
+      "message": "Calculating per-unit prices",
+      "status": "started",
+      "input": {
+        "enriched_urls": [
+          {
+            "url": "https://www.flipkart.com/logitech-m325-wireless-optical-mouse/p/itmeabytzhz6fw9x",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech M325 Wireless Ambidextrous Optical Mouse",
+            "price": null,
+            "currency": null,
+            "image": "https://rukminim2.flixcart.com/image/832/832/mouse/q/w/h/logitech-m325-original-imadnhna4uqaraqu.jpeg?q=70&crop=false",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.snapdeal.com/product/logitech-wireless-mouse-m325-dark/1243926",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "N/A",
+            "price": null,
+            "currency": null,
+            "image": "N/A",
+            "availability": "unavailable"
+          },
+          {
+            "url": "https://www.indiamart.com/proddetail/logitech-m325-wireless-mouse-20506035497.html",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech Black M325 Wireless Mouse",
+            "price": null,
+            "currency": null,
+            "image": "https://5.imimg.com/data5/TP/TB/GH/SELLER-73906631/logitech-m325-wireless-mouse-1000x1000.jpg",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.desertcart.in/products/1247453-logitech-m325-wireless-mouse-for-web-scrolling-black",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech M325 Wireless Mouse for Web Scrolling - Black",
+            "price": "4239.0",
+            "currency": "INR",
+            "image": "https://m.media-amazon.com/images/I/715ezfr98UL.jpg",
+            "availability": "in_stock"
+          },
+          {
+            "url": "https://www.ubuy.co.in/product/1SC56ZJ8-logitech-wireless-mouse-m325-celebration-black",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech Wireless Mouse M325 Celebration Black",
+            "price": null,
+            "currency": null,
+            "image": "https://m.media-amazon.com/images/I/71SiGyH+NwL._AC_SL1500_.jpg",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.amazon.in/Logitech-Wireless-Mouse-Celebration-Black/dp/B00E7IPN0I",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "N/A",
+            "price": null,
+            "currency": null,
+            "image": "N/A",
+            "availability": "unavailable"
+          }
+        ],
+        "total_count": 6
+      },
+      "timestamp": "2025-10-31T12:01:39.414987"
+    },
+    {
+      "stage": "per_unit_pricing",
+      "message": "Per-unit pricing complete",
+      "status": "success",
+      "output": {
+        "updated_urls": [
+          {
+            "url": "https://www.flipkart.com/logitech-m325-wireless-optical-mouse/p/itmeabytzhz6fw9x",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech M325 Wireless Ambidextrous Optical Mouse",
+            "price": null,
+            "currency": null,
+            "image": "https://rukminim2.flixcart.com/image/832/832/mouse/q/w/h/logitech-m325-original-imadnhna4uqaraqu.jpeg?q=70&crop=false",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.snapdeal.com/product/logitech-wireless-mouse-m325-dark/1243926",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "N/A",
+            "price": null,
+            "currency": null,
+            "image": "N/A",
+            "availability": "unavailable"
+          },
+          {
+            "url": "https://www.indiamart.com/proddetail/logitech-m325-wireless-mouse-20506035497.html",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech Black M325 Wireless Mouse",
+            "price": null,
+            "currency": null,
+            "image": "https://5.imimg.com/data5/TP/TB/GH/SELLER-73906631/logitech-m325-wireless-mouse-1000x1000.jpg",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.desertcart.in/products/1247453-logitech-m325-wireless-mouse-for-web-scrolling-black",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech M325 Wireless Mouse for Web Scrolling - Black",
+            "price": "4239.0",
+            "currency": "INR",
+            "image": "https://m.media-amazon.com/images/I/715ezfr98UL.jpg",
+            "availability": "in_stock",
+            "per_unit_price": "4239.00"
+          },
+          {
+            "url": "https://www.ubuy.co.in/product/1SC56ZJ8-logitech-wireless-mouse-m325-celebration-black",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech Wireless Mouse M325 Celebration Black",
+            "price": null,
+            "currency": null,
+            "image": "https://m.media-amazon.com/images/I/71SiGyH+NwL._AC_SL1500_.jpg",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.amazon.in/Logitech-Wireless-Mouse-Celebration-Black/dp/B00E7IPN0I",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "N/A",
+            "price": null,
+            "currency": null,
+            "image": "N/A",
+            "availability": "unavailable"
+          }
+        ],
+        "total_count": 6
+      },
+      "timestamp": "2025-10-31T12:01:39.414987"
+    },
+    {
+      "stage": "ranking",
+      "message": "Ranking products by price",
+      "status": "started",
+      "input": {
+        "updated_urls": [
+          {
+            "url": "https://www.flipkart.com/logitech-m325-wireless-optical-mouse/p/itmeabytzhz6fw9x",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech M325 Wireless Ambidextrous Optical Mouse",
+            "price": null,
+            "currency": null,
+            "image": "https://rukminim2.flixcart.com/image/832/832/mouse/q/w/h/logitech-m325-original-imadnhna4uqaraqu.jpeg?q=70&crop=false",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.snapdeal.com/product/logitech-wireless-mouse-m325-dark/1243926",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "N/A",
+            "price": null,
+            "currency": null,
+            "image": "N/A",
+            "availability": "unavailable"
+          },
+          {
+            "url": "https://www.indiamart.com/proddetail/logitech-m325-wireless-mouse-20506035497.html",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech Black M325 Wireless Mouse",
+            "price": null,
+            "currency": null,
+            "image": "https://5.imimg.com/data5/TP/TB/GH/SELLER-73906631/logitech-m325-wireless-mouse-1000x1000.jpg",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.desertcart.in/products/1247453-logitech-m325-wireless-mouse-for-web-scrolling-black",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech M325 Wireless Mouse for Web Scrolling - Black",
+            "price": "4239.0",
+            "currency": "INR",
+            "image": "https://m.media-amazon.com/images/I/715ezfr98UL.jpg",
+            "availability": "in_stock",
+            "per_unit_price": "4239.00"
+          },
+          {
+            "url": "https://www.ubuy.co.in/product/1SC56ZJ8-logitech-wireless-mouse-m325-celebration-black",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech Wireless Mouse M325 Celebration Black",
+            "price": null,
+            "currency": null,
+            "image": "https://m.media-amazon.com/images/I/71SiGyH+NwL._AC_SL1500_.jpg",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.amazon.in/Logitech-Wireless-Mouse-Celebration-Black/dp/B00E7IPN0I",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "N/A",
+            "price": null,
+            "currency": null,
+            "image": "N/A",
+            "availability": "unavailable"
+          }
+        ],
+        "total_count": 6
+      },
+      "timestamp": "2025-10-31T12:01:39.414987"
+    },
+    {
+      "stage": "ranking",
+      "message": "Ranked 6 products",
+      "status": "success",
+      "output": {
+        "ranked_urls": [
+          {
+            "url": "https://www.desertcart.in/products/1247453-logitech-m325-wireless-mouse-for-web-scrolling-black",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech M325 Wireless Mouse for Web Scrolling - Black",
+            "price": "4239.0",
+            "currency": "INR",
+            "image": "https://m.media-amazon.com/images/I/715ezfr98UL.jpg",
+            "availability": "in_stock",
+            "per_unit_price": "4239.00"
+          },
+          {
+            "url": "https://www.flipkart.com/logitech-m325-wireless-optical-mouse/p/itmeabytzhz6fw9x",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech M325 Wireless Ambidextrous Optical Mouse",
+            "price": null,
+            "currency": null,
+            "image": "https://rukminim2.flixcart.com/image/832/832/mouse/q/w/h/logitech-m325-original-imadnhna4uqaraqu.jpeg?q=70&crop=false",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.snapdeal.com/product/logitech-wireless-mouse-m325-dark/1243926",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "N/A",
+            "price": null,
+            "currency": null,
+            "image": "N/A",
+            "availability": "unavailable"
+          },
+          {
+            "url": "https://www.indiamart.com/proddetail/logitech-m325-wireless-mouse-20506035497.html",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech Black M325 Wireless Mouse",
+            "price": null,
+            "currency": null,
+            "image": "https://5.imimg.com/data5/TP/TB/GH/SELLER-73906631/logitech-m325-wireless-mouse-1000x1000.jpg",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.ubuy.co.in/product/1SC56ZJ8-logitech-wireless-mouse-m325-celebration-black",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "Logitech Wireless Mouse M325 Celebration Black",
+            "price": null,
+            "currency": null,
+            "image": "https://m.media-amazon.com/images/I/71SiGyH+NwL._AC_SL1500_.jpg",
+            "availability": "out_of_stock"
+          },
+          {
+            "url": "https://www.amazon.in/Logitech-Wireless-Mouse-Celebration-Black/dp/B00E7IPN0I",
+            "product_type": "individual",
+            "variant": "Black",
+            "name": "N/A",
+            "price": null,
+            "currency": null,
+            "image": "N/A",
+            "availability": "unavailable"
+          }
+        ],
+        "total_count": 6
+      },
+      "timestamp": "2025-10-31T12:01:39.415968"
+    },
+    {
+      "stage": "complete",
+      "message": "Workflow completed successfully with 6 results",
+      "status": "success",
+      "timestamp": "2025-10-31T12:01:39.415968"
+    }
+  ],
+  "final_results": [
+    {
+      "url": "https://www.desertcart.in/products/1247453-logitech-m325-wireless-mouse-for-web-scrolling-black",
+      "product_type": "individual",
+      "variant": "Black",
+      "name": "Logitech M325 Wireless Mouse for Web Scrolling - Black",
+      "price": "4239.0",
+      "currency": "INR",
+      "image": "https://m.media-amazon.com/images/I/715ezfr98UL.jpg",
+      "availability": "in_stock",
+      "per_unit_price": "4239.00"
+    },
+    {
+      "url": "https://www.flipkart.com/logitech-m325-wireless-optical-mouse/p/itmeabytzhz6fw9x",
+      "product_type": "individual",
+      "variant": "Black",
+      "name": "Logitech M325 Wireless Ambidextrous Optical Mouse",
+      "price": null,
+      "currency": null,
+      "image": "https://rukminim2.flixcart.com/image/832/832/mouse/q/w/h/logitech-m325-original-imadnhna4uqaraqu.jpeg?q=70&crop=false",
+      "availability": "out_of_stock"
+    },
+    {
+      "url": "https://www.snapdeal.com/product/logitech-wireless-mouse-m325-dark/1243926",
+      "product_type": "individual",
+      "variant": "Black",
+      "name": "N/A",
+      "price": null,
+      "currency": null,
+      "image": "N/A",
+      "availability": "unavailable"
+    },
+    {
+      "url": "https://www.indiamart.com/proddetail/logitech-m325-wireless-mouse-20506035497.html",
+      "product_type": "individual",
+      "variant": "Black",
+      "name": "Logitech Black M325 Wireless Mouse",
+      "price": null,
+      "currency": null,
+      "image": "https://5.imimg.com/data5/TP/TB/GH/SELLER-73906631/logitech-m325-wireless-mouse-1000x1000.jpg",
+      "availability": "out_of_stock"
+    },
+    {
+      "url": "https://www.ubuy.co.in/product/1SC56ZJ8-logitech-wireless-mouse-m325-celebration-black",
+      "product_type": "individual",
+      "variant": "Black",
+      "name": "Logitech Wireless Mouse M325 Celebration Black",
+      "price": null,
+      "currency": null,
+      "image": "https://m.media-amazon.com/images/I/71SiGyH+NwL._AC_SL1500_.jpg",
+      "availability": "out_of_stock"
+    },
+    {
+      "url": "https://www.amazon.in/Logitech-Wireless-Mouse-Celebration-Black/dp/B00E7IPN0I",
+      "product_type": "individual",
+      "variant": "Black",
+      "name": "N/A",
+      "price": null,
+      "currency": null,
+      "image": "N/A",
+      "availability": "unavailable"
+    }
+  ],
+  "error_message": null,
+  "statistics": {
+    "total_results": 6,
+    "total_stages": 18,
+    "duration_seconds": 207.2277
+  }
+}

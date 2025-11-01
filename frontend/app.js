@@ -75,6 +75,15 @@ function initializeEnterKeyHandlers() {
  * Start search workflow
  */
 async function startSearch(inputType) {
+    // NEW: Check session limit BEFORE starting search
+    const canSearch = await checkSessionLimit();
+    
+    if (!canSearch) {
+        // User exceeded free sessions and is not logged in
+        // Modal is already shown by checkSessionLimit()
+        return;
+    }
+    
     // Get input value
     const input = inputType === 'keyword' 
         ? document.getElementById('keyword-input').value.trim()
@@ -90,12 +99,19 @@ async function startSearch(inputType) {
     showLoading(true);
     
     try {
+        // NEW: Include auth token if available
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+        
+        if (authToken) {
+            headers['Authorization'] = `Bearer ${authToken}`;
+        }
+        
         // Call API to start workflow
         const response = await fetch(`${API_BASE_URL}/workflow/start`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify({
                 input_type: inputType,
                 user_input: input
@@ -108,6 +124,9 @@ async function startSearch(inputType) {
         
         const data = await response.json();
         currentSessionId = data.session_id;
+        
+        // NEW: Track session start
+        await trackSessionStart(currentSessionId, inputType, input);
         
         // Hide input section, show progress section
         hideAllSections();
@@ -384,7 +403,7 @@ async function confirmSelection(type) {
     showLoading(true);
     
     try {
-        const endpoint = type === 'product' 
+        const endpoint = type === 'product'
             ? `/workflow/confirm-product/${currentSessionId}`
             : `/workflow/confirm-variant/${currentSessionId}`;
         
@@ -463,15 +482,23 @@ async function confirmExtraction(confirmed) {
 /**
  * Handle workflow completion
  */
-function handleWorkflowComplete(data) {
+async function handleWorkflowComplete(data) {
     if (eventSource) {
         eventSource.close();
+    }
+    
+    // NEW: Mark session as complete
+    if (currentSessionId) {
+        await completeSession(currentSessionId);
     }
     
     hideAllSections();
     showSection('results-section');
     
     displayResults(data.results);
+    
+    // NEW: Refresh session limit check
+    await checkSessionLimit();
 }
 
 /**
