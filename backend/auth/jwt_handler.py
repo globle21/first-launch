@@ -86,8 +86,10 @@ def verify_token(token: str) -> Optional[Dict]:
         decode_kwargs = {
             "key": SECRET_KEY,
             "algorithms": [ALGORITHM],
-            "options": {"require_exp": True, "verify_aud": bool(JWT_AUDIENCE)},
-            "leeway": JWT_LEEWAY_SECONDS,
+            "options": {
+                "require_exp": True,
+                "verify_aud": bool(JWT_AUDIENCE)
+            },
         }
         if JWT_ISSUER:
             decode_kwargs["issuer"] = JWT_ISSUER

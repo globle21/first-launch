@@ -26,7 +26,21 @@ class User(Base):
         return f"<User {self.phone_number}>"
 
 
-# OTPRequest model removed (obsolete)
+# OTPRequest model removed (obsolete - replaced with LoginAttempt)
+
+
+class LoginAttempt(Base):
+    """Track login attempts for rate limiting (replaces OTPRequest)"""
+    __tablename__ = "login_attempts"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    phone_number = Column(String(15), nullable=False, index=True)
+    attempt_type = Column(String(20), default="login")  # 'login', 'otp', etc.
+    created_at = Column(TIMESTAMP, server_default=func.now())
+    ip_address = Column(String(45), nullable=True)  # Optional IP tracking
+
+    def __repr__(self):
+        return f"<LoginAttempt {self.phone_number} at {self.created_at}>"
 
 
 class GuestSession(Base):

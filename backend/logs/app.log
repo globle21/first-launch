@@ -82,3 +82,693 @@
 2025-10-31 12:22:05,029 - google_genai.models - INFO - AFC remote call 1 is done.
 2025-10-31 12:22:05,053 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
 2025-10-31 12:22:14,856 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-11-01 11:10:39,430 - utils.env_validator - INFO - ✅ Environment variable validation passed
+2025-11-01 11:10:39,430 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:10:39,430 - utils.env_validator - INFO - Environment Configuration Summary
+2025-11-01 11:10:39,430 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:10:39,430 - utils.env_validator - INFO - Environment: development
+2025-11-01 11:10:39,430 - utils.env_validator - INFO - DATABASE_URL: ✅ Set
+2025-11-01 11:10:39,430 - utils.env_validator - INFO - JWT_SECRET_KEY: ✅ Set
+2025-11-01 11:10:39,430 - utils.env_validator - INFO - GUEST_SESSION_LIMIT: 2
+2025-11-01 11:10:39,430 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:10:39,487 - __main__ - WARNING - ⚠️  Authentication module not available: cannot import name 'OTPRequest' from 'auth.models' (D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\models.py)
+2025-11-01 11:10:39,489 - __main__ - INFO - ⚠️  CORS allowing all origins (development mode)
+2025-11-01 11:11:06,022 - utils.env_validator - INFO - ✅ Environment variable validation passed
+2025-11-01 11:11:06,022 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:11:06,022 - utils.env_validator - INFO - Environment Configuration Summary
+2025-11-01 11:11:06,022 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:11:06,022 - utils.env_validator - INFO - Environment: development
+2025-11-01 11:11:06,022 - utils.env_validator - INFO - DATABASE_URL: ✅ Set
+2025-11-01 11:11:06,022 - utils.env_validator - INFO - JWT_SECRET_KEY: ✅ Set
+2025-11-01 11:11:06,022 - utils.env_validator - INFO - GUEST_SESSION_LIMIT: 2
+2025-11-01 11:11:06,022 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:11:06,022 - __main__ - WARNING - ⚠️  Authentication module not available: cannot import name 'OTPRequest' from 'auth.models' (D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\models.py)
+2025-11-01 11:11:06,022 - __main__ - INFO - ⚠️  CORS allowing all origins (development mode)
+2025-11-01 11:11:29,071 - utils.env_validator - INFO - ✅ Environment variable validation passed
+2025-11-01 11:11:29,071 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:11:29,071 - utils.env_validator - INFO - Environment Configuration Summary
+2025-11-01 11:11:29,071 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:11:29,071 - utils.env_validator - INFO - Environment: development
+2025-11-01 11:11:29,071 - utils.env_validator - INFO - DATABASE_URL: ✅ Set
+2025-11-01 11:11:29,071 - utils.env_validator - INFO - JWT_SECRET_KEY: ✅ Set
+2025-11-01 11:11:29,071 - utils.env_validator - INFO - GUEST_SESSION_LIMIT: 2
+2025-11-01 11:11:29,071 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:11:29,087 - __main__ - WARNING - ⚠️  Authentication module not available: cannot import name 'OTPRequest' from 'auth.models' (D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\models.py)
+2025-11-01 11:11:29,088 - __main__ - INFO - ⚠️  CORS allowing all origins (development mode)
+2025-11-01 11:16:55,875 - utils.env_validator - INFO - ✅ Environment variable validation passed
+2025-11-01 11:16:55,875 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:16:55,875 - utils.env_validator - INFO - Environment Configuration Summary
+2025-11-01 11:16:55,875 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:16:55,875 - utils.env_validator - INFO - Environment: development
+2025-11-01 11:16:55,875 - utils.env_validator - INFO - DATABASE_URL: ✅ Set
+2025-11-01 11:16:55,875 - utils.env_validator - INFO - JWT_SECRET_KEY: ✅ Set
+2025-11-01 11:16:55,875 - utils.env_validator - INFO - GUEST_SESSION_LIMIT: 2
+2025-11-01 11:16:55,878 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:17:01,368 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-11-01 11:17:01,370 - __main__ - INFO - ⚠️  CORS allowing all origins (development mode)
+2025-11-01 11:17:01,387 - __main__ - INFO - ✅ Authentication routes registered
+2025-11-01 11:18:34,004 - utils.env_validator - INFO - ✅ Environment variable validation passed
+2025-11-01 11:18:34,004 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:18:34,013 - utils.env_validator - INFO - Environment Configuration Summary
+2025-11-01 11:18:34,013 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:18:34,014 - utils.env_validator - INFO - Environment: development
+2025-11-01 11:18:34,014 - utils.env_validator - INFO - DATABASE_URL: ✅ Set
+2025-11-01 11:18:34,015 - utils.env_validator - INFO - JWT_SECRET_KEY: ✅ Set
+2025-11-01 11:18:34,015 - utils.env_validator - INFO - GUEST_SESSION_LIMIT: 2
+2025-11-01 11:18:34,015 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:18:39,662 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-11-01 11:18:39,662 - __main__ - INFO - ⚠️  CORS allowing all origins (development mode)
+2025-11-01 11:18:39,689 - __main__ - INFO - ✅ Authentication routes registered
+2025-11-01 11:18:40,833 - database.connection - ERROR - Database SQL error: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-11-01 11:18:42,764 - __main__ - ERROR - Unhandled exception: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\routes.py", line 299, in check_session_limit
+    ).first()
+      ^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2748, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2308, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2190, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1639, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2343, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-11-01 11:18:42,787 - database.connection - ERROR - Database SQL error: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-11-01 11:18:43,973 - __main__ - ERROR - Unhandled exception: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\routes.py", line 299, in check_session_limit
+    ).first()
+      ^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2748, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2308, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2190, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1639, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2343, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-11-01 11:18:44,004 - database.connection - ERROR - Database SQL error: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-11-01 11:18:44,257 - __main__ - ERROR - Unhandled exception: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\routes.py", line 299, in check_session_limit
+    ).first()
+      ^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2748, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2308, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2190, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1639, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2343, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-11-01 11:18:49,361 - database.connection - ERROR - Unexpected database error: decode() got an unexpected keyword argument 'leeway'
+2025-11-01 11:18:49,368 - __main__ - ERROR - Unhandled exception: decode() got an unexpected keyword argument 'leeway'
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 264, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\dependencies\utils.py", line 563, in solve_dependencies
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\dependencies\utils.py", line 592, in solve_dependencies
+    solved = await call(**sub_values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\dependencies.py", line 36, in get_current_user
+    payload = verify_token(token)
+              ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\jwt_handler.py", line 97, in verify_token
+    payload = jwt.decode(token, **decode_kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: decode() got an unexpected keyword argument 'leeway'
+2025-11-01 11:18:50,823 - database.connection - ERROR - Unexpected database error: decode() got an unexpected keyword argument 'leeway'
+2025-11-01 11:18:50,827 - __main__ - ERROR - Unhandled exception: decode() got an unexpected keyword argument 'leeway'
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 264, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\dependencies\utils.py", line 592, in solve_dependencies
+    solved = await call(**sub_values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\dependencies.py", line 36, in get_current_user
+    payload = verify_token(token)
+              ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\jwt_handler.py", line 97, in verify_token
+    payload = jwt.decode(token, **decode_kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: decode() got an unexpected keyword argument 'leeway'
+2025-11-01 11:19:14,104 - utils.env_validator - INFO - ✅ Environment variable validation passed
+2025-11-01 11:19:14,104 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:19:14,104 - utils.env_validator - INFO - Environment Configuration Summary
+2025-11-01 11:19:14,104 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:19:14,104 - utils.env_validator - INFO - Environment: development
+2025-11-01 11:19:14,104 - utils.env_validator - INFO - DATABASE_URL: ✅ Set
+2025-11-01 11:19:14,104 - utils.env_validator - INFO - JWT_SECRET_KEY: ✅ Set
+2025-11-01 11:19:14,104 - utils.env_validator - INFO - GUEST_SESSION_LIMIT: 2
+2025-11-01 11:19:14,104 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:19:19,567 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-11-01 11:19:19,569 - __main__ - INFO - ⚠️  CORS allowing all origins (development mode)
+2025-11-01 11:19:19,600 - __main__ - INFO - ✅ Authentication routes registered
+2025-11-01 11:19:23,249 - database.connection - ERROR - Unexpected database error: decode() got an unexpected keyword argument 'leeway'
+2025-11-01 11:19:23,255 - __main__ - ERROR - Unhandled exception: decode() got an unexpected keyword argument 'leeway'
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 264, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\dependencies\utils.py", line 563, in solve_dependencies
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\dependencies\utils.py", line 592, in solve_dependencies
+    solved = await call(**sub_values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\dependencies.py", line 36, in get_current_user
+    payload = verify_token(token)
+              ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\jwt_handler.py", line 97, in verify_token
+    payload = jwt.decode(token, **decode_kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: decode() got an unexpected keyword argument 'leeway'
+2025-11-01 11:19:24,649 - database.connection - ERROR - Unexpected database error: decode() got an unexpected keyword argument 'leeway'
+2025-11-01 11:19:24,649 - __main__ - ERROR - Unhandled exception: decode() got an unexpected keyword argument 'leeway'
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 264, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\dependencies\utils.py", line 592, in solve_dependencies
+    solved = await call(**sub_values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\dependencies.py", line 36, in get_current_user
+    payload = verify_token(token)
+              ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\jwt_handler.py", line 97, in verify_token
+    payload = jwt.decode(token, **decode_kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: decode() got an unexpected keyword argument 'leeway'
+2025-11-01 11:21:06,776 - utils.env_validator - INFO - ✅ Environment variable validation passed
+2025-11-01 11:21:06,776 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:21:06,776 - utils.env_validator - INFO - Environment Configuration Summary
+2025-11-01 11:21:06,776 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:21:06,776 - utils.env_validator - INFO - Environment: development
+2025-11-01 11:21:06,776 - utils.env_validator - INFO - DATABASE_URL: ✅ Set
+2025-11-01 11:21:06,776 - utils.env_validator - INFO - JWT_SECRET_KEY: ✅ Set
+2025-11-01 11:21:06,776 - utils.env_validator - INFO - GUEST_SESSION_LIMIT: 2
+2025-11-01 11:21:06,776 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:21:12,624 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-11-01 11:21:12,625 - __main__ - INFO - ⚠️  CORS allowing all origins (development mode)
+2025-11-01 11:21:12,634 - __main__ - INFO - ✅ Authentication routes registered
+2025-11-01 11:21:54,358 - database.connection - ERROR - Database SQL error: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-11-01 11:21:54,618 - __main__ - ERROR - Unhandled exception: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\auth\routes.py", line 299, in check_session_limit
+    ).first()
+      ^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2748, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 2847, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2308, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2190, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\orm\context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+           ^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 516, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1639, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2343, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+  File "D:\Globle Club\Decision Layer & Brand Discovery\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 922, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column guest_sessions.guest_uuid does not exist
+LINE 1: SELECT guest_sessions.id AS guest_sessions_id, guest_session...
+                                                       ^
+
+[SQL: SELECT guest_sessions.id AS guest_sessions_id, guest_sessions.guest_uuid AS guest_sessions_guest_uuid, guest_sessions.ip_address AS guest_sessions_ip_address, guest_sessions.user_agent AS guest_sessions_user_agent, guest_sessions.session_count AS guest_sessions_session_count, guest_sessions.last_session_at AS guest_sessions_last_session_at, guest_sessions.created_at AS guest_sessions_created_at 
+FROM guest_sessions 
+WHERE guest_sessions.guest_uuid = %(guest_uuid_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'guest_uuid_1': '492e64c9-a120-468c-a163-798f827ae834', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-11-01 11:27:24,780 - utils.env_validator - INFO - ✅ Environment variable validation passed
+2025-11-01 11:27:24,781 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:27:24,782 - utils.env_validator - INFO - Environment Configuration Summary
+2025-11-01 11:27:24,782 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:27:24,783 - utils.env_validator - INFO - Environment: development
+2025-11-01 11:27:24,784 - utils.env_validator - INFO - DATABASE_URL: ✅ Set
+2025-11-01 11:27:24,784 - utils.env_validator - INFO - JWT_SECRET_KEY: ✅ Set
+2025-11-01 11:27:24,785 - utils.env_validator - INFO - GUEST_SESSION_LIMIT: 2
+2025-11-01 11:27:24,788 - utils.env_validator - INFO - ============================================================
+2025-11-01 11:27:30,495 - __main__ - INFO - ✅ Authentication module loaded successfully
+2025-11-01 11:27:30,496 - __main__ - INFO - ⚠️  CORS allowing all origins (development mode)
+2025-11-01 11:27:30,526 - __main__ - INFO - ✅ Authentication routes registered
+2025-11-01 11:27:57,712 - __main__ - INFO - Workflow started: session_id=68ae7c76-988c-41bf-82bb-460f0adc59af, input_type=keyword
+2025-11-01 11:27:57,717 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-11-01 11:28:03,668 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-11-01 11:28:03,686 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-11-01 11:28:28,940 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-11-01 11:28:44,967 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2025-11-01 11:29:26,218 - google_genai.models - INFO - AFC remote call 1 is done.
+2025-11-01 11:30:40,618 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-11-01 11:30:41,622 - workflow_async - INFO - Results saved to: D:\Globle Club\Decision Layer & Brand Discovery\first_launch_development\backend\results\workflow_session_68ae7c76-988c-41bf-82bb-460f0adc59af.json
+2025-11-01 11:30:43,818 - workflow_async - INFO - Conversation saved to database for user +917386598599, session 68ae7c76-988c-41bf-82bb-460f0adc59af
+2025-11-01 11:30:44,074 - workflow_async - INFO - Session 68ae7c76... marked for cleanup (will be removed after 10 minutes)
